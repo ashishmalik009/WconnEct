@@ -59,7 +59,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="WconnEct" id="NA5-pN-NYe">
                         <barButtonItem key="leftBarButtonItem" image="cancelImage" id="gMk-GJ-pNm">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
@@ -120,6 +120,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NE8-On-0nd" customClass="GIDSignInButton">
+                                <rect key="frame" x="20" y="342" width="560" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="qAa-Va-TUx"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -127,9 +134,12 @@
                             <constraint firstItem="UDN-cP-g6i" firstAttribute="centerX" secondItem="0eI-t6-yIf" secondAttribute="centerX" id="CeC-AB-tv8"/>
                             <constraint firstAttribute="leadingMargin" secondItem="fQG-XN-ktD" secondAttribute="leading" id="Hld-LC-j0p"/>
                             <constraint firstItem="aUY-3L-1Kd" firstAttribute="top" secondItem="UDN-cP-g6i" secondAttribute="bottom" constant="22" id="Ifd-4i-3y0"/>
+                            <constraint firstItem="NE8-On-0nd" firstAttribute="leading" secondItem="0eI-t6-yIf" secondAttribute="leading" constant="20" id="VPJ-Y6-wwr"/>
+                            <constraint firstItem="NE8-On-0nd" firstAttribute="top" secondItem="aUY-3L-1Kd" secondAttribute="bottom" constant="19" id="WMQ-TO-UZK"/>
                             <constraint firstItem="aUY-3L-1Kd" firstAttribute="centerX" secondItem="0eI-t6-yIf" secondAttribute="centerX" id="XFv-wU-c1e"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fQG-XN-ktD" secondAttribute="trailing" id="bET-om-4DE"/>
                             <constraint firstItem="UDN-cP-g6i" firstAttribute="top" secondItem="fQG-XN-ktD" secondAttribute="bottom" constant="38" id="bjh-aq-j0G"/>
+                            <constraint firstAttribute="trailing" secondItem="NE8-On-0nd" secondAttribute="trailing" constant="20" id="cuh-UF-ErY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pl8-y8-2Og" secondAttribute="trailing" id="gZO-SH-whB"/>
                             <constraint firstItem="pl8-y8-2Og" firstAttribute="top" secondItem="8ET-Xf-SyW" secondAttribute="bottom" constant="60" id="jjX-5e-lOQ"/>
                             <constraint firstAttribute="leadingMargin" secondItem="pl8-y8-2Og" secondAttribute="leading" id="zay-TE-MtS"/>

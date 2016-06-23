@@ -13,6 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
+    let tintColor =  UIColor(red: 242/255, green: 71/255, blue: 63/255, alpha: 1)
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -22,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
         GIDSignIn.sharedInstance().delegate = self
-
+        customizeAppearance()
         return true
     }
 
@@ -50,6 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         self.saveContext()
     }
     
+    private func customizeAppearance() {
+        window?.tintColor = tintColor
+        UINavigationBar.appearance().barTintColor = tintColor
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    }
+
     func application(application: UIApplication,
         openURL url: NSURL, options: [String: AnyObject]) -> Bool {
             return GIDSignIn.sharedInstance().handleURL(url,
@@ -58,9 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func application(application: UIApplication,
-        openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-            var options: [String: AnyObject] = [UIApplicationOpenURLOptionsSourceApplicationKey: sourceApplication!,
-                UIApplicationOpenURLOptionsAnnotationKey: annotation!]
+        openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+            let options: [String: AnyObject] = [UIApplicationOpenURLOptionsSourceApplicationKey: sourceApplication!,
+                UIApplicationOpenURLOptionsAnnotationKey: annotation]
             return GIDSignIn.sharedInstance().handleURL(url,
                 sourceApplication: sourceApplication,
                 annotation: annotation)
