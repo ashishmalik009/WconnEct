@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-WconnEct.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>Pods-WconnEctTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Pods-WconnEctUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>611CB9AE8F558ABCE722E5947EAF3D4E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6CA9BA7B3E05B15F467408DE78BF41B7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9562D5A8256215B7BA9BF21F9DADEA0D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

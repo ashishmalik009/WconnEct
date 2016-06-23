@@ -1,0 +1,6 @@
+framework module Pods_WconnEct {
+  umbrella header "Pods-WconnEct-umbrella.h"
+
+  export *
+  module * { export * }
+}
