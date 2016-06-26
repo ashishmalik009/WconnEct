@@ -43,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -52,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     private func customizeAppearance() {
-        window?.tintColor = tintColor
+//        window?.tintColor = tintColor
         UINavigationBar.appearance().barTintColor = tintColor
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
@@ -64,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             return GIDSignIn.sharedInstance().handleURL(url,
                 sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String,
                 annotation: options[UIApplicationOpenURLOptionsAnnotationKey])
+            
     }
     
     func application(application: UIApplication,
@@ -72,7 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 UIApplicationOpenURLOptionsAnnotationKey: annotation]
             return GIDSignIn.sharedInstance().handleURL(url,
                 sourceApplication: sourceApplication,
-                annotation: annotation)
+                annotation: annotation) ||
+                FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
