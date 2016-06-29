@@ -218,7 +218,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         
         let requestKeys  = NSArray(objects:"name","ph_number","email","pswd","photo")
         let requestValues = NSArray(objects:"ASHU", "893", "ASHISH@GMAIL.COM", "123", "")
-        let jsonRequest = NSDictionary(objec)
+        let jsonRequest = NSDictionary(object: requestKeys, forKey: requestValues)
         do {
             let jsonData: NSData  = try NSJSONSerialization.dataWithJSONObject(jsonRequest, options:.PrettyPrinted)
             request.HTTPBody = jsonData
