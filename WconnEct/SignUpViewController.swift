@@ -148,6 +148,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         else {
             print(GIDSignIn.sharedInstance().currentUser.profile.name)
             print(GIDSignIn.sharedInstance().currentUser.profile.email)
+             self.dismissViewControllerAnimated(true, completion: nil)
             
         }
         
@@ -161,6 +162,16 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     func signIn(signIn: GIDSignIn!,
                 dismissViewController viewController: UIViewController!) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        let alert = UIAlertController(title: nil, message: "Logging In...", preferredStyle: .Alert)
+        
+        alert.view.tintColor = UIColor.blackColor()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        loadingIndicator.startAnimating()
+        
+        alert.view.addSubview(loadingIndicator)
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     @IBAction func facebooksignUp(sender: AnyObject)
@@ -194,5 +205,80 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         
     }
     
-    
+    var data : NSMutableData = NSMutableData()
+    let url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/student/")
+
+    @IBAction func signUp(sender: AnyObject)
+    {
+        
+        let request: NSMutableURLRequest = NSMutableURLRequest(URL: url!)
+        request.HTTPMethod = "Post"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        let requestKeys  = NSArray(objects:"name","ph_number","email","pswd","photo")
+        let requestValues = NSArray(objects:"ASHU", "893", "ASHISH@GMAIL.COM", "123", "")
+        let jsonRequest = NSDictionary(objec)
+        do {
+            let jsonData: NSData  = try NSJSONSerialization.dataWithJSONObject(jsonRequest, options:.PrettyPrinted)
+            request.HTTPBody = jsonData
+            print(NSString(data: jsonData, encoding: NSUTF8StringEncoding))
+            // use jsonData
+        } catch {
+            // report error
+        }
+
+        
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {
+            
+            (let data, let response, let error) in
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            self.parseData(data!)
+        })
+        
+        dataTask.resume()
+        
+
+    }
+    func parseData(data : NSData) -> Void {
+//        do
+//        {
+//            var json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as! [[String:AnyObject]]
+//            for name in json
+//            {
+//                print(name["ph_number"])
+//                if let phNumber = name["ph_number"]
+//                {
+//                    print(phNumber)
+//                }
+//            }
+//            print(json)
+//            
+//        }catch{
+//            print("error serializing JSON: \(error)")
+//        }
+        
+    }
+//    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+//        print(NSString(data: data, encoding: NSUTF8StringEncoding))
+//        do
+//        {
+//            var json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as! [[String:AnyObject]]
+//            for name in json
+//            {
+//                print(name["ph_number"])
+//                if let phNumber = name["ph_number"]
+//                {
+//                    print(phNumber)
+//                }
+//            }
+//            print(json)
+//            
+//        }catch{
+//            print("error serializing JSON: \(error)")
+//        }
+//    }
+
 }
