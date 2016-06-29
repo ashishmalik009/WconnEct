@@ -8,9 +8,17 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelegate {
-
-    @IBOutlet weak var fbButton: FBSDKButton!
+class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelegate, UITextFieldDelegate {
+    
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var emailIDField: UITextField!
+    var activeTextField: UITextField!
+    
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var contactNumberField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,15 +27,112 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.login")
         GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.me")
+        
+        registerForKeyboardNotifications()
+        nameTextField.delegate = self
+        contactNumberField.delegate = self
+        passwordField.delegate = self
+        emailIDField.delegate = self
+        
+        self.view.userInteractionEnabled = true
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:"hidesKeyboard")
+        self.view.addGestureRecognizer(tap)
+        
+        
         // Do any additional setup after loading the view.
     }
-
+    
+    func hidesKeyboard()
+    {
+        if self.activeTextField != nil
+        {
+            view.endEditing(true)
+        }
+        
+    }
+    func showUserData()
+    {
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "id, name, gender, first_name, last_name, locale, email"])
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            
+            if ((error) != nil)
+            {
+                // Process error
+                print("Error: \(error)")
+            }
+            else
+            {
+                let userName : NSString = result.valueForKey("name") as! NSString
+                print("User Name is: \(userName)")
+                
+                if let userEmail : NSString = result.valueForKey("email") as? NSString {
+                    print("User Email is: \(userEmail)")
+                }
+            }
+        })
+    }
+    override func viewWillAppear(animated: Bool) {
+        if (FBSDKAccessToken.currentAccessToken() != nil)
+        {
+            self.getFBUserData()
+            
+        }
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    // Call this method somewhere in your view controller setup code.
+    func registerForKeyboardNotifications() {
+        let center:  NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector:  #selector(SignUpViewController.keyboardWasShown(_:)), name: UIKeyboardDidShowNotification, object: nil)
+        center.addObserver(self, selector: #selector(SignUpViewController.keyboardWillBeHidden(_:)), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func unregisterFromKeyboardNotifications () {
+        let center:  NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
+        center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    // Called when the UIKeyboardDidShowNotification is sent.
+    func keyboardWasShown (notification: NSNotification) {
+        let info : NSDictionary = notification.userInfo!
+        let kbSize = (info.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue() as CGRect!).size
+        
+        let contentInsets: UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+        scrollView.contentInset = contentInsets;
+        scrollView.scrollIndicatorInsets = contentInsets;
+        
+        // If active text field is hidden by keyboard, scroll it so it's visible
+        // Your app might not need or want this behavior.
+        var aRect = self.view.frame
+        aRect.size.height -= kbSize.height;
+        if self.activeTextField != nil
+        {
+            if (!CGRectContainsPoint(aRect, self.activeTextField.frame.origin) ) {
+                self.scrollView.scrollRectToVisible(self.activeTextField.frame, animated: true)
+            }
+        }
+    }
+    
+    // Called when the UIKeyboardWillHideNotification is sent
+    func keyboardWillBeHidden (notification: NSNotification) {
+        let contentInsets = UIEdgeInsetsZero;
+        scrollView.contentInset = contentInsets;
+        scrollView.scrollIndicatorInsets = contentInsets;
+    }
+    
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        self.activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.activeTextField = nil
+    }
     @IBAction func googleSignUp(sender: AnyObject)
     {
         GIDSignIn.sharedInstance().signIn()
@@ -37,34 +142,57 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         
     }
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
-        print(GIDSignIn.sharedInstance().currentUser.profile.name)
+        if let _ = error {
+            print(error)
+        }
+        else {
+            print(GIDSignIn.sharedInstance().currentUser.profile.name)
+            print(GIDSignIn.sharedInstance().currentUser.profile.email)
+            
+        }
+        
     }
     func signIn(signIn: GIDSignIn!,
-        presentViewController viewController: UIViewController!) {
-            self.presentViewController(viewController, animated: true, completion: nil)
+                presentViewController viewController: UIViewController!) {
+        self.presentViewController(viewController, animated: true, completion: nil)
     }
     
     // Dismiss the "Sign in with Google" view
     func signIn(signIn: GIDSignIn!,
-        dismissViewController viewController: UIViewController!) {
-            self.dismissViewControllerAnimated(true, completion: nil)
+                dismissViewController viewController: UIViewController!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     @IBAction func facebooksignUp(sender: AnyObject)
     {
-        
+        let login : FBSDKLoginManager = FBSDKLoginManager()
+        let  readPermissions = ["public_profile", "email", "user_friends"]
+        login.logInWithReadPermissions(readPermissions, fromViewController: self, handler: {(result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+            if error != nil {
+                print(FBSDKAccessToken.currentAccessToken())
+            } else if result.isCancelled {
+                print("Cancelled")
+            } else {
+                print("LoggedIn")
+                self.getFBUserData()
+                
+            }
+            
+        })
+    }
+    
+    func getFBUserData()
+    {
+        if((FBSDKAccessToken.currentAccessToken()) != nil)
+        {
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                if (error == nil){
+                    print(result)
+                }
+            })
+        }
         
     }
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

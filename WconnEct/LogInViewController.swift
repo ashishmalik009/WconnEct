@@ -12,63 +12,112 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     
     @IBOutlet weak var signInButton: GIDSignInButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-//        GIDSignIn.sharedInstance().clientID = "792162020267-8vchclkrkbmfclhm1j4atlepvqm1jucl.apps.googleusercontent.com"
+        //        GIDSignIn.sharedInstance().clientID = "792162020267-8vchclkrkbmfclhm1j4atlepvqm1jucl.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.login")
         GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.me")
         GIDSignIn.sharedInstance().signInSilently()
         
-        
-
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        if (FBSDKAccessToken.currentAccessToken() != nil)
+        {
+            self.getFBUserData()
+            
+        }
+        
+    }
+    
     override func viewDidAppear(animated: Bool) {
         GIDSignIn.sharedInstance().delegate = self
     }
-
+    
     @IBAction func signIn(sender: AnyObject) {
         GIDSignIn.sharedInstance().signIn()
     }
     
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
-        withError error: NSError!) {
-           
-            if let _ = error {
-                print(error)
-            }
-            else {
-                print(GIDSignIn.sharedInstance().currentUser.profile.name)
-                print(GIDSignIn.sharedInstance().currentUser.profile.email)
-
-            }
+                withError error: NSError!) {
+        
+        if let _ = error {
+            print(error)
+        }
+        else {
+            
+            print(GIDSignIn.sharedInstance().currentUser.profile.name)
+            print(GIDSignIn.sharedInstance().currentUser.profile.email)
+            self.activityIndicator.stopAnimating()
+            
+        }
     }
     
     func signIn(signIn: GIDSignIn!, didDisconnectWithUser user: GIDGoogleUser!, withError error: NSError!) {
         
     }
     func signIn(signIn: GIDSignIn!,
-        presentViewController viewController: UIViewController!) {
-            self.presentViewController(viewController, animated: true, completion: nil)
+                presentViewController viewController: UIViewController!) {
+        self.presentViewController(viewController, animated: true, completion: nil)
     }
     
     // Dismiss the "Sign in with Google" view
     func signIn(signIn: GIDSignIn!,
-        dismissViewController viewController: UIViewController!) {
-            self.dismissViewControllerAnimated(true, completion: nil)
+                dismissViewController viewController: UIViewController!) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.activityIndicator.startAnimating()
     }
     
+    
     @IBAction func signOut(sender: AnyObject) {
+        
         GIDSignIn.sharedInstance().signOut()
+        FBSDKLoginManager().logOut()
+        FBSDKProfile.setCurrentProfile(nil)
+        FBSDKAccessToken.setCurrentAccessToken(nil)
         dismissViewControllerAnimated(true, completion: nil)
     }
-
-
+    
+    @IBAction func facebookSignIn(sender: AnyObject)
+    {
+        let login : FBSDKLoginManager = FBSDKLoginManager()
+        let  readPermissions = ["public_profile", "email", "user_friends"]
+        login.logInWithReadPermissions(readPermissions, fromViewController: self, handler: {(result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+            if error != nil {
+                print(FBSDKAccessToken.currentAccessToken())
+            } else if result.isCancelled {
+                print("Cancelled")
+            } else {
+                print("LoggedIn")
+                self.getFBUserData()
+                
+            }
+            
+        })
+        
+    }
+    
+    func getFBUserData()
+    {
+        if((FBSDKAccessToken.currentAccessToken()) != nil)
+        {
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                if (error == nil){
+                    print(result)
+                }
+            })
+        }
+        
+    }
+    
 }
 
 //    var data : NSMutableData = NSMutableData()
@@ -132,5 +181,5 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
 
 
 
-    
+
 
