@@ -185,6 +185,15 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
                 print("Cancelled")
             } else {
                 print("LoggedIn")
+                let alert = UIAlertController(title: nil, message: "Logging In...", preferredStyle: .Alert)
+                alert.view.tintColor = UIColor.blackColor()
+                let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+                loadingIndicator.hidesWhenStopped = true
+                loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+                loadingIndicator.startAnimating()
+                
+                alert.view.addSubview(loadingIndicator)
+                self.presentViewController(alert, animated: true, completion: nil)
                 self.getFBUserData()
                 
             }
@@ -199,6 +208,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
                 if (error == nil){
                     print(result)
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
             })
         }
@@ -216,11 +226,11 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         
-        let requestKeys  = NSArray(objects:"name","ph_number","email","pswd","photo")
-        let requestValues = NSArray(objects:"ASHU", "893", "ASHISH@GMAIL.COM", "123", "")
-        let jsonRequest = NSDictionary(object: requestKeys, forKey: requestValues)
+//        let requestKeys  = NSArray(objects:"name","ph_number","email","pswd","photo")
+//        let requestValues = NSArray(objects:"ASHU", "893", "ASHISH@GMAIL.COM", "123", "")
+        let jsonRequest = ["name":"s","ph_number":"123456","email":"a@abcd.com","photo":"[]"]
         do {
-            let jsonData: NSData  = try NSJSONSerialization.dataWithJSONObject(jsonRequest, options:.PrettyPrinted)
+            let jsonData: NSData  = try NSJSONSerialization.dataWithJSONObject(jsonRequest, options:[])
             request.HTTPBody = jsonData
             print(NSString(data: jsonData, encoding: NSUTF8StringEncoding))
             // use jsonData
