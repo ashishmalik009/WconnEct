@@ -253,6 +253,12 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         {
             let requestObject = RequestBuilder()
             requestObject.requestForSignUp(String(nameTextField.text), phNumber: String(contactNumberField.text), emailID: String(emailIDField.text), password: String(passwordField.text), gender: gender, photo:"[]", isTeacher: isTeacher)
+            requestObject.completionHandler = {dataValue in
+                print(NSString(data: dataValue, encoding: NSUTF8StringEncoding))
+          
+                
+            }
+            
             
         }
         

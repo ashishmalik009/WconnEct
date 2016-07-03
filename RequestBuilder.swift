@@ -10,7 +10,12 @@ import UIKit
 
 class RequestBuilder: NSObject
 {
-    typealias CompletionHandler = (dataFromServer : NSData) -> Void
+    var completionHandler: (dataFromServer: NSData) -> Void =  {dataValue in }
+    override init()
+    {
+        super.init()
+    }
+    
     
     func requestForSignUp(name:String ,phNumber:String,emailID:String,password:String,gender:String,photo:String,isTeacher:Bool) -> Void
     {
@@ -51,6 +56,7 @@ class RequestBuilder: NSObject
                 if httpResponse.statusCode == 200
                 {
                     print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                    self.completionHandler(dataFromServer: data!)
                    
                     
                 }
