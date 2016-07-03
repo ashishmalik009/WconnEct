@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B62C0FB1D2941BD00014F7F /* SignUpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B62C0FA1D2941BD00014F7F /* SignUpParser.swift */; };
 		54414A411D181D4C0000E3D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54414A401D181D4C0000E3D2 /* AppDelegate.swift */; };
 		54414A431D181D4C0000E3D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54414A421D181D4C0000E3D2 /* ViewController.swift */; };
 		54414A461D181D4C0000E3D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54414A441D181D4C0000E3D2 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		0615E9257D8A7733A9FEEA66 /* Pods_WconnEctTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WconnEctTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B62C0FA1D2941BD00014F7F /* SignUpParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpParser.swift; sourceTree = "<group>"; };
 		2F32CBD9BCAE59D2C8F225E5 /* Pods-WconnEctUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WconnEctUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WconnEctUITests/Pods-WconnEctUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		54414A3D1D181D4C0000E3D2 /* WconnEct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WconnEct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54414A401D181D4C0000E3D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		54414A341D181D4B0000E3D2 = {
 			isa = PBXGroup;
 			children = (
+				1B62C0FA1D2941BD00014F7F /* SignUpParser.swift */,
 				6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */,
 				54414A3F1D181D4C0000E3D2 /* WconnEct */,
 				54414A571D181D4C0000E3D2 /* WconnEctTests */,
@@ -460,6 +463,7 @@
 			files = (
 				5472D9411D192AD500FEA690 /* LogInViewController.swift in Sources */,
 				54414A431D181D4C0000E3D2 /* ViewController.swift in Sources */,
+				1B62C0FB1D2941BD00014F7F /* SignUpParser.swift in Sources */,
 				54414A411D181D4C0000E3D2 /* AppDelegate.swift in Sources */,
 				6D5B387B1D28CC4400BD8DEF /* RequestBuilder.swift in Sources */,
 				54414A491D181D4C0000E3D2 /* WconnEct.xcdatamodeld in Sources */,
