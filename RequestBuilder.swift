@@ -12,7 +12,7 @@ class RequestBuilder: NSObject
 {
     typealias CompletionHandler = (dataFromServer : NSData) -> Void
     
-    func requestForSignUp(name:String ,phNumber:String,emailID:String,password:String,gender:String,photo:String,isTeacher:Bool,completionHandler:CompletionHandler) -> Void
+    func requestForSignUp(name:String ,phNumber:String,emailID:String,password:String,gender:String,photo:String,isTeacher:Bool) -> Void
     {
         var url = NSURL()
         if isTeacher
@@ -51,7 +51,7 @@ class RequestBuilder: NSObject
                 if httpResponse.statusCode == 200
                 {
                     print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-                    completionHandler(dataFromServer: data!)
+                   
                     
                 }
             }
