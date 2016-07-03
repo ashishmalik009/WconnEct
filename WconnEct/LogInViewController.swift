@@ -12,7 +12,10 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     
     @IBOutlet weak var signInButton: GIDSignInButton!
+    @IBOutlet weak var emailIdTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +43,20 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     }
     
        @IBAction func signIn(sender: AnyObject) {
-        GIDSignIn.sharedInstance().signIn()
+        let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
+        let actionForTeacher = UIAlertAction(title: "Teacher", style: .Default, handler: {(alert: UIAlertAction!) in
+            GIDSignIn.sharedInstance().signIn()
+        })
+        let actionForStudent = UIAlertAction(title: "Student", style: .Default, handler: {(alert: UIAlertAction!) in
+            GIDSignIn.sharedInstance().signIn()
+        })
+        let dismissAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
+        
+        actionSheet.addAction(actionForStudent)
+        actionSheet.addAction(actionForTeacher)
+        actionSheet.addAction(dismissAction)
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+        
         }
     
     
@@ -136,10 +152,90 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         
     }
     
+    func showActivityIndicator()
+    {
+        let alert = UIAlertController(title: nil, message: "Authenticating...", preferredStyle: .Alert)
+        
+        alert.view.tintColor = UIColor.blackColor()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        loadingIndicator.startAnimating()
+        
+        alert.view.addSubview(loadingIndicator)
+        presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    @IBAction func logIn(sender: AnyObject)
+    {
+        var isTeacher : Bool = true
+        if segmentControl.selectedSegmentIndex == 0
+        {
+            isTeacher = true
+        }
+        else
+        {
+            isTeacher = false
+        }
 
+        if emailIdTextField.text == "" || passwordTextField.text == ""
+        {
+            let alert = UIAlertController(title: "Error", message: "Values cannot be empty", preferredStyle:.Alert)
+            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(alertAction)
+            presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            self.showActivityIndicator()
+            let requestObject = RequestBuilder()
+            requestObject.requestForLogIn(String(UTF8String: emailIdTextField.text!)!, password: String(UTF8String:passwordTextField.text!)!, isTeacher: isTeacher)
+            requestObject.errorHandler = { error in
+                
+                dispatch_async(dispatch_get_main_queue(),{
+                    let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(alertAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
 
+            requestObject.completionHandler = { dataValue in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let parser = LogInParser()
+                    if parser.isparsedLogInDetailsUsingData(dataValue)
+                    {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
+                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(alertAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                    else
+                    {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
+                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(alertAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        
+                    }
+                    
+                    
+                })
+                
+                
+            }
+
+            
+        }
+
+    }
     
 }
+
+
+
 
 
 

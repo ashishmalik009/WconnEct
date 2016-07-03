@@ -1,18 +1,19 @@
 //
-//  SignUpParser.swift
+//  LogInParser.swift
 //  WconnEct
 //
-//  Created by Anahita Kapoor on 12/04/1938 Saka.
-//  Copyright © 1938 Saka wconnect. All rights reserved.
+//  Created by Ashish Malik on 04/07/16.
+//  Copyright © 2016 wconnect. All rights reserved.
 //
 
 import UIKit
 
-class SignUpParser: NSObject
+class LogInParser: NSObject
 {
+
     var messageFromParser : String = ""
     
-    func isparsedSignUpDetailsUsingData(data: NSData) -> Bool
+    func isparsedLogInDetailsUsingData(data: NSData) -> Bool
     {
         do
         {
@@ -30,14 +31,21 @@ class SignUpParser: NSObject
             }
             else if status == 0
             {
-                messageFromParser = json.objectForKey("message") as! String
+                let message = json.objectForKey("message") as! NSDictionary
+                messageFromParser = String(message.objectForKey("message")!)
+                if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                {
+                    delegate.accessTokenAfterLogin = String(message.objectForKey("token")!)
+                }
+                
             }
             
         }catch{
             print("error serializing JSON: \(error)")
         }
-
+        
         return true
     }
+    
 
 }

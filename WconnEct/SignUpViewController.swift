@@ -138,7 +138,20 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     }
     @IBAction func googleSignUp(sender: AnyObject)
     {
-        GIDSignIn.sharedInstance().signIn()
+        let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
+        let actionForTeacher = UIAlertAction(title: "Teacher", style: .Default, handler: {(alert: UIAlertAction!) in
+            GIDSignIn.sharedInstance().signIn()
+            })
+        let actionForStudent = UIAlertAction(title: "Student", style: .Default, handler: {(alert: UIAlertAction!) in
+            GIDSignIn.sharedInstance().signIn()
+        })
+        let dismissAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
+
+        actionSheet.addAction(actionForStudent)
+        actionSheet.addAction(actionForTeacher)
+        actionSheet.addAction(dismissAction)
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+        
     }
     
     func signIn(signIn: GIDSignIn!, didDisconnectWithUser user: GIDGoogleUser!, withError error: NSError!) {
@@ -179,6 +192,28 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     
     @IBAction func facebooksignUp(sender: AnyObject)
     {
+        var isTeacher : Bool = true
+        let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
+        let actionForTeacher = UIAlertAction(title: "Teacher", style: .Default, handler: {(alert: UIAlertAction!) in
+            
+            self.callFacebooksignUpFunction(isTeacher)
+        })
+        let actionForStudent = UIAlertAction(title: "Student", style: .Default, handler: {(alert: UIAlertAction!) in
+            isTeacher = false
+            self.callFacebooksignUpFunction(isTeacher)
+        })
+        let dismissAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
+        
+        actionSheet.addAction(actionForStudent)
+        actionSheet.addAction(actionForTeacher)
+        actionSheet.addAction(dismissAction)
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+        
+
+    }
+    
+    func callFacebooksignUpFunction(isTeacher : Bool) ->Void
+    {
         let login : FBSDKLoginManager = FBSDKLoginManager()
         let  readPermissions = ["public_profile", "email", "user_friends"]
         login.logInWithReadPermissions(readPermissions, fromViewController: self, handler: {(result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
@@ -209,7 +244,8 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         if((FBSDKAccessToken.currentAccessToken()) != nil)
         {
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
-                if (error == nil){
+                if (error == nil)
+                {
                     print(result)
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
@@ -228,11 +264,11 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         var isTeacher : Bool = true
         if genderSegmentControl.selectedSegmentIndex == 0
         {
-            gender = "Male"
+            gender = "Female"
         }
         else
         {
-            gender = "Female"
+            gender = "Male"
         }
         if teacherOrStudentSegmentControl.selectedSegmentIndex == 0
         {
@@ -251,19 +287,25 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         }
         else
         {
+            self.showActivityIndicator()
             let requestObject = RequestBuilder()
-            requestObject.requestForSignUp(String(nameTextField.text), phNumber: String(contactNumberField.text), emailID: String(emailIDField.text), password: String(passwordField.text), gender: gender, photo:"[]", isTeacher: isTeacher)
+            requestObject.requestForSignUp(String(UTF8String: nameTextField.text!)!, phNumber: String(UTF8String:contactNumberField.text!)!, emailID: String(UTF8String: emailIDField.text!)!, password: String(UTF8String: passwordField.text!)!, gender: gender, photo:String(UTF8String: "[]")!, isTeacher: isTeacher)
             requestObject.completionHandler = { dataValue in
                 dispatch_async(dispatch_get_main_queue(), {
                     let parser = SignUpParser()
                     if parser.isparsedSignUpDetailsUsingData(dataValue)
                     {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
+                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(alertAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
                         
                     }
                     else
                     {
-                        
-                        let alert = UIAlertController(title: "Error", message: parser.errorFromParser, preferredStyle:.Alert)
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
                         let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                         alert.addAction(alertAction)
                         self.presentViewController(alert, animated: true, completion: nil)
@@ -285,8 +327,19 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
 
     }
 
-    func parseData(data : NSData) -> Void {
-                
+    func showActivityIndicator()
+    {
+        let alert = UIAlertController(title: nil, message: "Creating an Account...", preferredStyle: .Alert)
+        
+        alert.view.tintColor = UIColor.blackColor()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        loadingIndicator.startAnimating()
+        
+        alert.view.addSubview(loadingIndicator)
+        presentViewController(alert, animated: true, completion: nil)
+
     }
 //    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
 //        print(NSString(data: data, encoding: NSUTF8StringEncoding))

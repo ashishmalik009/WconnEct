@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WconnEct/LogInViewController.swift"
-            timestampString = "489007698.114228"
+            timestampString = "489268340.569504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "facebookSignIn(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WconnEct/LogInViewController.swift"
-            timestampString = "489007698.114228"
+            timestampString = "489268340.569504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "getFBUserData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WconnEct/SignUpViewController.swift"
-            timestampString = "489214042.849024"
+            filePath = "RequestBuilder.swift"
+            timestampString = "489262629.342076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "signUp(_:)"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "requestForLogIn(_:password:isTeacher:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,13 +58,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RequestBuilder.swift"
-            timestampString = "489214957.328014"
+            timestampString = "489262742.017355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "requestForSignUp(_:phNumber:emailID:password:gender:photo:isTeacher:)"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "requestForLogIn(_:password:isTeacher:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WconnEct.RequestBuilder.(requestForLogIn (Swift.String, password : Swift.String, isTeacher : Swift.Bool) -&gt; ()).(closure #1)"
+                  moduleName = "WconnEct"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devAshish/Documents/WconnEct/RequestBuilder.swift"
+                  timestampString = "489267123.146309"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WconnEct.RequestBuilder.(requestForLogIn (Swift.String, password : Swift.String, isTeacher : Swift.Bool) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "WconnEct"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devAshish/Documents/WconnEct/RequestBuilder.swift"
+                  timestampString = "489267123.146542"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

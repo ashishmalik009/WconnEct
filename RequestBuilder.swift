@@ -11,6 +11,7 @@ import UIKit
 class RequestBuilder: NSObject
 {
     var completionHandler: (dataFromServer: NSData) -> Void =  {dataValue in }
+    var errorHandler : (errorValue : NSError) -> Void = { errorFromServer in }
     override init()
     {
         super.init()
@@ -22,11 +23,11 @@ class RequestBuilder: NSObject
         var url = NSURL()
         if isTeacher
         {
-             url = NSURL.init(string: "http://wconnect-pcj.rhcloud.com/teacher/")!
+             url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/teacher/")!
         }
         else
         {
-            url = NSURL.init(string: "http://wconnect-pcj.rhcloud.com/student/")!
+            url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/student/")!
         }
         
         let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
@@ -66,7 +67,64 @@ class RequestBuilder: NSObject
         })
         
         dataTask.resume()
-        
-
     }
+    
+    
+    func requestForLogIn(emailId:String ,password:String,isTeacher:Bool) -> Void
+    {
+        var url = NSURL()
+        if isTeacher
+        {
+            url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/teacher/login/")!
+        }
+        else
+        {
+            url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/student/login/")!
+        }
+        
+        let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        let post : String = "email=\(emailId)&pswd=\(password)"
+        let postData : NSData = post.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
+        let postLength: String = "\(postData.length)"
+        request.HTTPMethod = "POST"
+        
+        request.setValue(postLength, forHTTPHeaderField: "Content-Length")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = postData
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let session = NSURLSession.sharedSession()
+        let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {
+            
+            data, response, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+            if error != nil
+            {
+                self.errorHandler(errorValue: error!)
+            }
+            else
+            {
+                if let httpResponse = response as? NSHTTPURLResponse
+                {
+                    if httpResponse.statusCode == 200
+                    {
+                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                        self.completionHandler(dataFromServer: data!)
+                        
+                        
+                    }
+                }
+
+            }
+            
+            
+        })
+        
+        dataTask.resume()
+    }
+    
+
+    
 }
