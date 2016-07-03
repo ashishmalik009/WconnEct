@@ -253,6 +253,28 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         {
             let requestObject = RequestBuilder()
             requestObject.requestForSignUp(String(nameTextField.text), phNumber: String(contactNumberField.text), emailID: String(emailIDField.text), password: String(passwordField.text), gender: gender, photo:"[]", isTeacher: isTeacher)
+            requestObject.completionHandler = { dataValue in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let parser = SignUpParser()
+                    if parser.isparsedSignUpDetailsUsingData(dataValue)
+                    {
+                        
+                    }
+                    else
+                    {
+                        
+                        let alert = UIAlertController(title: "Error", message: parser.errorFromParser, preferredStyle:.Alert)
+                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(alertAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        
+                    }
+                    
+    
+                })
+                
+            }
+            
             
         }
         
@@ -264,25 +286,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     }
 
     func parseData(data : NSData) -> Void {
-        do
-        {
-            let json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as!  NSDictionary
-            let status = json.objectForKey("status")
-            print(status)
-//            for name in json
-//            {
-//                print(name["ph_number"])
-//                if let phNumber = name["ph_number"]
-//                {
-//                    print(phNumber)
-//                }
-//            }
-//            print(json)
-            
-        }catch{
-            print("error serializing JSON: \(error)")
-        }
-        
+                
     }
 //    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
 //        print(NSString(data: data, encoding: NSUTF8StringEncoding))
