@@ -254,13 +254,24 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             let requestObject = RequestBuilder()
             requestObject.requestForSignUp(String(nameTextField.text), phNumber: String(contactNumberField.text), emailID: String(emailIDField.text), password: String(passwordField.text), gender: gender, photo:"[]", isTeacher: isTeacher)
             requestObject.completionHandler = { dataValue in
-                
-                let parser = SignUpParser()
-               if parser.isparsedSignUpDetailsUsingData(dataValue)
-               {
-                
-                }
-          
+                dispatch_async(dispatch_get_main_queue(), {
+                    let parser = SignUpParser()
+                    if parser.isparsedSignUpDetailsUsingData(dataValue)
+                    {
+                        
+                    }
+                    else
+                    {
+                        
+                        let alert = UIAlertController(title: "Error", message: parser.errorFromParser, preferredStyle:.Alert)
+                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(alertAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        
+                    }
+                    
+    
+                })
                 
             }
             

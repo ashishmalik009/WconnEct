@@ -10,6 +10,7 @@ import UIKit
 
 class SignUpParser: NSObject
 {
+    var errorFromParser : String = ""
     
     func isparsedSignUpDetailsUsingData(data: NSData) -> Bool
     {
@@ -19,6 +20,12 @@ class SignUpParser: NSObject
             let status = json.objectForKey("status") as! NSNumber
             if status == 1
             {
+                let message = json.objectForKey("message") as! NSDictionary
+                let errors = message.objectForKey("errors") as! NSArray
+                let messageInErrors = errors.objectAtIndex(0) as! NSDictionary
+                errorFromParser = String(messageInErrors.objectForKey("message")!)
+                
+                
                 return false
             }
             //            for name in json
