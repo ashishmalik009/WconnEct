@@ -19,7 +19,10 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contactNumberField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var genderSegmentControl: UISegmentedControl!
     
+    @IBOutlet weak var teacherOrStudentSegmentControl: UISegmentedControl!
+    var data : NSMutableData = NSMutableData()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -215,47 +218,57 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         
     }
     
-    var data : NSMutableData = NSMutableData()
-    let url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/student/")
+    
+    
 
     @IBAction func signUp(sender: AnyObject)
     {
         
-        let request: NSMutableURLRequest = NSMutableURLRequest(URL: url!)
-        request.HTTPMethod = "Post"
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        
-//        let requestKeys  = NSArray(objects:"name","ph_number","email","pswd","photo")
-//        let requestValues = NSArray(objects:"ASHU", "893", "ASHISH@GMAIL.COM", "123", "")
-        let jsonRequest = ["name":"s","ph_number":"123456","email":"a@abcd.com","photo":"[]"]
-        do {
-            let jsonData: NSData  = try NSJSONSerialization.dataWithJSONObject(jsonRequest, options:[])
-            request.HTTPBody = jsonData
-            print(NSString(data: jsonData, encoding: NSUTF8StringEncoding))
-            // use jsonData
-        } catch {
-            // report error
+        var gender : String = ""
+        var isTeacher : Bool = true
+        if genderSegmentControl.selectedSegmentIndex == 0
+        {
+            gender = "Male"
         }
+        else
+        {
+            gender = "Female"
+        }
+        if teacherOrStudentSegmentControl.selectedSegmentIndex == 0
+        {
+            isTeacher = true
+        }
+        else
+        {
+            isTeacher = false
+        }
+        if nameTextField.text == "" || passwordField.text == "" || emailIDField.text == "" || contactNumberField.text == ""
+        {
+            let alert = UIAlertController(title: "Error", message: "Values cannot be empty", preferredStyle:.Alert)
+            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(alertAction)
+            presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            let requestObject = RequestBuilder()
+            requestObject.requestForSignUp(String(nameTextField.text), phNumber: String(contactNumberField.text), emailID: String(emailIDField.text), password: String(passwordField.text), gender: gender, photo:"[]", isTeacher: isTeacher)
+            
+        }
+        
 
         
         
-        let session = NSURLSession.sharedSession()
-        let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {
-            
-            (let data, let response, let error) in
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            self.parseData(data!)
-        })
-        
-        dataTask.resume()
         
 
     }
+
     func parseData(data : NSData) -> Void {
-//        do
-//        {
-//            var json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as! [[String:AnyObject]]
+        do
+        {
+            let json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as!  NSDictionary
+            let status = json.objectForKey("status")
+            print(status)
 //            for name in json
 //            {
 //                print(name["ph_number"])
@@ -265,10 +278,10 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
 //                }
 //            }
 //            print(json)
-//            
-//        }catch{
-//            print("error serializing JSON: \(error)")
-//        }
+            
+        }catch{
+            print("error serializing JSON: \(error)")
+        }
         
     }
 //    func connection(connection: NSURLConnection, didReceiveData data: NSData) {

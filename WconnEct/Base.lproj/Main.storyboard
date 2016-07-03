@@ -360,9 +360,11 @@
                     <connections>
                         <outlet property="contactNumberField" destination="D54-vZ-tLG" id="nUr-J8-KLD"/>
                         <outlet property="emailIDField" destination="o7U-NW-apS" id="1FW-kv-NTW"/>
+                        <outlet property="genderSegmentControl" destination="c3W-At-wm5" id="zHi-pf-6J8"/>
                         <outlet property="nameTextField" destination="CU6-ZD-Yky" id="4Al-dv-xfP"/>
                         <outlet property="passwordField" destination="9J9-T3-cHa" id="KvK-Bb-PJW"/>
                         <outlet property="scrollView" destination="Be8-GX-Aq7" id="Ybi-Oy-YFS"/>
+                        <outlet property="teacherOrStudentSegmentControl" destination="gmS-nk-ksz" id="du6-Jt-045"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BHS-tF-SZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
