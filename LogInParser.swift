@@ -39,6 +39,12 @@ class LogInParser: NSObject
                 }
                 
             }
+            else if status == 2
+            {
+                let message = json.objectForKey("message") as! String
+                messageFromParser = message
+                return false
+            }
             
         }catch{
             print("error serializing JSON: \(error)")
