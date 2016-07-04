@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -600,6 +600,91 @@
             </objects>
             <point key="canvasLocation" x="2062" y="456"/>
         </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="miQ-pw-HFz">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="2sB-eH-LWd" customClass="ProfileViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LfL-TI-wxf"/>
+                        <viewControllerLayoutGuide type="bottom" id="C68-5Q-yqT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9F6-JG-geh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="73T-XG-nBV">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="profileCellIdentifier" id="Lbt-Vq-yVm">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lbt-Vq-yVm" id="rtQ-S3-lhs">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2sB-eH-LWd" id="jdO-Xk-9wM"/>
+                                    <outlet property="delegate" destination="2sB-eH-LWd" id="RxI-g1-Uis"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C68-5Q-yqT" firstAttribute="top" secondItem="73T-XG-nBV" secondAttribute="bottom" id="BDG-F4-I56"/>
+                            <constraint firstItem="73T-XG-nBV" firstAttribute="top" secondItem="LfL-TI-wxf" secondAttribute="bottom" id="Qsg-rt-utE"/>
+                            <constraint firstAttribute="trailing" secondItem="73T-XG-nBV" secondAttribute="trailing" id="egw-iv-jlZ"/>
+                            <constraint firstItem="73T-XG-nBV" firstAttribute="leading" secondItem="9F6-JG-geh" secondAttribute="leading" id="n05-eM-8tW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="kyy-fd-Xfa"/>
+                    <connections>
+                        <outlet property="profileTableView" destination="73T-XG-nBV" id="RCK-7K-Leq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8q5-nG-gST" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4438" y="977"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Oxo-xk-MMh">
+            <objects>
+                <viewController id="SxD-Dq-UsV" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mf0-ib-64H"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qex-cN-46Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ynz-33-X6Q">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Cu1-v7-vdD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c7z-cD-Toi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4438" y="317"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="o2X-nN-Ob2">
+            <objects>
+                <tabBarController storyboardIdentifier="tabbarControllerStoryboardID" id="WCO-tq-3ia" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="QZ0-Mf-Uz8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="yV0-BF-0Yi" kind="relationship" relationship="viewControllers" id="fXY-6r-n3b"/>
+                        <segue destination="wgz-SB-ehZ" kind="relationship" relationship="viewControllers" id="Lqx-XJ-nQD"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0ki-0Y-wRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2806" y="647"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="Znw-bb-4uu">
             <objects>
@@ -636,10 +721,49 @@
             </objects>
             <point key="canvasLocation" x="646" y="456"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="xmT-7e-fQf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wgz-SB-ehZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="profileIcon" id="mMw-xJ-lJX"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vIk-Df-m1t">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2sB-eH-LWd" kind="relationship" relationship="rootViewController" id="I7X-F9-wC2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pHZ-ow-O1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3626" y="977"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cpc-tt-eR0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yV0-BF-0Yi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="search" id="gUk-C7-xfC"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="koj-ZE-lMc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SxD-Dq-UsV" kind="relationship" relationship="rootViewController" id="7fW-uD-9k7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JcP-j2-x9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3626" y="317"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cancelImage" width="25" height="25"/>
         <image name="faceBook Icon" width="19" height="18"/>
         <image name="google Icon" width="86" height="88"/>
+        <image name="profileIcon" width="25" height="25"/>
     </resources>
 </document>

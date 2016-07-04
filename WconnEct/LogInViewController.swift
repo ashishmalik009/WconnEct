@@ -193,6 +193,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             requestObject.errorHandler = { error in
                 
                 dispatch_async(dispatch_get_main_queue(),{
+                    self.dismissViewControllerAnimated(true, completion: nil)
                     let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                     let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alert.addAction(alertAction)
@@ -206,10 +207,13 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     if parser.isparsedLogInDetailsUsingData(dataValue)
                     {
                         self.dismissViewControllerAnimated(true, completion: nil)
-                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
-                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                        alert.addAction(alertAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
+//                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
+//                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//                        alert.addAction(alertAction)
+//                        self.presentViewController(alert, animated: true, completion: nil)
+                        
+                        let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("tabbarControllerStoryboardID") as! UITabBarController
+                        self.presentViewController(tabBarController, animated: true, completion: nil)
                     }
                     else
                     {

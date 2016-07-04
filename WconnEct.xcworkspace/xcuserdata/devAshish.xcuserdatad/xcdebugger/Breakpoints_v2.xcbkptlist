@@ -42,61 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RequestBuilder.swift"
-            timestampString = "489262629.342076"
+            timestampString = "489351449.318682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "requestForLogIn(_:password:isTeacher:)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RequestBuilder.swift"
-            timestampString = "489262742.017355"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "requestForLogIn(_:password:isTeacher:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WconnEct.RequestBuilder.(requestForLogIn (Swift.String, password : Swift.String, isTeacher : Swift.Bool) -&gt; ()).(closure #1)"
-                  moduleName = "WconnEct"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devAshish/Documents/WconnEct/RequestBuilder.swift"
-                  timestampString = "489267123.146309"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WconnEct.RequestBuilder.(requestForLogIn (Swift.String, password : Swift.String, isTeacher : Swift.Bool) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "WconnEct"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devAshish/Documents/WconnEct/RequestBuilder.swift"
-                  timestampString = "489267123.146542"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "101"
-                  endingLineNumber = "101"
-                  offsetFromSymbolStart = "4">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
