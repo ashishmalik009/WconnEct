@@ -13,6 +13,7 @@ class ProfileUserParser: NSObject
     var name : String = ""
     var contactNumber : String = ""
     var gender : String = ""
+    var email : String = ""
     func isparsedPRrofileUserUsingData(data: NSData) -> Bool
     {
         do
@@ -21,6 +22,7 @@ class ProfileUserParser: NSObject
             name = String(json.objectForKey("name")!)
             contactNumber = String(json.objectForKey("ph_number")!)
             gender = String(json.objectForKey("gender")!)
+            email = String(json.objectForKey("email")!)
             
             
         }

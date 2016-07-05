@@ -206,22 +206,29 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     let parser = LogInParser()
                     if parser.isparsedLogInDetailsUsingData(dataValue)
                     {
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismissViewControllerAnimated(true, completion: {
+                            let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
+                            self.presentViewController(revealController, animated: true, completion: nil)
+                            
+                            
+                        })
 //                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
 //                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
 //                        alert.addAction(alertAction)
 //                        self.presentViewController(alert, animated: true, completion: nil)
                         
-                        let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("tabbarControllerStoryboardID") as! UITabBarController
-                        self.presentViewController(tabBarController, animated: true, completion: nil)
+//                        let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("tabbarControllerStoryboardID") as! UITabBarController
+                       
                     }
                     else
                     {
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                        let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
-                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                        alert.addAction(alertAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.dismissViewControllerAnimated(true, completion: {
+                            let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
+                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                            alert.addAction(alertAction)
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        })
+                        
                         
                     }
                     

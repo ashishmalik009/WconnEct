@@ -26,8 +26,6 @@ class LogInParser: NSObject
                 let messageInErrors = errors.objectAtIndex(0) as! NSDictionary
                 messageFromParser = String(messageInErrors.objectForKey("message")!)
                 
-                
-                return false
             }
             else if status == 0
             {
@@ -37,20 +35,20 @@ class LogInParser: NSObject
                 {
                     delegate.accessTokenAfterLogin = String(message.objectForKey("token")!)
                 }
+                return true
                 
             }
-            else if status == 2
+            else if status == 2 || status == 5
             {
                 let message = json.objectForKey("message") as! String
                 messageFromParser = message
-                return false
             }
             
         }catch{
             print("error serializing JSON: \(error)")
         }
         
-        return true
+        return false
     }
     
 
