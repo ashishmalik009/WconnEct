@@ -20,43 +20,55 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBOutlet weak var userNameLabel: UILabel!
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2
         self.profileImageView.clipsToBounds = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(SlideMenuController.screenTapped(_:)))
+        self.profileImageView.addGestureRecognizer(tapRecognizer)
+        
+    }
+    func screenTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        print("ashish")
     }
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(true)
-        self.showActivityIndicator()
-        let requestObject = RequestBuilder()
-        requestObject.requestForProfileOfUser()
-        requestObject.errorHandler = { error in
-            
-            dispatch_async(dispatch_get_main_queue(),{
-                let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
-                let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(alertAction)
-                self.presentViewController(alert, animated: true, completion: nil)
-            })
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            self.userNameLabel.text = delegate.emailIdOfLoggedInUser
         }
-        
-        requestObject.completionHandler = { dataValue in
-            dispatch_async(dispatch_get_main_queue(), {
-                let parser = ProfileUserParser()
-                if parser.isparsedPRrofileUserUsingData(dataValue)
-                {
-                    self.userName = parser.name
-                    self.phNumber = parser.contactNumber
-                    self.gender = parser.gender
-                    self.emailId = parser.email
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    self.userNameLabel.text = parser.name
-                    self.profileTableView.reloadData()
-                }
-            })
-            
-        }
+//        self.showActivityIndicator()
+//        let requestObject = RequestBuilder()
+//        requestObject.requestForProfileOfUser()
+//        requestObject.errorHandler = { error in
+//            
+//            dispatch_async(dispatch_get_main_queue(),{
+//                let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+//                let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//                alert.addAction(alertAction)
+//                self.presentViewController(alert, animated: true, completion: nil)
+//            })
+//        }
+//        
+//        requestObject.completionHandler = { dataValue in
+//            dispatch_async(dispatch_get_main_queue(), {
+//                let parser = ProfileUserParser()
+//                if parser.isparsedPRrofileUserUsingData(dataValue)
+//                {
+//                    self.userName = parser.name
+//                    self.phNumber = parser.contactNumber
+//                    self.gender = parser.gender
+//                    self.emailId = parser.email
+//                    self.dismissViewControllerAnimated(true, completion: nil)
+//                    self.userNameLabel.text = parser.name
+//                    self.profileTableView.reloadData()
+//                }
+//            })
+//            
+//        }
     }
     func showActivityIndicator()
     {
@@ -85,7 +97,7 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
         let tableViewCell = tableView.dequeueReusableCellWithIdentifier("profileCellIdentifier")
         if indexPath.row == 0
         {
-            tableViewCell?.textLabel?.text = "Home"
+            tableViewCell?.textLabel?.text = "Search"
             
         }
         else if indexPath.row == 1

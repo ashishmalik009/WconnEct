@@ -715,7 +715,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCO-bt-k4y">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="228"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="fKy-5z-soo">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="fKy-5z-soo">
                                         <rect key="frame" x="236" y="43" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="Cpj-Bd-Me7"/>
@@ -723,7 +723,10 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hq-Tj-j4l">
-                                        <rect key="frame" x="236" y="164" width="90" height="21"/>
+                                        <rect key="frame" x="190" y="164" width="181" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="181" id="8GQ-xb-PZ3"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -737,6 +740,11 @@
                                     <constraint firstItem="fKy-5z-soo" firstAttribute="centerY" secondItem="bCO-bt-k4y" secondAttribute="centerY" constant="-26.5" id="jjj-lp-Bby"/>
                                     <constraint firstItem="8hq-Tj-j4l" firstAttribute="top" secondItem="fKy-5z-soo" secondAttribute="bottom" constant="31" id="p7m-bN-X24"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="6JQ-pv-apa"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

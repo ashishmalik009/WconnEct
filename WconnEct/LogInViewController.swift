@@ -207,6 +207,10 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     if parser.isparsedLogInDetailsUsingData(dataValue)
                     {
                         self.dismissViewControllerAnimated(true, completion: {
+                            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                            {
+                                delegate.emailIdOfLoggedInUser = self.emailIdTextField.text!
+                            }
                             let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
                             self.presentViewController(revealController, animated: true, completion: nil)
                             
