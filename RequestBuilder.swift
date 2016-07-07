@@ -18,7 +18,7 @@ class RequestBuilder: NSObject
     }
     
     
-    func requestForSignUp(name:String ,phNumber:String,emailID:String,password:String,gender:String,photo:String,isTeacher:Bool) -> Void
+    func requestForSignUp(name:String,phNumber:String,emailID:String,password:String,gender:String,photo:String,isTeacher:Bool) -> Void
     {
         var url = NSURL()
         if isTeacher

@@ -119,7 +119,12 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 3
         {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            GIDSignIn.sharedInstance().signOut()
+            FBSDKLoginManager().logOut()
+            FBSDKProfile.setCurrentProfile(nil)
+            FBSDKAccessToken.setCurrentAccessToken(nil)
+            dismissViewControllerAnimated(true, completion: nil)
+
         }
     }
 }

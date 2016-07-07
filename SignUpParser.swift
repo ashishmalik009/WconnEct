@@ -20,10 +20,7 @@ class SignUpParser: NSObject
             let status = json.objectForKey("status") as! NSNumber
             if status == 1
             {
-                let message = json.objectForKey("message") as! NSDictionary
-                let errors = message.objectForKey("errors") as! NSArray
-                let messageInErrors = errors.objectAtIndex(0) as! NSDictionary
-                messageFromParser = String(messageInErrors.objectForKey("message")!)
+                messageFromParser = json.objectForKey("message") as! String
                 
                 
                 return false
@@ -39,5 +36,7 @@ class SignUpParser: NSObject
 
         return true
     }
+    
+    
 
 }
