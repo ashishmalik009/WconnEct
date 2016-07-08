@@ -41,6 +41,13 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func skipLogin(sender: AnyObject)
+    {
+        dismissViewControllerAnimated(true, completion: nil)
+        let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
+        self.presentViewController(revealController, animated: true, completion: nil)
+
+    }
     
 }
 

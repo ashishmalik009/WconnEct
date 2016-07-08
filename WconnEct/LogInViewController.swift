@@ -316,6 +316,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                             {
                                 delegate.emailIdOfLoggedInUser = self.emailIdTextField.text!
+                                delegate.isUserLoggedIn = true
                             }
                             let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
                             self.presentViewController(revealController, animated: true, completion: nil)

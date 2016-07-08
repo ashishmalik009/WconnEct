@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     let tintColor =  UIColor(red: 242/255, green: 71/255, blue: 63/255, alpha: 1)
     var accessTokenAfterLogin : String = ""
     var emailIdOfLoggedInUser : String = ""
+    var isUserLoggedIn : Bool = false
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

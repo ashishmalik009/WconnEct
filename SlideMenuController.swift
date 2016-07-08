@@ -31,7 +31,9 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
     }
     func screenTapped(gestureRecognizer: UITapGestureRecognizer)
     {
-        print("ashish")
+            let profileUserController = self.storyboard?.instantiateViewControllerWithIdentifier("userProfileStoryBoardID") as! UserProfileViewController
+            self.presentViewController(profileUserController, animated: true, completion: nil)
+        
     }
     override func viewWillAppear(animated: Bool)
     {
@@ -110,7 +112,18 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
         }
         else if indexPath.row == 3
         {
-            tableViewCell?.textLabel?.text = "Log out"
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+               if delegate.isUserLoggedIn
+               {
+                tableViewCell?.textLabel?.text = "Log out"
+               }
+                else
+               {
+                tableViewCell?.textLabel?.text = "Log in"
+               }
+            }
+            
             tableViewCell?.imageView?.image = UIImage(named: "logOut")
         }
         return tableViewCell!
@@ -124,6 +137,11 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
             FBSDKProfile.setCurrentProfile(nil)
             FBSDKAccessToken.setCurrentAccessToken(nil)
             dismissViewControllerAnimated(true, completion: nil)
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isUserLoggedIn = false
+            }
+
 
         }
     }

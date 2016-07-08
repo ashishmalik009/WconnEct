@@ -47,6 +47,9 @@
                                 <state key="normal" title="Skip">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="skipLogin:" destination="zlx-mg-jZD" eventType="touchUpInside" id="3eY-f6-ipP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -65,6 +68,9 @@
                     <navigationItem key="navigationItem" title="WconnEct" id="LAj-L3-a1y">
                         <barButtonItem key="leftBarButtonItem" image="cancelImage" id="1cT-Sb-8C7">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="skipLogin:" destination="zlx-mg-jZD" id="xoK-c3-Blk"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
@@ -770,6 +776,24 @@
             </objects>
             <point key="canvasLocation" x="3068" y="1561"/>
         </scene>
+        <!--User Profile View Controller-->
+        <scene sceneID="zDG-fC-PsW">
+            <objects>
+                <viewController storyboardIdentifier="userProfileStoryBoardID" id="yfb-Wg-ePF" customClass="UserProfileViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J4F-dA-YAe"/>
+                        <viewControllerLayoutGuide type="bottom" id="gDf-lA-E5I"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QKH-rr-l3h">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9AI-M8-dvh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3844" y="1567"/>
+        </scene>
         <!--Slide Menu Detail Controller-->
         <scene sceneID="gUc-zh-Tgr">
             <objects>
@@ -852,6 +876,6 @@
         <image name="menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7AW-sJ-BUo"/>
+        <segue reference="dWV-ZG-0Sd"/>
     </inferredMetricsTieBreakers>
 </document>
