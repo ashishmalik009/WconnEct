@@ -27,7 +27,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         //        GIDSignIn.sharedInstance().clientID = "792162020267-8vchclkrkbmfclhm1j4atlepvqm1jucl.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.login")
         GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.me")
-        GIDSignIn.sharedInstance().signInSilently()
+//        GIDSignIn.sharedInstance().signInSilently()
         
     }
     
@@ -95,6 +95,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                             {
                                 delegate.emailIdOfLoggedInUser = String(GIDSignIn.sharedInstance().currentUser.profile.email)
+                                delegate.isUserLoggedIn = true
                             }
                             let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
                             self.presentViewController(revealController, animated: true, completion: nil)
@@ -225,6 +226,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                                     if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                                     {
                                         delegate.emailIdOfLoggedInUser = String(result.objectForKey("email")!)
+                                        delegate.isUserLoggedIn = true
                                     }
                                     let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
                                     self.presentViewController(revealController, animated: true, completion: nil)
