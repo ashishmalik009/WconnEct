@@ -68,9 +68,13 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         
         if let _ = error {
             print(error)
+            let alert = UIAlertController(title: "Error", message: "The login flow has been cancelled", preferredStyle: .Alert)
+            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(alertAction)
+            presentViewController(alert, animated: true, completion: nil)
         }
         else {
-            
+            self.showActivityIndicator()
             print(GIDSignIn.sharedInstance().currentUser.profile.name)
             print(GIDSignIn.sharedInstance().currentUser.profile.email)
             let requestObject = RequestBuilder()
@@ -78,11 +82,12 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             requestObject.errorHandler = { error in
                 
                 dispatch_async(dispatch_get_main_queue(),{
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismissViewControllerAnimated(true, completion:{
                     let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                     let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alert.addAction(alertAction)
                     self.presentViewController(alert, animated: true, completion: nil)
+                    })
                 })
             }
             
@@ -91,7 +96,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     let parser = LogInParser()
                     if parser.isparsedLogInDetailsUsingData(dataValue)
                     {
-                        self.dismissViewControllerAnimated(true, completion: {
+                        self.dismissViewControllerAnimated(true, completion:{
                             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                             {
                                 delegate.emailIdOfLoggedInUser = String(GIDSignIn.sharedInstance().currentUser.profile.email)
@@ -99,10 +104,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                             }
                             let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
                             self.presentViewController(revealController, animated: true, completion: nil)
-                            
-                            
                         })
-                        
                         
                     }
                     else
@@ -138,9 +140,10 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     func signIn(signIn: GIDSignIn!,
                 dismissViewController viewController: UIViewController!) {
         
-        self.dismissViewControllerAnimated(true, completion: {
-            self.showActivityIndicator()
-        })
+        self.dismissViewControllerAnimated(true, completion:nil)
+            
+        
+       
         
         
     }
