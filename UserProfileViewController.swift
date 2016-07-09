@@ -8,8 +8,14 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController {
-
+class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var userName: String = ""
+    var phNumber : String = ""
+    var gender : String = ""
+    var emailId : String = ""
+    
+    @IBOutlet weak var profileTableView: UITableView!
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -43,13 +49,12 @@ class UserProfileViewController: UIViewController {
                 if parser.isparsedPRrofileUserUsingData(dataValue)
                 {
                     self.dismissViewControllerAnimated(true, completion: nil)
-                    //                            self.userName = parser.name
-                    //                            self.phNumber = parser.contactNumber
-                    //                            self.gender = parser.gender
-                    //                            self.emailId = parser.email
-                    //                            self.dismissViewControllerAnimated(true, completion: nil)
-                    //                            self.userNameLabel.text = parser.name
-                    //                            self.profileTableView.reloadData()
+                                                self.userName = parser.name
+                                                self.phNumber = parser.contactNumber
+                                                self.gender = parser.gender
+                                                self.emailId = parser.email
+                                                self.dismissViewControllerAnimated(true, completion: nil)
+                                                self.profileTableView.reloadData()
                 }
             })
             
@@ -77,16 +82,20 @@ class UserProfileViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
         
     }
-
-  
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    //Mark : tableViewDelegates and resources
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
-    */
-
-}
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let tablewViewCell = tableView.dequeueReusableCellWithIdentifier("profileCellIdentifier") as! ProfileUserTableViewCell
+        tablewViewCell.detailTextField.text = String("\(userName)")
+        return tablewViewCell
+    }
+  }

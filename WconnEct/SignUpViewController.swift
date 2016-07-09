@@ -42,7 +42,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         emailIDField.delegate = self
         
         self.view.userInteractionEnabled = true
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:"hidesKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(SignUpViewController.hidesKeyboard))
         self.view.addGestureRecognizer(tap)
         
         

@@ -20,6 +20,8 @@
 		5482FEB31D1ACA65002E991A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5482FEB21D1ACA65002E991A /* GoogleService-Info.plist */; };
 		5495A0441D2FB79900F9E3F2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495A0431D2FB79900F9E3F2 /* UserProfileViewController.swift */; };
 		6D5B387B1D28CC4400BD8DEF /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */; };
+		6D82C7381D31850200DCC51B /* ProfileUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D82C7371D31850200DCC51B /* ProfileUserTableViewCell.swift */; };
+		6D82C73A1D31877800DCC51B /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D82C7391D31877800DCC51B /* FontAwesome.otf */; };
 		6D93E4B61D204290008CF9C2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D93E4B51D204290008CF9C2 /* FBSDKCoreKit.framework */; };
 		6D93E4B81D204299008CF9C2 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D93E4B71D204299008CF9C2 /* FBSDKLoginKit.framework */; };
 		6D93E4BA1D2042A5008CF9C2 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D93E4B91D2042A5008CF9C2 /* FBSDKShareKit.framework */; };
@@ -74,6 +76,8 @@
 		5495A0431D2FB79900F9E3F2 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		6D5C14CF1D1B175000AB6A00 /* WconnEct-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WconnEct-Bridging-Header.h"; sourceTree = "<group>"; };
+		6D82C7371D31850200DCC51B /* ProfileUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUserTableViewCell.swift; sourceTree = "<group>"; };
+		6D82C7391D31877800DCC51B /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		6D93E4B51D204290008CF9C2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		6D93E4B71D204299008CF9C2 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		6D93E4B91D2042A5008CF9C2 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 		54414A341D181D4B0000E3D2 = {
 			isa = PBXGroup;
 			children = (
+				6D82C7391D31877800DCC51B /* FontAwesome.otf */,
+				6D82C7371D31850200DCC51B /* ProfileUserTableViewCell.swift */,
 				6DA1BE0D1D2C425E006F4473 /* SlideMenuDetailController.swift */,
 				6DA1BE0B1D2C401A006F4473 /* SlideMenuController.swift */,
 				6DA1BE081D2C3ECE006F4473 /* SWRevealViewController.h */,
@@ -339,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54414A4E1D181D4C0000E3D2 /* LaunchScreen.storyboard in Resources */,
+				6D82C73A1D31877800DCC51B /* FontAwesome.otf in Resources */,
 				5482FEB31D1ACA65002E991A /* GoogleService-Info.plist in Resources */,
 				54414A4B1D181D4C0000E3D2 /* Assets.xcassets in Resources */,
 				54414A461D181D4C0000E3D2 /* Main.storyboard in Resources */,
@@ -495,6 +502,7 @@
 				6DA8176B1D2AEE3C003EAA16 /* ProfileUserParser.swift in Sources */,
 				1B62C0FB1D2941BD00014F7F /* SignUpParser.swift in Sources */,
 				54414A411D181D4C0000E3D2 /* AppDelegate.swift in Sources */,
+				6D82C7381D31850200DCC51B /* ProfileUserTableViewCell.swift in Sources */,
 				6D5B387B1D28CC4400BD8DEF /* RequestBuilder.swift in Sources */,
 				6DA1BE0A1D2C3ECE006F4473 /* SWRevealViewController.m in Sources */,
 				5495A0441D2FB79900F9E3F2 /* UserProfileViewController.swift in Sources */,
