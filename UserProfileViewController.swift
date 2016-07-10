@@ -8,7 +8,8 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate
+{
     
     var userName: String = ""
     var phNumber : String = ""
@@ -20,23 +21,22 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2
         self.profileImageView.clipsToBounds = true
-//        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(SlideMenuController.screenTapped(_:)))
-//        self.profileImageView.addGestureRecognizer(tapRecognizer)
-//        
-//    }
-//    func screenTapped(gestureRecognizer: UITapGestureRecognizer)
-//    {
-//        let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
-//        let galleryAction = UIAlertAction(title: "Open Gallery", style: .Default, handler: nil)
-//        let chooseCameraAction = UIAlertAction(title:"Open Camera", style: .Default, handler: nil)
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
-//        actionSheet.addAction(galleryAction)
-//        actionSheet.addAction(chooseCameraAction)
-//        actionSheet.addAction(cancelAction)
-//        presentViewController(actionSheet, animated: true, completion: nil)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.screenTapped(_:)))
+        self.profileImageView.addGestureRecognizer(tapRecognizer)
+        
+    }
+    func screenTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
+        let galleryAction = UIAlertAction(title: "Open Gallery", style: .Default, handler: nil)
+        let chooseCameraAction = UIAlertAction(title:"Open Camera", style: .Default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
+        actionSheet.addAction(galleryAction)
+        actionSheet.addAction(chooseCameraAction)
+        actionSheet.addAction(cancelAction)
+        presentViewController(actionSheet, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -219,4 +219,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         }
         return tablewViewCell
     }
+    
+    
+    
+    //MARK : UIImagePickerControllerDelegates
   }

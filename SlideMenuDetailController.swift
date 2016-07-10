@@ -17,7 +17,7 @@ class SlideMenuDetailController: UIViewController
         if revealViewController() != nil {
             //            revealViewController().rearViewRevealWidth = 62
             menuButton.target = revealViewController()
-            menuButton.action = "revealToggle:"
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             
 //            revealViewController().rightViewRevealWidth = 150
 //            extraButton.target = revealViewController()
