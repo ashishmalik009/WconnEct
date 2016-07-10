@@ -885,7 +885,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Tcz-L8-guj">
-                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="cancel" id="E9l-TO-3GF">
+                        <barButtonItem key="leftBarButtonItem" image="cancelImage" id="E9l-TO-3GF">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="cancel:" destination="yfb-Wg-ePF" id="irf-sP-i9b"/>

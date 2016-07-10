@@ -25,8 +25,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.profileImageView.clipsToBounds = true
 //        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(SlideMenuController.screenTapped(_:)))
 //        self.profileImageView.addGestureRecognizer(tapRecognizer)
-        
-    }
+//        
+//    }
 //    func screenTapped(gestureRecognizer: UITapGestureRecognizer)
 //    {
 //        let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
@@ -37,8 +37,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
 //        actionSheet.addAction(chooseCameraAction)
 //        actionSheet.addAction(cancelAction)
 //        presentViewController(actionSheet, animated: true, completion: nil)
-//    }
-//
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -52,14 +52,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.showActivityIndicator()
         requestObject.errorHandler = { error in
             
-            self.dismissViewControllerAnimated(true, completion:{
+            self.dismissViewControllerAnimated(true, completion:nil)
             dispatch_async(dispatch_get_main_queue(),{
                 let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                 let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(alertAction)
                 self.presentViewController(alert, animated: true, completion: nil)
             })
-            })
+            
         }
         
         requestObject.completionHandler = { dataValue in
@@ -67,13 +67,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 let parser = ProfileUserParser()
                 if parser.isparsedPRrofileUserUsingData(dataValue)
                 {
-                    self.dismissViewControllerAnimated(true, completion:{
+                    self.dismissViewControllerAnimated(true, completion:nil)
+                    
                                                 self.userName = parser.name
                                                 self.phNumber = parser.contactNumber
                                                 self.gender = parser.gender
                                                 self.emailId = parser.email
                                                 self.profileTableView.reloadData()
-                    })
+                    
                 }
             })
             
