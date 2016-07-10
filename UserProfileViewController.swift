@@ -46,16 +46,19 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.showActivityIndicator()
+        
         let requestObject = RequestBuilder()
         requestObject.requestForProfileOfUser()
+        self.showActivityIndicator()
         requestObject.errorHandler = { error in
             
+            self.dismissViewControllerAnimated(true, completion:{
             dispatch_async(dispatch_get_main_queue(),{
                 let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                 let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(alertAction)
                 self.presentViewController(alert, animated: true, completion: nil)
+            })
             })
         }
         
@@ -69,7 +72,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                                                 self.phNumber = parser.contactNumber
                                                 self.gender = parser.gender
                                                 self.emailId = parser.email
-                        
                                                 self.profileTableView.reloadData()
                     })
                 }
@@ -85,6 +87,73 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func save(sender: AnyObject)
+    {
+        var updatedUsername : String = ""
+        var updatedPhoneNumber :String = ""
+        for i in 0..<3
+        {
+            let updatedTableViewCell = self.profileTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as! ProfileUserTableViewCell
+            switch i {
+            case 0: updatedUsername = String(updatedTableViewCell.detailTextField.text!)
+            case 2: updatedPhoneNumber = String(updatedTableViewCell.detailTextField.text!)
+                
+            default: print("Nothing")
+                
+            }
+            
+            
+        }
+        let updatedGenderCell = self.profileTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! GenderProfileTableViewCell
+        
+        let genderValue = updatedGenderCell.genderSegmentControl.selectedSegmentIndex
+        var updatedGender : String = ""
+        if genderValue == 0
+        {
+            updatedGender = "Male"
+        }
+        else
+        {
+            updatedGender = "Female"
+        }
+        let requestObject = RequestBuilder()
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            
+            requestObject.requestToUpdateData(updatedUsername, phNumber: updatedPhoneNumber, emailID: emailId, gender: updatedGender, photo: "", isTeacher: delegate.isTeacherLoggedIn)
+        }
+            showActivityIndicator()
+            requestObject.errorHandler = { error in
+                
+                self.dismissViewControllerAnimated(true, completion:{
+                    dispatch_async(dispatch_get_main_queue(),{
+                        let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(alertAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    })
+                })
+            }
+            
+            requestObject.completionHandler = { dataValue in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let parser = ProfileUserParser()
+                    if parser.isparsedPRrofileUserAfterUpdateingData(dataValue)
+                    {
+                        self.dismissViewControllerAnimated(true, completion:{
+                            let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
+                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                            alert.addAction(alertAction)
+                            self.presentViewController(alert, animated: true, completion: nil)
+  
+                        })
+                    }
+                })
+                
+            }
+            
+        
+    }
     func showActivityIndicator()
     {
         let alert = UIAlertController(title: nil, message: "Fetching Info...", preferredStyle: .Alert)
@@ -133,7 +202,18 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else if indexPath.row == 3
         {
+            if gender == "Male"
+            {
+                tableViewCellForGender.genderSegmentControl.selectedSegmentIndex = 0
+            }
+            else if gender == "Female"
+            {
+        
+                tableViewCellForGender.genderSegmentControl.selectedSegmentIndex = 1
+                
+            }
             
+            return tableViewCellForGender
             
         }
         return tablewViewCell

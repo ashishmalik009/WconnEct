@@ -86,8 +86,8 @@
 		6D93E4BB1D205849008CF9C2 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		6DA1BE081D2C3ECE006F4473 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		6DA1BE091D2C3ECE006F4473 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		6DA1BE0B1D2C401A006F4473 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
-		6DA1BE0D1D2C425E006F4473 /* SlideMenuDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuDetailController.swift; sourceTree = "<group>"; };
+		6DA1BE0B1D2C401A006F4473 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlideMenuController.swift; path = ../SlideMenuController.swift; sourceTree = "<group>"; };
+		6DA1BE0D1D2C425E006F4473 /* SlideMenuDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlideMenuDetailController.swift; path = ../SlideMenuDetailController.swift; sourceTree = "<group>"; };
 		6DA8176A1D2AEE3C003EAA16 /* ProfileUserParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUserParser.swift; sourceTree = "<group>"; };
 		6DAC01C51D2991B800CC1CF1 /* LogInParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInParser.swift; sourceTree = "<group>"; };
 		6FB57CD4F8436A9333160FE3 /* Pods-WconnEct.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WconnEct.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WconnEct/Pods-WconnEct.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +143,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1B90A6901D326F7000010394 /* Request Builder */ = {
+			isa = PBXGroup;
+			children = (
+				6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */,
+			);
+			name = "Request Builder";
+			sourceTree = "<group>";
+		};
+		1B90A6911D326F8400010394 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				1B94B4C91D322F5E00E92785 /* GenderProfileTableViewCell.swift */,
+				6D82C7371D31850200DCC51B /* ProfileUserTableViewCell.swift */,
+			);
+			name = CustomCells;
+			sourceTree = "<group>";
+		};
+		1B90A6931D326FAD00010394 /* SlideMenuClass */ = {
+			isa = PBXGroup;
+			children = (
+				6DA1BE081D2C3ECE006F4473 /* SWRevealViewController.h */,
+				6DA1BE091D2C3ECE006F4473 /* SWRevealViewController.m */,
+			);
+			name = SlideMenuClass;
+			sourceTree = "<group>";
+		};
 		1F2AB0E0A16DB05C470F8B8A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,15 +185,11 @@
 		54414A341D181D4B0000E3D2 = {
 			isa = PBXGroup;
 			children = (
-				1B94B4C91D322F5E00E92785 /* GenderProfileTableViewCell.swift */,
+				1B90A6931D326FAD00010394 /* SlideMenuClass */,
+				1B90A6911D326F8400010394 /* CustomCells */,
+				1B90A6901D326F7000010394 /* Request Builder */,
 				6D82C7391D31877800DCC51B /* FontAwesome.otf */,
-				6D82C7371D31850200DCC51B /* ProfileUserTableViewCell.swift */,
-				6DA1BE0D1D2C425E006F4473 /* SlideMenuDetailController.swift */,
-				6DA1BE0B1D2C401A006F4473 /* SlideMenuController.swift */,
-				6DA1BE081D2C3ECE006F4473 /* SWRevealViewController.h */,
-				6DA1BE091D2C3ECE006F4473 /* SWRevealViewController.m */,
 				6DA817691D2AEE20003EAA16 /* Parser Classes */,
-				6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */,
 				54414A3F1D181D4C0000E3D2 /* WconnEct */,
 				54414A571D181D4C0000E3D2 /* WconnEctTests */,
 				54414A621D181D4C0000E3D2 /* WconnEctUITests */,
@@ -191,6 +213,8 @@
 		54414A3F1D181D4C0000E3D2 /* WconnEct */ = {
 			isa = PBXGroup;
 			children = (
+				6DA1BE0D1D2C425E006F4473 /* SlideMenuDetailController.swift */,
+				6DA1BE0B1D2C401A006F4473 /* SlideMenuController.swift */,
 				54414A401D181D4C0000E3D2 /* AppDelegate.swift */,
 				54414A421D181D4C0000E3D2 /* ViewController.swift */,
 				54414A441D181D4C0000E3D2 /* Main.storyboard */,

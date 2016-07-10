@@ -893,6 +893,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="save" id="A3j-qS-sXr">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="save:" destination="yfb-Wg-ePF" id="xlu-ye-dwk"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

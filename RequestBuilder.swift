@@ -174,5 +174,66 @@ class RequestBuilder: NSObject
         })
         dataTask.resume()
     }
+  
+    func requestToUpdateData(name:String,phNumber:String,emailID:String,gender:String,photo:String,isTeacher:Bool) -> Void
+    {
+        var url = NSURL()
+        if isTeacher
+        {
+            url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/teacher/")!
+        }
+        else
+        {
+            url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/student/")!
+        }
+        
+        let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        var post : String = ""
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+             post = "token=\(delegate.accessTokenAfterLogin)&name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&photo=\(photo)&gender=\(gender)"
+        }
+        let postData : NSData = post.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
+        let postLength: String = "\(postData.length)"
+        request.HTTPMethod = "PUT"
+        
+        request.setValue(postLength, forHTTPHeaderField: "Content-Length")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = postData
+        print("SignupRequest : \(request)")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let session = NSURLSession.sharedSession()
+        let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {
+            
+            data, response, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+            if error != nil
+            {
+                
+            }
+            if let httpResponse = response as? NSHTTPURLResponse
+            {
+                if httpResponse.statusCode == 200
+                {
+                    print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                    self.completionHandler(dataFromServer: data!)
+                    
+                    
+                }
+                
+            }
+            
+            
+        })
+        
+        dataTask.resume()
+    }
+    
+    
     
 }
+
+

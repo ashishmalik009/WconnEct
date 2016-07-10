@@ -24,7 +24,6 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     @IBOutlet weak var teacherOrStudentSegmentControl: UISegmentedControl!
 
     var data : NSMutableData = NSMutableData()
-    var isTeacherDuringGoogleOrFacebookSignUp : Bool = true
     
     override func viewDidLoad()
     {
@@ -148,7 +147,10 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             GIDSignIn.sharedInstance().signIn()
             })
         let actionForStudent = UIAlertAction(title: "Student/Parent", style: .Default, handler: {(alert: UIAlertAction!) in
-            self.isTeacherDuringGoogleOrFacebookSignUp = false
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = false
+            }
             GIDSignIn.sharedInstance().signIn()
         })
         let dismissAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
@@ -168,10 +170,14 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             print(error)
         }
         else {
+             self.showActivityIndicator()
             print(GIDSignIn.sharedInstance().currentUser.profile.name)
             print(GIDSignIn.sharedInstance().currentUser.profile.email)
             let requestObject = RequestBuilder()
-            requestObject.requestForSignUp(String(GIDSignIn.sharedInstance().currentUser.profile.name), phNumber: "000000", emailID: String(GIDSignIn.sharedInstance().currentUser.profile.email), password: "", gender: "", photo: "", isTeacher:self.isTeacherDuringGoogleOrFacebookSignUp )
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                requestObject.requestForSignUp(String(GIDSignIn.sharedInstance().currentUser.profile.name), phNumber: "000000", emailID: String(GIDSignIn.sharedInstance().currentUser.profile.email), password: "", gender: "", photo: "", isTeacher:delegate.isTeacherLoggedIn)
+            }
             requestObject.completionHandler =
                 {
                     dataValue in
@@ -215,7 +221,6 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     func signIn(signIn: GIDSignIn!,
                 dismissViewController viewController: UIViewController!) {
         self.dismissViewControllerAnimated(true, completion: {
-                self.showActivityIndicator()
 
 
             
@@ -231,7 +236,10 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             self.callFacebooksignUpFunction()
         })
         let actionForStudent = UIAlertAction(title: "Student/Parent", style: .Default, handler: {(alert: UIAlertAction!) in
-            self.isTeacherDuringGoogleOrFacebookSignUp = false
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = false
+            }
             self.callFacebooksignUpFunction()
         })
         let dismissAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
@@ -281,7 +289,10 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
                 {
                     print(result)
                     let requestObject = RequestBuilder()
-                    requestObject.requestForSignUp(String(result.objectForKey("name")!), phNumber: "0000000000", emailID: String(result.objectForKey("email")!), password: "", gender: "", photo: "", isTeacher:self.isTeacherDuringGoogleOrFacebookSignUp )
+                    if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                    {
+                        requestObject.requestForSignUp(String(result.objectForKey("name")!), phNumber: "0000000000", emailID: String(result.objectForKey("email")!), password: "", gender: "", photo: "", isTeacher:delegate.isTeacherLoggedIn )
+                    }
                         requestObject.completionHandler =
                         {
                             dataValue in

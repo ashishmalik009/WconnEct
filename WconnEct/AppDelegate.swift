@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var accessTokenAfterLogin : String = ""
     var emailIdOfLoggedInUser : String = ""
     var isUserLoggedIn : Bool = false
+    var isTeacherLoggedIn : Bool = true
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

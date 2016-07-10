@@ -16,7 +16,6 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    var isTeacherDuringGoogleOrFacebookLogIn : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +49,10 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             GIDSignIn.sharedInstance().signIn()
         })
         let actionForStudent = UIAlertAction(title: "Student/Parent", style: .Default, handler: {(alert: UIAlertAction!) in
-             self.isTeacherDuringGoogleOrFacebookLogIn = false
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = false
+            }
             GIDSignIn.sharedInstance().signIn()
         })
         let dismissAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
@@ -78,7 +80,10 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             print(GIDSignIn.sharedInstance().currentUser.profile.name)
             print(GIDSignIn.sharedInstance().currentUser.profile.email)
             let requestObject = RequestBuilder()
-            requestObject.requestForLogIn(String(GIDSignIn.sharedInstance().currentUser.profile.email), password:"", isTeacher: self.isTeacherDuringGoogleOrFacebookLogIn)
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                requestObject.requestForLogIn(String(GIDSignIn.sharedInstance().currentUser.profile.email), password:"", isTeacher:delegate.isTeacherLoggedIn)
+            }
             requestObject.errorHandler = { error in
                 
                 dispatch_async(dispatch_get_main_queue(),{
@@ -166,7 +171,10 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             self.callFacebookSignInFunction()
         })
         let actionForStudent = UIAlertAction(title: "Student/Parent", style: .Default, handler: {(alert: UIAlertAction!) in
-            self.isTeacherDuringGoogleOrFacebookLogIn = false
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = false
+            }
             self.callFacebookSignInFunction()
         })
         let dismissAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
@@ -208,7 +216,10 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 if (error == nil)
                 {
                     let requestObject = RequestBuilder()
-                    requestObject.requestForLogIn(String(result.objectForKey("email")!), password:"", isTeacher: self.isTeacherDuringGoogleOrFacebookLogIn)
+                    if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                    {
+                        requestObject.requestForLogIn(String(result.objectForKey("email")!), password:"", isTeacher: delegate.isTeacherLoggedIn)
+                    }
                     requestObject.errorHandler = { error in
                         
                         dispatch_async(dispatch_get_main_queue(),{
