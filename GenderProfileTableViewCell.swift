@@ -1,18 +1,16 @@
 //
-//  ProfileUserTableViewCell.swift
+//  GenderProfileTableViewCell.swift
 //  WconnEct
 //
-//  Created by Ashish Malik on 10/07/16.
-//  Copyright © 2016 wconnect. All rights reserved.
+//  Created by Anahita Kapoor on 19/04/1938 Saka.
+//  Copyright © 1938 Saka wconnect. All rights reserved.
 //
 
 import UIKit
 
-class ProfileUserTableViewCell: UITableViewCell {
+class GenderProfileTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var detailTextField: UITextField!
-  
-    @IBOutlet weak var iconLabel: UILabel!
+    @IBOutlet weak var genderSegmentControl: UISegmentedControl!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
