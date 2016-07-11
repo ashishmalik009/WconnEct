@@ -133,7 +133,14 @@ class RequestBuilder: NSObject
         var url = NSURL()
         if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         {
-            url = NSURL(string: "http://wconnect-pcj.rhcloud.com/student/\(delegate.accessTokenAfterLogin)")!
+            if delegate.isTeacherLoggedIn
+            {
+                url = NSURL(string: "http://wconnect-pcj.rhcloud.com/teacher/\(delegate.accessTokenAfterLogin)")!
+            }
+            else
+            {
+                url = NSURL(string: "http://wconnect-pcj.rhcloud.com/student/\(delegate.accessTokenAfterLogin)")!
+            }
         }
         
         
@@ -175,7 +182,7 @@ class RequestBuilder: NSObject
         dataTask.resume()
     }
   
-    func requestToUpdateData(name:String,phNumber:String,emailID:String,gender:String,photo:String,isTeacher:Bool) -> Void
+    func requestToUpdateData(name:String,phNumber:String,emailID:String,gender:String,photo:String,base64EncodedString:String,isTeacher:Bool) -> Void
     {
         var url = NSURL()
         if isTeacher
@@ -191,7 +198,7 @@ class RequestBuilder: NSObject
         var post : String = ""
         if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         {
-             post = "token=\(delegate.accessTokenAfterLogin)&name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&photo=\(photo)&gender=\(gender)"
+             post = "token=\(delegate.accessTokenAfterLogin)&name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&photo=\(photo)&photoData=\(base64EncodedString)&gender=\(gender)"
         }
         let postData : NSData = post.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
         let postLength: String = "\(postData.length)"
@@ -232,6 +239,52 @@ class RequestBuilder: NSObject
         dataTask.resume()
     }
     
+    
+    
+    func requestForAllClasses()
+    {
+        var url = NSURL()
+        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/class")!
+        
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.HTTPMethod = "GET"
+        print("Profile Request : \(request)")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let urlsession = NSURLSession.sharedSession()
+        
+        let dataTask : NSURLSessionDataTask = urlsession.dataTaskWithRequest(request, completionHandler: {
+            
+            data, response, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+            if error != nil
+            {
+                self.errorHandler(errorValue: error!)
+            }
+            else
+            {
+                if let httpResponse = response as? NSHTTPURLResponse
+                {
+                    if httpResponse.statusCode == 200
+                    {
+                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                        self.completionHandler(dataFromServer: data!)
+                        
+                        
+                    }
+                }
+                
+            }
+            
+            
+        })
+        dataTask.resume()
+    }
+
     
     
 }

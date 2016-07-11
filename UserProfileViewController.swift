@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate
+class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     
     var userName: String = ""
@@ -25,31 +25,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.profileImageView.clipsToBounds = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.screenTapped(_:)))
         self.profileImageView.addGestureRecognizer(tapRecognizer)
+        self.callFetchData()
         
     }
-    func screenTapped(gestureRecognizer: UITapGestureRecognizer)
+    func callFetchData()
     {
-        let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
-        let galleryAction = UIAlertAction(title: "Open Gallery", style: .Default, handler: nil)
-        let chooseCameraAction = UIAlertAction(title:"Open Camera", style: .Default, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
-        actionSheet.addAction(galleryAction)
-        actionSheet.addAction(chooseCameraAction)
-        actionSheet.addAction(cancelAction)
-        presentViewController(actionSheet, animated: true, completion: nil)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        
         let requestObject = RequestBuilder()
         requestObject.requestForProfileOfUser()
-        self.showActivityIndicator()
+        self.showActivityIndicator("Fetching Info..")
         requestObject.errorHandler = { error in
             
             self.dismissViewControllerAnimated(true, completion:nil)
@@ -69,11 +52,11 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 {
                     self.dismissViewControllerAnimated(true, completion:nil)
                     
-                                                self.userName = parser.name
-                                                self.phNumber = parser.contactNumber
-                                                self.gender = parser.gender
-                                                self.emailId = parser.email
-                                                self.profileTableView.reloadData()
+                    self.userName = parser.name
+                    self.phNumber = parser.contactNumber
+                    self.gender = parser.gender
+                    self.emailId = parser.email
+                    self.profileTableView.reloadData()
                     
                 }
             })
@@ -81,6 +64,57 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
 
+    }
+    func screenTapped(gestureRecognizer: UITapGestureRecognizer)
+    {
+        let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
+        let galleryAction = UIAlertAction(title: "Open Gallery", style: .Default, handler: {(alert: UIAlertAction!) in
+            
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
+            imagePickerController.allowsEditing = true
+            self.presentViewController(imagePickerController, animated: true, completion: { imageP in
+                
+            })
+        })
+        let chooseCameraAction = UIAlertAction(title:"Open Camera", style: .Default, handler:{ (alert: UIAlertAction!) in
+            
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            if UIImagePickerController.isSourceTypeAvailable(.Camera)
+            {
+                imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+                imagePickerController.allowsEditing = true
+                self.presentViewController(imagePickerController, animated: true, completion: { imageP in
+                
+            })
+            }
+            else
+            {
+                let alert = UIAlertController(title: "Error", message: "Camera not available", preferredStyle: .Alert)
+                let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(alertAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            
+            })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
+        actionSheet.addAction(galleryAction)
+        actionSheet.addAction(chooseCameraAction)
+        actionSheet.addAction(cancelAction)
+        presentViewController(actionSheet, animated: true, completion: nil)
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        
     }
     
     @IBAction func cancel(sender: AnyObject)
@@ -105,6 +139,11 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             
             
         }
+        
+        let image : UIImage = self.profileImageView.image!
+        let imageData : NSData = UIImagePNGRepresentation(image)!
+        let imageStringAfterDecoding: String = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+//        let imageStringAfterDecoding = String(data: base64Data, encoding: NSUTF8StringEncoding)!
         let updatedGenderCell = self.profileTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! GenderProfileTableViewCell
         
         let genderValue = updatedGenderCell.genderSegmentControl.selectedSegmentIndex
@@ -121,9 +160,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         {
             
-            requestObject.requestToUpdateData(updatedUsername, phNumber: updatedPhoneNumber, emailID: emailId, gender: updatedGender, photo: "", isTeacher: delegate.isTeacherLoggedIn)
+            requestObject.requestToUpdateData(updatedUsername, phNumber: updatedPhoneNumber, emailID: emailId, gender: updatedGender, photo: "",base64EncodedString: imageStringAfterDecoding, isTeacher: delegate.isTeacherLoggedIn)
         }
-            showActivityIndicator()
+            showActivityIndicator("Updating Info...")
             requestObject.errorHandler = { error in
                 
                 self.dismissViewControllerAnimated(true, completion:{
@@ -155,9 +194,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             
         
     }
-    func showActivityIndicator()
+    func showActivityIndicator(message:String)
     {
-        let alert = UIAlertController(title: nil, message: "Fetching Info...", preferredStyle: .Alert)
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
         
         alert.view.tintColor = UIColor.blackColor()
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
@@ -223,4 +262,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     //MARK : UIImagePickerControllerDelegates
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!) {
+        let selectedImage : UIImage = image
+        //var tempImage:UIImage = editingInfo[UIImagePickerControllerOriginalImage] as UIImage
+        self.profileImageView.image=selectedImage
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
   }

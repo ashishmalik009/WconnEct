@@ -8,25 +8,57 @@
 
 import UIKit
 
-class SlideMenuDetailController: UIViewController
+class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
      @IBOutlet var menuButton:UIBarButtonItem!
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
-        if revealViewController() != nil {
+        if revealViewController() != nil
+        {
             //            revealViewController().rearViewRevealWidth = 62
             menuButton.target = revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            
-//            revealViewController().rightViewRevealWidth = 150
-//            extraButton.target = revealViewController()
-//            extraButton.action = "rightRevealToggle:"
+
             
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
-            
         }
+        
+        
+    }
+    
+    
+    
+    
+    
+    //MARK : UitableViewDelegates and DataSources
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let tableViewCell = tableView.dequeueReusableCellWithIdentifier("detailCellIdentifier")
+        if indexPath.row == 0
+        {
+            tableViewCell?.textLabel?.text = "Class"
+            tableViewCell?.detailTextLabel?.text = "Select Class"
+        }
+        else if indexPath.row == 1
+        {
+            tableViewCell?.textLabel?.text = "Subject"
+            tableViewCell?.detailTextLabel?.text = "Select Subject"
+        }
+        else if indexPath.row == 2
+        {
+            tableViewCell?.textLabel?.text = "Board/University"
+            tableViewCell?.detailTextLabel?.text = "Select Board/University"
+        }
+        return tableViewCell!
     }
 
 
