@@ -118,6 +118,11 @@ class RequestBuilder: NSObject
                         
                         
                     }
+                    else
+                    {
+                        let responseError = NSError(domain: "Some error occured. Please try again later", code: 0, userInfo: nil)
+                        self.errorHandler(errorValue:responseError)
+                    }
                 }
 
             }
@@ -172,6 +177,11 @@ class RequestBuilder: NSObject
                         self.completionHandler(dataFromServer: data!)
                         
                         
+                    }
+                    else
+                    {
+                        let responseError = NSError(domain: "Some error occured. Please try again later", code: 0, userInfo: nil)
+                        self.errorHandler(errorValue:responseError)
                     }
                 }
                 
@@ -230,6 +240,11 @@ class RequestBuilder: NSObject
                     
                     
                 }
+                else
+                {
+                    let responseError = NSError(domain: "Some error occured. Please try again later", code: 0, userInfo: nil)
+                    self.errorHandler(errorValue:responseError)
+                }
                 
             }
             
@@ -275,6 +290,11 @@ class RequestBuilder: NSObject
                         self.completionHandler(dataFromServer: data!)
                         
                         
+                    }
+                    else
+                    {
+                        let responseError = NSError(domain: "Some error occured. Please try again later", code: 0, userInfo: nil)
+                        self.errorHandler(errorValue:responseError)
                     }
                 }
                 

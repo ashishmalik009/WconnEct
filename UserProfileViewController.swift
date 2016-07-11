@@ -15,6 +15,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     var phNumber : String = ""
     var gender : String = ""
     var emailId : String = ""
+    var base64encodedString : String = ""
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileTableView: UITableView!
@@ -25,45 +26,58 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.profileImageView.clipsToBounds = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.screenTapped(_:)))
         self.profileImageView.addGestureRecognizer(tapRecognizer)
-        self.callFetchData()
         
+     
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        self.callFetchData()
     }
     func callFetchData()
     {
         let requestObject = RequestBuilder()
         requestObject.requestForProfileOfUser()
-        self.showActivityIndicator("Fetching Info..")
+        
         requestObject.errorHandler = { error in
             
-            self.dismissViewControllerAnimated(true, completion:nil)
+            self.dismissViewControllerAnimated(true, completion:{
+            
             dispatch_async(dispatch_get_main_queue(),{
                 let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                 let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(alertAction)
                 self.presentViewController(alert, animated: true, completion: nil)
             })
-            
+            })
         }
         
         requestObject.completionHandler = { dataValue in
+            self.dismissViewControllerAnimated(true, completion:{
             dispatch_async(dispatch_get_main_queue(), {
                 let parser = ProfileUserParser()
                 if parser.isparsedPRrofileUserUsingData(dataValue)
                 {
-                    self.dismissViewControllerAnimated(true, completion:nil)
+                    
                     
                     self.userName = parser.name
                     self.phNumber = parser.contactNumber
                     self.gender = parser.gender
                     self.emailId = parser.email
+                    self.base64encodedString = parser.base64encodedStringFromServer
+                    let imageData = NSData(base64EncodedString: self.base64encodedString, options:NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+                    let image = UIImage(data: imageData)
+//                    let pictureDataLocal = UIImagePNGRepresentation(image!)
+                    self.profileImageView.image = image
                     self.profileTableView.reloadData()
                     
                 }
-            })
-            
-        }
+                })
         
-
+        })
+        
+        }
     }
     func screenTapped(gestureRecognizer: UITapGestureRecognizer)
     {
@@ -113,7 +127,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        
+        self.showActivityIndicator("Fetching Info..")
         
     }
     
@@ -143,6 +157,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         let image : UIImage = self.profileImageView.image!
         let imageData : NSData = UIImagePNGRepresentation(image)!
         let imageStringAfterDecoding: String = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+
 //        let imageStringAfterDecoding = String(data: base64Data, encoding: NSUTF8StringEncoding)!
         let updatedGenderCell = self.profileTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! GenderProfileTableViewCell
         
@@ -160,7 +175,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         {
             
-            requestObject.requestToUpdateData(updatedUsername, phNumber: updatedPhoneNumber, emailID: emailId, gender: updatedGender, photo: "",base64EncodedString: imageStringAfterDecoding, isTeacher: delegate.isTeacherLoggedIn)
+            requestObject.requestToUpdateData(updatedUsername, phNumber: updatedPhoneNumber, emailID: emailId, gender: updatedGender, photo: "new.png",base64EncodedString: imageStringAfterDecoding, isTeacher: delegate.isTeacherLoggedIn)
         }
             showActivityIndicator("Updating Info...")
             requestObject.errorHandler = { error in

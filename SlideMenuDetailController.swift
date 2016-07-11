@@ -11,6 +11,7 @@ import UIKit
 class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
      @IBOutlet var menuButton:UIBarButtonItem!
+    var selectedIndex : Int = 0
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -33,7 +34,9 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
     
     
     
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print(selectedIndex)
+    }
     
     //MARK : UitableViewDelegates and DataSources
     
@@ -61,6 +64,10 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
             tableViewCell?.detailTextLabel?.text = "Select Board/University"
         }
         return tableViewCell!
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedIndex = indexPath.row
     }
 
 }

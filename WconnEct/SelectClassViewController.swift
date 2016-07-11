@@ -16,36 +16,37 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.callClassData()
+        showActivityIndicator("Fetching classes...")
+        
         }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        self.callClassData()
+    }
     func callClassData()
     {
         let requestObject = RequestBuilder()
-        let activityIndicator = ActivityIndicatorView()
-        activityIndicator.showView("Fetching Classes")
-//        showActivityIndicator("Fetching classes")
+        
         requestObject.requestForAllClasses()
-//        self.showActivityIndicator("Fetching Info..")
         requestObject.errorHandler = { error in
             
-            self.dismissViewControllerAnimated(true, completion:nil)
+            self.dismissViewControllerAnimated(true, completion:{
             dispatch_async(dispatch_get_main_queue(),{
                 let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                 let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(alertAction)
                 self.presentViewController(alert, animated: true, completion: nil)
             })
-            
+            })
         }
         
         requestObject.completionHandler = { dataValue in
-            self.dismissViewControllerAnimated(true, completion:nil)
+            self.dismissViewControllerAnimated(true, completion:{
             dispatch_async(dispatch_get_main_queue(), {
                 let parser = AllClassesParser()
                 if parser.isparsedAllClasses(dataValue)
@@ -54,6 +55,7 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
                     self.classTableView.reloadData()
                 }
         })
+            })
             
         }
 
