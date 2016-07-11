@@ -15,6 +15,7 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
     {
         super.viewDidLoad()
         
+        
         if revealViewController() != nil
         {
             //            revealViewController().rearViewRevealWidth = 62
@@ -23,6 +24,7 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
 
             
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
             
         }
         
@@ -60,6 +62,5 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
         }
         return tableViewCell!
     }
-
 
 }

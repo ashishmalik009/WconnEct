@@ -27,7 +27,9 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
     func callClassData()
     {
         let requestObject = RequestBuilder()
-        showActivityIndicator("Fetching classes")
+        let activityIndicator = ActivityIndicatorView()
+        activityIndicator.showView("Fetching Classes")
+//        showActivityIndicator("Fetching classes")
         requestObject.requestForAllClasses()
 //        self.showActivityIndicator("Fetching Info..")
         requestObject.errorHandler = { error in

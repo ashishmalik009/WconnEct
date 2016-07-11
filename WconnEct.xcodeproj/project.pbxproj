@@ -22,6 +22,7 @@
 		5495A0441D2FB79900F9E3F2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495A0431D2FB79900F9E3F2 /* UserProfileViewController.swift */; };
 		54EC953F1D33B18800C6B67E /* SelectClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EC953E1D33B18800C6B67E /* SelectClassViewController.swift */; };
 		54EC95411D33B3C200C6B67E /* AllClassesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EC95401D33B3C200C6B67E /* AllClassesParser.swift */; };
+		54EC95431D33EBE700C6B67E /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EC95421D33EBE700C6B67E /* ActivityIndicatorView.swift */; };
 		6D5B387B1D28CC4400BD8DEF /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */; };
 		6D82C7381D31850200DCC51B /* ProfileUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D82C7371D31850200DCC51B /* ProfileUserTableViewCell.swift */; };
 		6D82C73A1D31877800DCC51B /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D82C7391D31877800DCC51B /* FontAwesome.otf */; };
@@ -80,6 +81,7 @@
 		5495A0431D2FB79900F9E3F2 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		54EC953E1D33B18800C6B67E /* SelectClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectClassViewController.swift; sourceTree = "<group>"; };
 		54EC95401D33B3C200C6B67E /* AllClassesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllClassesParser.swift; sourceTree = "<group>"; };
+		54EC95421D33EBE700C6B67E /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		6D5C14CF1D1B175000AB6A00 /* WconnEct-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WconnEct-Bridging-Header.h"; sourceTree = "<group>"; };
 		6D82C7371D31850200DCC51B /* ProfileUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUserTableViewCell.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		54414A341D181D4B0000E3D2 = {
 			isa = PBXGroup;
 			children = (
+				54EC95421D33EBE700C6B67E /* ActivityIndicatorView.swift */,
 				1B90A6931D326FAD00010394 /* SlideMenuClass */,
 				1B90A6911D326F8400010394 /* CustomCells */,
 				1B90A6901D326F7000010394 /* Request Builder */,
@@ -544,6 +547,7 @@
 				54414A491D181D4C0000E3D2 /* WconnEct.xcdatamodeld in Sources */,
 				6DA1BE0E1D2C425E006F4473 /* SlideMenuDetailController.swift in Sources */,
 				6DA1BE0C1D2C401A006F4473 /* SlideMenuController.swift in Sources */,
+				54EC95431D33EBE700C6B67E /* ActivityIndicatorView.swift in Sources */,
 				6D93E4BC1D205849008CF9C2 /* SignUpViewController.swift in Sources */,
 				54EC953F1D33B18800C6B67E /* SelectClassViewController.swift in Sources */,
 			);
