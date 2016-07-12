@@ -26,6 +26,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.profileImageView.clipsToBounds = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.screenTapped(_:)))
         self.profileImageView.addGestureRecognizer(tapRecognizer)
+        self.showActivityIndicator("Fetching Info..")
+        self.callFetchData()
         
      
         
@@ -33,7 +35,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        self.callFetchData()
+        
     }
     func callFetchData()
     {
@@ -68,6 +70,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                     self.base64encodedString = parser.base64encodedStringFromServer
                     let imageData = NSData(base64EncodedString: self.base64encodedString, options:NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
                     let image = UIImage(data: imageData)
+                    
 //                    let pictureDataLocal = UIImagePNGRepresentation(image!)
                     self.profileImageView.image = image
                     self.profileTableView.reloadData()
@@ -127,7 +130,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.showActivityIndicator("Fetching Info..")
+        
         
     }
     
