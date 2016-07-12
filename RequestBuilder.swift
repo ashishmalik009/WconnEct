@@ -259,7 +259,7 @@ class RequestBuilder: NSObject
     func requestForAllClasses()
     {
         var url = NSURL()
-        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/class")!
+        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/class/")!
         
         
         let request = NSMutableURLRequest(URL: url)
@@ -305,8 +305,52 @@ class RequestBuilder: NSObject
         dataTask.resume()
     }
 
-    
-    
+    func requestForSubjects(classID:Int)
+    {
+        var url = NSURL()
+        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/subject/?classid=\(classID)")!
+        let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "GET"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        print("SubjectListRequest : \(request)")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let session = NSURLSession.sharedSession()
+        let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {
+            
+            data, response, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+            if error != nil
+            {
+                self.errorHandler(errorValue: error!)
+            }
+            else
+            {
+                if let httpResponse = response as? NSHTTPURLResponse
+                {
+                    if httpResponse.statusCode == 200
+                    {
+                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                        self.completionHandler(dataFromServer: data!)
+                        
+                        
+                    }
+                    else
+                    {
+                        let responseError = NSError(domain: "Some error occured. Please try again later", code: 0, userInfo: nil)
+                        self.errorHandler(errorValue:responseError)
+                    }
+                }
+                
+            }
+            
+            
+        })
+        
+        dataTask.resume()
+    }
 }
 
 

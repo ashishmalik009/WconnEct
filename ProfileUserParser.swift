@@ -16,6 +16,7 @@ class ProfileUserParser: NSObject
     var email : String = ""
     var messageFromParser : String = ""
     var base64encodedStringFromServer : String = ""
+    var photoName : String = ""
     func isparsedPRrofileUserUsingData(data: NSData) -> Bool
     {
         do
@@ -25,8 +26,12 @@ class ProfileUserParser: NSObject
             contactNumber = String(json.objectForKey("ph_number")!)
             gender = String(json.objectForKey("gender")!)
             email = String(json.objectForKey("email")!)
-            base64encodedStringFromServer = String(json.objectForKey("photoData")!)
-            
+            photoName = String(json.objectForKey("photo")!)
+            print(photoName)
+            if photoName != ""
+            {
+                base64encodedStringFromServer = String(json.objectForKey("photoData")!)
+            }
             
         }
         catch

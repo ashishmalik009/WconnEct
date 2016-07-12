@@ -43,7 +43,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         requestObject.requestForProfileOfUser()
         
         requestObject.errorHandler = { error in
-            
+           if !(self.presentingViewController?.isBeingDismissed())!
+                {
             self.dismissViewControllerAnimated(true, completion:{
             
             dispatch_async(dispatch_get_main_queue(),{
@@ -52,11 +53,17 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 alert.addAction(alertAction)
                 self.presentViewController(alert, animated: true, completion: nil)
             })
+                
             })
+            }
         }
         
         requestObject.completionHandler = { dataValue in
+            if !(self.presentingViewController?.isBeingDismissed())!
+            {
+
             self.dismissViewControllerAnimated(true, completion:{
+                
             dispatch_async(dispatch_get_main_queue(), {
                 let parser = ProfileUserParser()
                 if parser.isparsedPRrofileUserUsingData(dataValue)
@@ -67,11 +74,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                     self.phNumber = parser.contactNumber
                     self.gender = parser.gender
                     self.emailId = parser.email
-                    self.base64encodedString = parser.base64encodedStringFromServer
-                    let imageData = NSData(base64EncodedString: self.base64encodedString, options:NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
-                    let image = UIImage(data: imageData)
+                    if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                    {
+                        self.base64encodedString = delegate.testString
+                    }
                     
-//                    let pictureDataLocal = UIImagePNGRepresentation(image!)
+                    let imageData = NSData(base64EncodedString: parser.base64encodedStringFromServer, options:NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+                    let image = UIImage(data: imageData)
+                
                     self.profileImageView.image = image
                     self.profileTableView.reloadData()
                     
@@ -79,6 +89,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 })
         
         })
+            }
         
         }
     }
@@ -160,7 +171,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         let image : UIImage = self.profileImageView.image!
         let imageData : NSData = UIImagePNGRepresentation(image)!
         let imageStringAfterDecoding: String = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
-
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            delegate.testString = imageStringAfterDecoding
+        }
 //        let imageStringAfterDecoding = String(data: base64Data, encoding: NSUTF8StringEncoding)!
         let updatedGenderCell = self.profileTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! GenderProfileTableViewCell
         

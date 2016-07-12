@@ -7,26 +7,57 @@
 //
 
 import UIKit
+protocol ClassValueDatasource
+{
+    func getValueOfClasse(value : String,iD : Int)
+}
 
 class SelectClassViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var classTupleArray : [(class: String, classId: Int)] = []
+    var valueTupleArray : [(class: String, classId: Int)] = []
+    var selectedIndexFromDetailController : Int = 0
+    var delegateOfClassValueController: ClassValueDatasource?
+    var selectedClassID : Int = 999
     
     @IBOutlet weak var classTableView: UITableView!
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        showActivityIndicator("Fetching classes...")
-        
+        if selectedIndexFromDetailController == 0
+        {
+            showActivityIndicator("Fetching classes...")
         }
+        else if selectedIndexFromDetailController == 1
+        {
+            showActivityIndicator("Fetching subjects...")
+        }
+        else if selectedIndexFromDetailController == 2
+        {
+            showActivityIndicator("Fetching Board/University...")
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool)
+    {
         super.viewDidAppear(true)
-        self.callClassData()
+        if self.selectedIndexFromDetailController == 0
+        {
+            self.callClassData()
+        }
+        else if self.selectedIndexFromDetailController == 1
+        {
+            //Get Subjects for selected Class
+            self.callSubjectData()
+        }
+        else
+        {
+            
+        }
     }
     func callClassData()
     {
@@ -51,7 +82,7 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
                 let parser = AllClassesParser()
                 if parser.isparsedAllClasses(dataValue)
                 {
-                    self.classTupleArray = parser.getClassAndClassIdArray
+                    self.valueTupleArray = parser.getClassAndClassIdArray
                     self.classTableView.reloadData()
                 }
         })
@@ -60,7 +91,38 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
         }
 
     }
-    
+    func callSubjectData()
+    {
+        let requestObject = RequestBuilder()
+        
+        requestObject.requestForSubjects(selectedClassID)
+        requestObject.errorHandler = { error in
+            
+            self.dismissViewControllerAnimated(true, completion:{
+                dispatch_async(dispatch_get_main_queue(),{
+                    let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(alertAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            })
+        }
+        
+        requestObject.completionHandler = { dataValue in
+            self.dismissViewControllerAnimated(true, completion:{
+                dispatch_async(dispatch_get_main_queue(), {
+//                    let parser = AllClassesParser()
+//                    if parser.isparsedAllClasses(dataValue)
+//                    {
+//                        self.valueTupleArray = parser.getClassAndClassIdArray
+//                        self.classTableView.reloadData()
+//                    }
+                })
+            })
+            
+        }
+
+    }
     func showActivityIndicator(message:String)
     {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
@@ -86,12 +148,12 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
 
      func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.classTupleArray.count
+        return self.valueTupleArray.count
     }
 
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("selectClassCellIdentifier", forIndexPath: indexPath)
-        let classTuple = self.classTupleArray[indexPath.row]
+        let classTuple = self.valueTupleArray[indexPath.row]
         let  valueOfClass : String = classTuple.0
         cell.textLabel?.text = valueOfClass
         
@@ -99,6 +161,10 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let classTuple = self.valueTupleArray[indexPath.row]
+        let  valueOfClass : String = classTuple.0
+        let iDOfClass : Int = classTuple.1
+        self.delegateOfClassValueController?.getValueOfClasse(valueOfClass, iD: iDOfClass)
         if  tableView.cellForRowAtIndexPath(indexPath)?.accessoryType == UITableViewCellAccessoryType.Checkmark {
             
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None

@@ -8,10 +8,14 @@
 
 import UIKit
 
-class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClassValueDatasource
 {
      @IBOutlet var menuButton:UIBarButtonItem!
     var selectedIndex : Int = 0
+    var classIdOfSelectedClass : Int = 999
+    
+    @IBOutlet weak var detailTableView: UITableView!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -34,10 +38,24 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
     
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print(selectedIndex)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        let classController = segue.destinationViewController as! SelectClassViewController
+        classController.selectedIndexFromDetailController = self.selectedIndex
+        classController.selectedClassID = classIdOfSelectedClass
+        classController.delegateOfClassValueController = self
+        
     }
     
+    //MARK : ClassValueDataSource
+    func getValueOfClasse(value: String, iD: Int)
+    {
+        let tableViewCell = self.detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedIndex, inSection: 0))
+        tableViewCell?.detailTextLabel?.text = value
+        classIdOfSelectedClass = iD
+    
+        
+    }
     //MARK : UitableViewDelegates and DataSources
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -68,6 +86,21 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedIndex = indexPath.row
+        if indexPath.row == 0
+        {
+            self.performSegueWithIdentifier("seguetoSelectClass", sender: self)
+        }
+        else if classIdOfSelectedClass == 999
+        {
+            let alert = UIAlertController(title: "WconnEct", message: "Please select class to continue", preferredStyle: .Alert)
+            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(alertAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            self.performSegueWithIdentifier("seguetoSelectClass", sender: self)
+        }
     }
 
 }

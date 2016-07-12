@@ -293,10 +293,15 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         var isTeacher : Bool = true
         if segmentControl.selectedSegmentIndex == 0
         {
+            
             isTeacher = true
         }
         else
         {
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = false
+            }
             isTeacher = false
         }
 
