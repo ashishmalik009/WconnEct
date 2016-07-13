@@ -170,7 +170,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         let image : UIImage = self.profileImageView.image!
         let imageData : NSData = UIImagePNGRepresentation(image)!
-        let imageStringAfterDecoding: String = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        let strBase64 = imageData.base64EncodedStringWithOptions(.EncodingEndLineWithLineFeed)
+        print(strBase64)
+        let imageStringAfterDecoding = imageData.base64EncodedStringWithOptions(.EncodingEndLineWithLineFeed)
         if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         {
             delegate.testString = imageStringAfterDecoding

@@ -20,6 +20,7 @@
 		5472D9411D192AD500FEA690 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5472D9401D192AD500FEA690 /* LogInViewController.swift */; };
 		5482FEB31D1ACA65002E991A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5482FEB21D1ACA65002E991A /* GoogleService-Info.plist */; };
 		5495A0441D2FB79900F9E3F2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495A0431D2FB79900F9E3F2 /* UserProfileViewController.swift */; };
+		54C1C8BD1D3653C600A0D474 /* GetSubjectsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C1C8BC1D3653C600A0D474 /* GetSubjectsParser.swift */; };
 		54EC953F1D33B18800C6B67E /* SelectClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EC953E1D33B18800C6B67E /* SelectClassViewController.swift */; };
 		54EC95411D33B3C200C6B67E /* AllClassesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EC95401D33B3C200C6B67E /* AllClassesParser.swift */; };
 		6D5B387B1D28CC4400BD8DEF /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */; };
@@ -78,6 +79,7 @@
 		5472D9401D192AD500FEA690 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		5482FEB21D1ACA65002E991A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5495A0431D2FB79900F9E3F2 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = SOURCE_ROOT; };
+		54C1C8BC1D3653C600A0D474 /* GetSubjectsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSubjectsParser.swift; sourceTree = "<group>"; };
 		54EC953E1D33B18800C6B67E /* SelectClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectClassViewController.swift; sourceTree = "<group>"; };
 		54EC95401D33B3C200C6B67E /* AllClassesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllClassesParser.swift; sourceTree = "<group>"; };
 		6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				1B62C0FA1D2941BD00014F7F /* SignUpParser.swift */,
 				6DA8176A1D2AEE3C003EAA16 /* ProfileUserParser.swift */,
 				54EC95401D33B3C200C6B67E /* AllClassesParser.swift */,
+				54C1C8BC1D3653C600A0D474 /* GetSubjectsParser.swift */,
 			);
 			name = "Parser Classes";
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				1B62C0FB1D2941BD00014F7F /* SignUpParser.swift in Sources */,
 				1B94B4CA1D322F5E00E92785 /* GenderProfileTableViewCell.swift in Sources */,
 				54414A411D181D4C0000E3D2 /* AppDelegate.swift in Sources */,
+				54C1C8BD1D3653C600A0D474 /* GetSubjectsParser.swift in Sources */,
 				6D82C7381D31850200DCC51B /* ProfileUserTableViewCell.swift in Sources */,
 				6D5B387B1D28CC4400BD8DEF /* RequestBuilder.swift in Sources */,
 				6DA1BE0A1D2C3ECE006F4473 /* SWRevealViewController.m in Sources */,

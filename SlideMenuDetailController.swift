@@ -13,6 +13,7 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
      @IBOutlet var menuButton:UIBarButtonItem!
     var selectedIndex : Int = 0
     var classIdOfSelectedClass : Int = 999
+    var subjectIdOfSelectedSubject : Int = 999
     
     @IBOutlet weak var detailTableView: UITableView!
     
@@ -47,15 +48,23 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
-    //MARK : ClassValueDataSource
-    func getValueOfClasse(value: String, iD: Int)
-    {
+     //MARK : ClassValueDataSource
+    func getValueOfClassOrSubject(value: String, iD: Int, isClass: Bool) {
         let tableViewCell = self.detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedIndex, inSection: 0))
         tableViewCell?.detailTextLabel?.text = value
-        classIdOfSelectedClass = iD
-    
-        
+        if isClass
+        {
+            classIdOfSelectedClass = iD
+            
+        }
+        else
+        {
+            subjectIdOfSelectedSubject = iD
+        }
+
     }
+   
+
     //MARK : UitableViewDelegates and DataSources
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

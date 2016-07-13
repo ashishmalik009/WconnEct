@@ -9,12 +9,12 @@
 import UIKit
 protocol ClassValueDatasource
 {
-    func getValueOfClasse(value : String,iD : Int)
+    func getValueOfClassOrSubject(value : String,iD : Int,isClass:Bool)
 }
 
 class SelectClassViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var valueTupleArray : [(class: String, classId: Int)] = []
+    var valueTupleArray : [(_: String, _: Int)] = []
     var selectedIndexFromDetailController : Int = 0
     var delegateOfClassValueController: ClassValueDatasource?
     var selectedClassID : Int = 999
@@ -34,7 +34,7 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else if selectedIndexFromDetailController == 2
         {
-            showActivityIndicator("Fetching Board/University...")
+            showActivityIndicator("Fetching Data...")
         }
     }
 
@@ -66,18 +66,19 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
         requestObject.requestForAllClasses()
         requestObject.errorHandler = { error in
             
-            self.dismissViewControllerAnimated(true, completion:{
+            self.dismissViewControllerAnimated(true, completion:nil)
+            
             dispatch_async(dispatch_get_main_queue(),{
                 let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                 let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(alertAction)
                 self.presentViewController(alert, animated: true, completion: nil)
-            })
+            
             })
         }
         
         requestObject.completionHandler = { dataValue in
-            self.dismissViewControllerAnimated(true, completion:{
+            self.dismissViewControllerAnimated(true, completion:nil)
             dispatch_async(dispatch_get_main_queue(), {
                 let parser = AllClassesParser()
                 if parser.isparsedAllClasses(dataValue)
@@ -85,7 +86,7 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
                     self.valueTupleArray = parser.getClassAndClassIdArray
                     self.classTableView.reloadData()
                 }
-        })
+        
             })
             
         }
@@ -98,26 +99,26 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
         requestObject.requestForSubjects(selectedClassID)
         requestObject.errorHandler = { error in
             
-            self.dismissViewControllerAnimated(true, completion:{
+            self.dismissViewControllerAnimated(true, completion:nil)
                 dispatch_async(dispatch_get_main_queue(),{
                     let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                     let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alert.addAction(alertAction)
                     self.presentViewController(alert, animated: true, completion: nil)
-                })
+                
             })
         }
         
         requestObject.completionHandler = { dataValue in
-            self.dismissViewControllerAnimated(true, completion:{
+            self.dismissViewControllerAnimated(true, completion:nil)
                 dispatch_async(dispatch_get_main_queue(), {
-//                    let parser = AllClassesParser()
-//                    if parser.isparsedAllClasses(dataValue)
-//                    {
-//                        self.valueTupleArray = parser.getClassAndClassIdArray
-//                        self.classTableView.reloadData()
-//                    }
-                })
+                    let parser = GetSubjectsParser()
+                    if parser.isparsedAllSubjects(dataValue)
+                    {
+                        self.valueTupleArray = parser.getSubjectAndSubjectIdArray
+                        self.classTableView.reloadData()
+                    }
+                
             })
             
         }
@@ -164,7 +165,15 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
         let classTuple = self.valueTupleArray[indexPath.row]
         let  valueOfClass : String = classTuple.0
         let iDOfClass : Int = classTuple.1
-        self.delegateOfClassValueController?.getValueOfClasse(valueOfClass, iD: iDOfClass)
+        if selectedIndexFromDetailController == 0
+        {
+                self.delegateOfClassValueController?.getValueOfClassOrSubject(valueOfClass, iD: iDOfClass, isClass: true)
+        }
+        else
+        {
+            self.delegateOfClassValueController?.getValueOfClassOrSubject(valueOfClass, iD: iDOfClass, isClass: false)
+        }
+        
         if  tableView.cellForRowAtIndexPath(indexPath)?.accessoryType == UITableViewCellAccessoryType.Checkmark {
             
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None

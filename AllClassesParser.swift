@@ -11,7 +11,7 @@ import UIKit
 class AllClassesParser: NSObject
 {
     var getClass : (class:String,classId:Int) = ("",0)
-    var getClassAndClassIdArray : [(class:String, classId:Int)] = []
+    var getClassAndClassIdArray : [(_:String, _:Int)] = []
     func isparsedAllClasses(data: NSData) -> Bool
     {
         do
