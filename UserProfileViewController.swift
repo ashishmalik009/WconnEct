@@ -26,7 +26,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.profileImageView.clipsToBounds = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.screenTapped(_:)))
         self.profileImageView.addGestureRecognizer(tapRecognizer)
-        self.showActivityIndicator("Fetching Info..")
+        
         self.callFetchData()
         
      
@@ -41,7 +41,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     {
         let requestObject = RequestBuilder()
         requestObject.requestForProfileOfUser()
-        
+       
         requestObject.errorHandler = { error in
            if !(self.presentingViewController?.isBeingDismissed())!
                 {
@@ -59,8 +59,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         requestObject.completionHandler = { dataValue in
-            if !(self.presentingViewController?.isBeingDismissed())!
-            {
+             self.showActivityIndicator("Fetching Info..")
+//            if !(self.presentingViewController?.isBeingDismissed())!
+//            {
 
             self.dismissViewControllerAnimated(true, completion:{
                 
@@ -79,8 +80,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                         self.base64encodedString = delegate.testString
                     }
                     
-                    let imageData = NSData(base64EncodedString: parser.base64encodedStringFromServer, options:NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
-                    let image = UIImage(data: imageData)
+                    let imageData = NSData(base64EncodedString: parser.base64encodedStringFromServer, options:NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                    let image = UIImage(data: imageData!)
                 
                     self.profileImageView.image = image
                     self.profileTableView.reloadData()
@@ -89,7 +90,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 })
         
         })
-            }
+            
         
         }
     }
