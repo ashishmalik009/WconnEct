@@ -14,7 +14,7 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
     var selectedIndex : Int = 0
     var classIdOfSelectedClass : Int = 999
     var subjectIdOfSelectedSubject : Int = 999
-    
+    var arrayValuesToShowInTable : NSMutableArray = ["Class","Subject"]
     @IBOutlet weak var detailTableView: UITableView!
     
     override func viewDidLoad()
@@ -54,6 +54,23 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
         tableViewCell?.detailTextLabel?.text = value
         if isClass
         {
+            if value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12"
+            {
+                arrayValuesToShowInTable.addObject("Board")
+                if arrayValuesToShowInTable.count == 3
+                {
+                    self.detailTableView.insertRowsAtIndexPaths([NSIndexPath.init(forRow: arrayValuesToShowInTable.count-1, inSection: 0)], withRowAnimation: .Automatic)
+                }
+            }
+            else
+            {
+                arrayValuesToShowInTable.removeObject("Board")
+                if arrayValuesToShowInTable.count == 2
+                {
+                    self.detailTableView.deleteRowsAtIndexPaths([NSIndexPath.init(forRow: arrayValuesToShowInTable.count, inSection: 0)], withRowAnimation: .Automatic)
+                }
+            }
+
             classIdOfSelectedClass = iD
             
         }
@@ -71,25 +88,25 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return arrayValuesToShowInTable.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCellWithIdentifier("detailCellIdentifier")
         if indexPath.row == 0
         {
-            tableViewCell?.textLabel?.text = "Class"
+            
             tableViewCell?.detailTextLabel?.text = "Select Class"
         }
         else if indexPath.row == 1
         {
-            tableViewCell?.textLabel?.text = "Subject"
+            
             tableViewCell?.detailTextLabel?.text = "Select Subject"
         }
         else if indexPath.row == 2
         {
-            tableViewCell?.textLabel?.text = "Board/University"
-            tableViewCell?.detailTextLabel?.text = "Select Board/University"
+            tableViewCell?.detailTextLabel?.text = "Select Board"
         }
+        tableViewCell?.textLabel?.text = String(arrayValuesToShowInTable.objectAtIndex(indexPath.row))
         return tableViewCell!
     }
     

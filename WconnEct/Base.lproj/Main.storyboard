@@ -24,6 +24,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6BZ-o9-nuX">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ohx-l3-wZT">
                                 <rect key="frame" x="306" y="498" width="274" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -61,14 +64,18 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="8oW-Wj-Y1F" firstAttribute="top" secondItem="lRm-xq-i6q" secondAttribute="bottom" constant="22" id="0DB-Jf-Kse"/>
+                            <constraint firstItem="6BZ-o9-nuX" firstAttribute="leading" secondItem="uGD-yY-kvX" secondAttribute="leading" id="2jW-zB-wlc"/>
                             <constraint firstItem="8oW-Wj-Y1F" firstAttribute="leading" secondItem="uGD-yY-kvX" secondAttribute="leading" constant="79" id="5yL-rO-8ll"/>
                             <constraint firstItem="Ohx-l3-wZT" firstAttribute="width" secondItem="lRm-xq-i6q" secondAttribute="width" id="Bk0-zO-mcQ"/>
                             <constraint firstItem="Ohx-l3-wZT" firstAttribute="leading" secondItem="lRm-xq-i6q" secondAttribute="trailing" constant="11" id="DyN-fT-wdE"/>
                             <constraint firstItem="8oW-Wj-Y1F" firstAttribute="top" secondItem="Ohx-l3-wZT" secondAttribute="bottom" constant="22" id="ExR-AZ-QoL"/>
+                            <constraint firstItem="6BZ-o9-nuX" firstAttribute="top" secondItem="eAx-Hk-GmP" secondAttribute="bottom" id="HQJ-uB-j3u"/>
                             <constraint firstItem="gUU-IU-Qnu" firstAttribute="top" secondItem="8oW-Wj-Y1F" secondAttribute="bottom" constant="20" id="JHM-BC-Phn"/>
+                            <constraint firstAttribute="trailing" secondItem="6BZ-o9-nuX" secondAttribute="trailing" id="Kge-kK-v7d"/>
                             <constraint firstAttribute="trailing" secondItem="8oW-Wj-Y1F" secondAttribute="trailing" constant="79" id="TeQ-vq-dVY"/>
                             <constraint firstItem="lRm-xq-i6q" firstAttribute="leading" secondItem="uGD-yY-kvX" secondAttribute="leading" constant="20" id="Ulr-H6-syE"/>
                             <constraint firstAttribute="trailing" secondItem="Ohx-l3-wZT" secondAttribute="trailing" constant="20" id="mec-Uu-k6a"/>
+                            <constraint firstItem="gUU-IU-Qnu" firstAttribute="top" secondItem="6BZ-o9-nuX" secondAttribute="bottom" id="pgB-cs-wsX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="WconnEct" id="LAj-L3-a1y">
@@ -958,6 +965,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="YCP-0R-GgB">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="CBE-sN-GWB"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="fwh-ef-bQv">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="detailTableView" destination="2pA-kl-tIa" id="tbG-Tm-EnJ"/>

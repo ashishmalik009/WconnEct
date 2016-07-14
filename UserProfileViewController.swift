@@ -16,6 +16,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     var gender : String = ""
     var emailId : String = ""
     var base64encodedString : String = ""
+    var updatedDataTupleArray : [(_:String, _:String)] = []
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileTableView: UITableView!
@@ -28,72 +29,84 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.profileImageView.addGestureRecognizer(tapRecognizer)
         
         self.callFetchData()
-        
-     
-        
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool)
+    {
         super.viewDidAppear(true)
         
     }
     func callFetchData()
     {
+        self.showActivityIndicator("Fetching Info..")
         let requestObject = RequestBuilder()
         requestObject.requestForProfileOfUser()
        
         requestObject.errorHandler = { error in
-           if !(self.presentingViewController?.isBeingDismissed())!
-                {
-            self.dismissViewControllerAnimated(true, completion:{
+   
             
             dispatch_async(dispatch_get_main_queue(),{
+                self.dismissViewControllerAnimated(true, completion:nil)
                 let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                 let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(alertAction)
                 self.presentViewController(alert, animated: true, completion: nil)
             })
                 
-            })
-            }
+           
         }
         
         requestObject.completionHandler = { dataValue in
-             self.showActivityIndicator("Fetching Info..")
-//            if !(self.presentingViewController?.isBeingDismissed())!
-//            {
 
-            self.dismissViewControllerAnimated(true, completion:{
+            
                 
             dispatch_async(dispatch_get_main_queue(), {
+                self.dismissViewControllerAnimated(true, completion:nil)
                 let parser = ProfileUserParser()
                 if parser.isparsedPRrofileUserUsingData(dataValue)
                 {
-                    
-                    
                     self.userName = parser.name
                     self.phNumber = parser.contactNumber
                     self.gender = parser.gender
                     self.emailId = parser.email
-                    if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-                    {
-                        self.base64encodedString = delegate.testString
-                    }
-                    
-                    let imageData = NSData(base64EncodedString: parser.base64encodedStringFromServer, options:NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                    self.base64encodedString = parser.base64encodedStringFromServer
+                    let imageData = NSData(base64EncodedString: self.base64encodedString, options:NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
                     let image = UIImage(data: imageData!)
-                
-                    self.profileImageView.image = image
+                    if image == nil
+                    {
+                        self.profileImageView.image = UIImage.init(named: "defaultUserIcon")
+                    }
+                    else
+                    {
+                        self.profileImageView.image = image
+                        self.saveImageDocumentDirectory(image!)
+
+                    }
                     self.profileTableView.reloadData()
                     
                 }
-                })
+            
         
         })
             
         
         }
     }
+    func saveImageDocumentDirectory(finalImage : UIImage)
+    {
+        let fileManager = NSFileManager.defaultManager()
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            let path = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString).stringByAppendingPathComponent("\(delegate.emailIdOfLoggedInUser).jpg")
+            let image = finalImage
+            print(path)
+            let imageData = UIImageJPEGRepresentation(image, 0.5)
+            fileManager.createFileAtPath(path as String, contents: imageData, attributes: nil)
+        }
+        
+        
+    }
+    
     func screenTapped(gestureRecognizer: UITapGestureRecognizer)
     {
         let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
@@ -158,9 +171,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         for i in 0..<3
         {
             let updatedTableViewCell = self.profileTableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as! ProfileUserTableViewCell
-            switch i {
-            case 0: updatedUsername = String(updatedTableViewCell.detailTextField.text!)
-            case 2: updatedPhoneNumber = String(updatedTableViewCell.detailTextField.text!)
+            switch i
+            {
+                case 0: updatedUsername = String(updatedTableViewCell.detailTextField.text!)
+                case 2: updatedPhoneNumber = String(updatedTableViewCell.detailTextField.text!)
                 
             default: print("Nothing")
                 
@@ -168,19 +182,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             
             
         }
-        
-        let image : UIImage = self.profileImageView.image!
-        let imageData : NSData = UIImagePNGRepresentation(image)!
-        let strBase64 = imageData.base64EncodedStringWithOptions(.EncodingEndLineWithLineFeed)
-        print(strBase64)
-        let imageStringAfterDecoding = imageData.base64EncodedStringWithOptions(.EncodingEndLineWithLineFeed)
-        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-        {
-            delegate.testString = imageStringAfterDecoding
-        }
-//        let imageStringAfterDecoding = String(data: base64Data, encoding: NSUTF8StringEncoding)!
         let updatedGenderCell = self.profileTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 3, inSection: 0)) as! GenderProfileTableViewCell
-        
         let genderValue = updatedGenderCell.genderSegmentControl.selectedSegmentIndex
         var updatedGender : String = ""
         if genderValue == 0
@@ -191,12 +193,38 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         {
             updatedGender = "Female"
         }
-        let requestObject = RequestBuilder()
-        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        let image : UIImage = self.profileImageView.image!
+        self.saveImageDocumentDirectory(image)
+        let imageData : NSData = UIImagePNGRepresentation(image)!
+        let imageStringAfterDecoding = imageData.base64EncodedStringWithOptions(.EncodingEndLineWithLineFeed)
+        if updatedUsername != userName
         {
-            
-            requestObject.requestToUpdateData(updatedUsername, phNumber: updatedPhoneNumber, emailID: emailId, gender: updatedGender, photo: "new.png",base64EncodedString: imageStringAfterDecoding, isTeacher: delegate.isTeacherLoggedIn)
+            let updatedTuple = ("name",updatedUsername)
+            updatedDataTupleArray.append(updatedTuple)
         }
+        if updatedPhoneNumber != phNumber
+        {
+            let updatedTuple = ("ph_number",updatedPhoneNumber)
+            updatedDataTupleArray.append(updatedTuple)
+        }
+        if updatedGender != gender
+        {
+            let updatedTuple = ("gender",updatedGender)
+            updatedDataTupleArray.append(updatedTuple)
+
+        }
+        
+        if imageStringAfterDecoding != base64encodedString
+        {
+            let updatedTuplePhoto = ("photo",emailId)
+            updatedDataTupleArray.append(updatedTuplePhoto)
+            let updatedTuple = ("photoData",imageStringAfterDecoding)
+            updatedDataTupleArray.append(updatedTuple)
+        }
+
+
+        let requestObject = RequestBuilder()
+        requestObject.requestToUpdateData(updatedDataTupleArray)
             showActivityIndicator("Updating Info...")
             requestObject.errorHandler = { error in
                 

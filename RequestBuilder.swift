@@ -113,7 +113,7 @@ class RequestBuilder: NSObject
                 {
                     if httpResponse.statusCode == 200
                     {
-                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+//                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                         self.completionHandler(dataFromServer: data!)
                         
                         
@@ -173,7 +173,7 @@ class RequestBuilder: NSObject
                 {
                     if httpResponse.statusCode == 200
                     {
-                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+//                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                         self.completionHandler(dataFromServer: data!)
                         
                         
@@ -192,8 +192,16 @@ class RequestBuilder: NSObject
         dataTask.resume()
     }
   
-    func requestToUpdateData(name:String,phNumber:String,emailID:String,gender:String,photo:String,base64EncodedString:String,isTeacher:Bool) -> Void
+    func requestToUpdateData(tupleArrayReceived : [(_:String, _:String)]) -> Void
     {
+        var isTeacher : Bool = true
+        if let deleagte = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            if !deleagte.isTeacherLoggedIn
+            {
+                isTeacher = false
+            }
+        }
         var url = NSURL()
         if isTeacher
         {
@@ -205,10 +213,16 @@ class RequestBuilder: NSObject
         }
         
         let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        var post : String = ""
+        let post : NSMutableString = ""
         if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         {
-             post = "token=\(delegate.accessTokenAfterLogin)&name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&photo=\(photo)&photoData=\(base64EncodedString)&gender=\(gender)"
+            post.appendString("token=\(delegate.accessTokenAfterLogin)")
+        }
+        for i in 0..<tupleArrayReceived.count
+        {
+            
+               post.appendString("&\(tupleArrayReceived[i].0)=\(tupleArrayReceived[i].1)")
+            
         }
         let postData : NSData = post.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
         let postLength: String = "\(postData.length)"
@@ -235,7 +249,7 @@ class RequestBuilder: NSObject
             {
                 if httpResponse.statusCode == 200
                 {
-                    print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+//                    print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                     self.completionHandler(dataFromServer: data!)
                     
                     
@@ -286,7 +300,7 @@ class RequestBuilder: NSObject
                 {
                     if httpResponse.statusCode == 200
                     {
-                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+//                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                         self.completionHandler(dataFromServer: data!)
                         
                         
@@ -332,7 +346,7 @@ class RequestBuilder: NSObject
                 {
                     if httpResponse.statusCode == 200
                     {
-                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+//                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                         self.completionHandler(dataFromServer: data!)
                         
                         
@@ -350,6 +364,56 @@ class RequestBuilder: NSObject
         })
         
         dataTask.resume()
+    }
+    
+    func requestForBoard()
+    {
+        var url = NSURL()
+        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/board/")!
+        
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.HTTPMethod = "GET"
+        print("Boards Request : \(request)")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let urlsession = NSURLSession.sharedSession()
+        
+        let dataTask : NSURLSessionDataTask = urlsession.dataTaskWithRequest(request, completionHandler: {
+            
+            data, response, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+            if error != nil
+            {
+                self.errorHandler(errorValue: error!)
+            }
+            else
+            {
+                if let httpResponse = response as? NSHTTPURLResponse
+                {
+                    if httpResponse.statusCode == 200
+                    {
+//                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                        self.completionHandler(dataFromServer: data!)
+                        
+                        
+                    }
+                    else
+                    {
+                        let responseError = NSError(domain: "Some error occured. Please try again later", code: 0, userInfo: nil)
+                        self.errorHandler(errorValue:responseError)
+                    }
+                }
+                
+            }
+            
+            
+        })
+        dataTask.resume()
+
     }
 }
 

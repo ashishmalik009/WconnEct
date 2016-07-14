@@ -56,7 +56,7 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else
         {
-            
+            self.callBoardsData()
         }
     }
     func callClassData()
@@ -118,6 +118,39 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
                         self.valueTupleArray = parser.getSubjectAndSubjectIdArray
                         self.classTableView.reloadData()
                     }
+                
+            })
+            
+        }
+
+    }
+    func callBoardsData()
+    {
+        let requestObject = RequestBuilder()
+        
+        requestObject.requestForBoard()
+        requestObject.errorHandler = { error in
+            
+            self.dismissViewControllerAnimated(true, completion:nil)
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+                let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(alertAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+            })
+        }
+        
+        requestObject.completionHandler = { dataValue in
+            self.dismissViewControllerAnimated(true, completion:nil)
+            dispatch_async(dispatch_get_main_queue(), {
+                let parser = AllBoardsParser()
+                if parser.isParsedAllBoards(dataValue)
+                {
+                    self.valueTupleArray = parser.getBoardAndBoardArray
+                    self.classTableView.reloadData()
+                }
                 
             })
             

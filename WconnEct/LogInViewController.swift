@@ -31,11 +31,6 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     }
     
     override func viewWillAppear(animated: Bool) {
-//        if (FBSDKAccessToken.currentAccessToken() != nil)
-//        {
-//            self.getFBUserData()
-//            
-//        }
         
     }
     
@@ -43,17 +38,22 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         GIDSignIn.sharedInstance().delegate = self
     }
     
-       @IBAction func signIn(sender: AnyObject) {
+       @IBAction func signIn(sender: AnyObject)
+       {
         let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
         let actionForTeacher = UIAlertAction(title: "Teacher", style: .Default, handler: {(alert: UIAlertAction!) in
+            
             GIDSignIn.sharedInstance().signIn()
+            
         })
         let actionForStudent = UIAlertAction(title: "Student/Parent", style: .Default, handler: {(alert: UIAlertAction!) in
             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
             {
                 delegate.isTeacherLoggedIn = false
             }
+            
             GIDSignIn.sharedInstance().signIn()
+            
         })
         let dismissAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
         
@@ -87,12 +87,12 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             requestObject.errorHandler = { error in
                 
                 dispatch_async(dispatch_get_main_queue(),{
-                    self.dismissViewControllerAnimated(true, completion:{
+                    self.dismissViewControllerAnimated(true, completion:nil)
                     let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                     let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alert.addAction(alertAction)
                     self.presentViewController(alert, animated: true, completion: nil)
-                    })
+                    
                 })
             }
             
@@ -146,6 +146,8 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 dismissViewController viewController: UIViewController!) {
         
         self.dismissViewControllerAnimated(true, completion:nil)
+        self.showActivityIndicator()
+        
             
         
        
@@ -333,7 +335,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     let parser = LogInParser()
                     if parser.isparsedLogInDetailsUsingData(dataValue)
                     {
-                        self.dismissViewControllerAnimated(true, completion: {
+                        self.dismissViewControllerAnimated(true, completion:nil)
                             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                             {
                                 delegate.emailIdOfLoggedInUser = self.emailIdTextField.text!
@@ -343,7 +345,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                             self.presentViewController(revealController, animated: true, completion: nil)
                             
                             
-                        })
+                        
 //                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
 //                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
 //                        alert.addAction(alertAction)

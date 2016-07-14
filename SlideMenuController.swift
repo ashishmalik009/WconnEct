@@ -51,8 +51,52 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
         {
             self.userNameLabel.text = delegate.emailIdOfLoggedInUser
         }
+        self.getImage()
     }
-       
+    
+    func getDirectoryPath() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    func getImage(){
+        let fileManager = NSFileManager.defaultManager()
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            let imagePAth = (self.getDirectoryPath() as NSString).stringByAppendingPathComponent("\(delegate.emailIdOfLoggedInUser).jpg")
+            if fileManager.fileExistsAtPath(imagePAth)
+            {
+                self.profileImageView.image = UIImage(contentsOfFile: imagePAth)
+            }
+            else
+            {
+                print("No Image")
+            }
+        }
+    }
+    
+    func deleteImage()
+    {
+        let fileManager = NSFileManager.defaultManager()
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            let imagePath = (self.getDirectoryPath() as NSString).stringByAppendingPathComponent("\(delegate.emailIdOfLoggedInUser).jpg")
+            if fileManager.fileExistsAtPath(imagePath)
+            {
+
+                do
+                {
+                    try fileManager.removeItemAtPath(imagePath)
+                }
+                catch let error as NSError
+                {
+                    print("No such File found")
+                }
+                
+            }
+        }
+    }
+
     //Mark : TableViewDatasource and Delegates
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -102,6 +146,7 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
             FBSDKLoginManager().logOut()
             FBSDKProfile.setCurrentProfile(nil)
             FBSDKAccessToken.setCurrentAccessToken(nil)
+            self.deleteImage()
             dismissViewControllerAnimated(true, completion: nil)
             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
             {

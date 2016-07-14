@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var isUserLoggedIn : Bool = false
     var isTeacherLoggedIn : Bool = true
     
-    var testString : String = ""
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         var configureError: NSError?
