@@ -17,6 +17,7 @@
 		54414A4E1D181D4C0000E3D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54414A4C1D181D4C0000E3D2 /* LaunchScreen.storyboard */; };
 		54414A591D181D4C0000E3D2 /* WconnEctTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54414A581D181D4C0000E3D2 /* WconnEctTests.swift */; };
 		54414A641D181D4C0000E3D2 /* WconnEctUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54414A631D181D4C0000E3D2 /* WconnEctUITests.swift */; };
+		5442A3EC1D38BE32003F5A3F /* TeachersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442A3EB1D38BE32003F5A3F /* TeachersListViewController.swift */; };
 		5471EC0D1D377710001AB166 /* AllBoardsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5471EC0C1D377710001AB166 /* AllBoardsParser.swift */; };
 		5472D9411D192AD500FEA690 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5472D9401D192AD500FEA690 /* LogInViewController.swift */; };
 		5482FEB31D1ACA65002E991A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5482FEB21D1ACA65002E991A /* GoogleService-Info.plist */; };
@@ -77,6 +78,7 @@
 		54414A5F1D181D4C0000E3D2 /* WconnEctUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WconnEctUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54414A631D181D4C0000E3D2 /* WconnEctUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WconnEctUITests.swift; sourceTree = "<group>"; };
 		54414A651D181D4C0000E3D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5442A3EB1D38BE32003F5A3F /* TeachersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachersListViewController.swift; sourceTree = "<group>"; };
 		5471EC0C1D377710001AB166 /* AllBoardsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBoardsParser.swift; sourceTree = "<group>"; };
 		5472D9401D192AD500FEA690 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		5482FEB21D1ACA65002E991A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				6D93E4BB1D205849008CF9C2 /* SignUpViewController.swift */,
 				5495A0431D2FB79900F9E3F2 /* UserProfileViewController.swift */,
 				54EC953E1D33B18800C6B67E /* SelectClassViewController.swift */,
+				5442A3EB1D38BE32003F5A3F /* TeachersListViewController.swift */,
 			);
 			path = WconnEct;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				54EC95411D33B3C200C6B67E /* AllClassesParser.swift in Sources */,
 				6DA8176B1D2AEE3C003EAA16 /* ProfileUserParser.swift in Sources */,
 				1B62C0FB1D2941BD00014F7F /* SignUpParser.swift in Sources */,
+				5442A3EC1D38BE32003F5A3F /* TeachersListViewController.swift in Sources */,
 				5471EC0D1D377710001AB166 /* AllBoardsParser.swift in Sources */,
 				1B94B4CA1D322F5E00E92785 /* GenderProfileTableViewCell.swift in Sources */,
 				54414A411D181D4C0000E3D2 /* AppDelegate.swift in Sources */,

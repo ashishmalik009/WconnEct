@@ -6,16 +6,23 @@
 //  Copyright © 2016 wconnect. All rights reserved.
 //
 
+
+enum isClassSubjectorBoardID : Int {
+    case isClass = 1,
+         isSubject,
+         isBoard
+    
+}
 import UIKit
 protocol ClassValueDatasource
 {
-    func getValueOfClassOrSubject(value : String,iD : Int,isClass:Bool)
+    func getValueOfClassOrSubject(value : String,iD : Int,isClassSubjectOrBoard:Int)
 }
 
 class SelectClassViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var valueTupleArray : [(_: String, _: Int)] = []
-    var selectedIndexFromDetailController : Int = 0
+    var selectedIndexFromDetailController : Int = 999
     var delegateOfClassValueController: ClassValueDatasource?
     var selectedClassID : Int = 999
     
@@ -200,11 +207,15 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
         let iDOfClass : Int = classTuple.1
         if selectedIndexFromDetailController == 0
         {
-                self.delegateOfClassValueController?.getValueOfClassOrSubject(valueOfClass, iD: iDOfClass, isClass: true)
+                self.delegateOfClassValueController?.getValueOfClassOrSubject(valueOfClass, iD: iDOfClass, isClassSubjectOrBoard: isClassSubjectorBoardID.isClass.rawValue)
+        }
+        else if selectedIndexFromDetailController == 1
+        {
+            self.delegateOfClassValueController?.getValueOfClassOrSubject(valueOfClass, iD: iDOfClass, isClassSubjectOrBoard: isClassSubjectorBoardID.isSubject.rawValue)
         }
         else
         {
-            self.delegateOfClassValueController?.getValueOfClassOrSubject(valueOfClass, iD: iDOfClass, isClass: false)
+            self.delegateOfClassValueController?.getValueOfClassOrSubject(valueOfClass, iD: iDOfClass, isClassSubjectOrBoard: isClassSubjectorBoardID.isBoard.rawValue)
         }
         
         if  tableView.cellForRowAtIndexPath(indexPath)?.accessoryType == UITableViewCellAccessoryType.Checkmark {

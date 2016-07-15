@@ -967,10 +967,15 @@
                         <barButtonItem key="leftBarButtonItem" image="menu" id="CBE-sN-GWB"/>
                         <barButtonItem key="rightBarButtonItem" title="Done" id="fwh-ef-bQv">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="sendIDToNextController:" destination="nsZ-2x-Ttq" id="CvX-qq-VP6"/>
+                                <segue destination="zdL-dn-Vg5" kind="show" identifier="sendIDStoryboardSegue" id="ZwO-eX-etf"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="detailTableView" destination="2pA-kl-tIa" id="tbG-Tm-EnJ"/>
+                        <outlet property="doneButton" destination="fwh-ef-bQv" id="DD9-Qn-Pki"/>
                         <outlet property="menuButton" destination="CBE-sN-GWB" id="o24-QH-bVL"/>
                         <segue destination="OBr-RZ-gst" kind="show" identifier="seguetoSelectClass" id="5EG-Lh-dPD"/>
                     </connections>
@@ -1041,6 +1046,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xyP-Qf-O0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5036" y="2481"/>
+        </scene>
+        <!--Teachers List View Controller-->
+        <scene sceneID="JXr-5d-sEM">
+            <objects>
+                <viewController id="zdL-dn-Vg5" customClass="TeachersListViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4k4-pk-SbO"/>
+                        <viewControllerLayoutGuide type="bottom" id="b0X-6i-8FW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C8Q-29-YEg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JUC-BY-5Aj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5036" y="3150"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hHg-TP-Ykf">

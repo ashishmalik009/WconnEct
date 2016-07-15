@@ -176,7 +176,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             let requestObject = RequestBuilder()
             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
             {
-                requestObject.requestForSignUp(String(GIDSignIn.sharedInstance().currentUser.profile.name), phNumber:"", emailID: String(GIDSignIn.sharedInstance().currentUser.profile.email), password: "", gender: "", photo: "", isTeacher:delegate.isTeacherLoggedIn)
+                requestObject.requestForSignUp(String(GIDSignIn.sharedInstance().currentUser.profile.name), phNumber:"", emailID: String(GIDSignIn.sharedInstance().currentUser.profile.email), password: "", gender: "", isTeacher:delegate.isTeacherLoggedIn)
             }
             requestObject.completionHandler =
                 {
@@ -281,7 +281,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
                     let requestObject = RequestBuilder()
                     if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                     {
-                        requestObject.requestForSignUp(String(result.objectForKey("name")!), phNumber: "0000000000", emailID: String(result.objectForKey("email")!), password: "", gender: "", photo: "", isTeacher:delegate.isTeacherLoggedIn )
+                        requestObject.requestForSignUp(String(result.objectForKey("name")!), phNumber: "", emailID: String(result.objectForKey("email")!), password: "", gender: "", isTeacher:delegate.isTeacherLoggedIn )
                     }
                         requestObject.completionHandler =
                         {
@@ -358,7 +358,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         {
             self.showActivityIndicator()
             let requestObject = RequestBuilder()
-            requestObject.requestForSignUp(String(UTF8String: nameTextField.text!)!, phNumber: String(UTF8String:contactNumberField.text!)!, emailID: String(UTF8String: emailIDField.text!)!, password: String(UTF8String: passwordField.text!)!, gender: gender, photo:String(UTF8String: "[]")!, isTeacher: isTeacher)
+            requestObject.requestForSignUp(String(UTF8String: nameTextField.text!)!, phNumber: String(UTF8String:contactNumberField.text!)!, emailID: String(UTF8String: emailIDField.text!)!, password: String(UTF8String: passwordField.text!)!, gender: gender, isTeacher: isTeacher)
             requestObject.completionHandler = { dataValue in
                 dispatch_async(dispatch_get_main_queue(), {
                     let parser = SignUpParser()

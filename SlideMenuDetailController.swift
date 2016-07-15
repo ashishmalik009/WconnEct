@@ -11,9 +11,14 @@ import UIKit
 class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClassValueDatasource
 {
      @IBOutlet var menuButton:UIBarButtonItem!
+    
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    
     var selectedIndex : Int = 0
     var classIdOfSelectedClass : Int = 999
     var subjectIdOfSelectedSubject : Int = 999
+    var boardIDofSelectedBoard : Int = 999
     var arrayValuesToShowInTable : NSMutableArray = ["Class","Subject"]
     @IBOutlet weak var detailTableView: UITableView!
     
@@ -37,22 +42,42 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        if classIdOfSelectedClass == 999 || subjectIdOfSelectedSubject == 999
+        {
+            doneButton.enabled = false
+        }
+    }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        let classController = segue.destinationViewController as! SelectClassViewController
-        classController.selectedIndexFromDetailController = self.selectedIndex
-        classController.selectedClassID = classIdOfSelectedClass
-        classController.delegateOfClassValueController = self
+        if segue.identifier == "sendIDStoryboardSegue"
+        {
+            let teachersListController = segue.destinationViewController as? TeachersListViewController
+            teachersListController?.classID = classIdOfSelectedClass
+            teachersListController?.subjectID = subjectIdOfSelectedSubject
+            teachersListController?.boardId = boardIDofSelectedBoard
+            
+            
+        }
+        else
+        {
+            let classController = segue.destinationViewController as! SelectClassViewController
+            classController.selectedIndexFromDetailController = self.selectedIndex
+            classController.selectedClassID = classIdOfSelectedClass
+            classController.delegateOfClassValueController = self
+        }
         
     }
     
      //MARK : ClassValueDataSource
-    func getValueOfClassOrSubject(value: String, iD: Int, isClass: Bool) {
+    func getValueOfClassOrSubject(value : String,iD : Int,isClassSubjectOrBoard:Int)
+    {
         let tableViewCell = self.detailTableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedIndex, inSection: 0))
         tableViewCell?.detailTextLabel?.text = value
-        if isClass
+        if isClassSubjectOrBoard == 1
         {
             if value == "1" || value == "2" || value == "3" || value == "4" || value == "5" || value == "6" || value == "7" || value == "8" || value == "9" || value == "10" || value == "11" || value == "12"
             {
@@ -74,13 +99,24 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
             classIdOfSelectedClass = iD
             
         }
-        else
+        else if isClassSubjectOrBoard == 2
         {
             subjectIdOfSelectedSubject = iD
+            doneButton.enabled = true
+        }
+        else if isClassSubjectOrBoard == 3
+        {
+            boardIDofSelectedBoard = iD
         }
 
     }
    
+    
+    @IBAction func sendIDToNextController(sender: AnyObject)
+    {
+        self.performSegueWithIdentifier("sendIDStoryboardSegue", sender: self)
+        
+    }
 
     //MARK : UitableViewDelegates and DataSources
     

@@ -18,7 +18,7 @@ class RequestBuilder: NSObject
     }
     
     
-    func requestForSignUp(name:String,phNumber:String,emailID:String,password:String,gender:String,photo:String,isTeacher:Bool) -> Void
+    func requestForSignUp(name:String,phNumber:String,emailID:String,password:String,gender:String,isTeacher:Bool) -> Void
     {
         var url = NSURL()
         if isTeacher
@@ -31,7 +31,7 @@ class RequestBuilder: NSObject
         }
         
         let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        let post : String = "name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&pswd=\(password)&photo=\(photo)&gender=\(gender)"
+        let post : String = "name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&pswd=\(password)&gender=\(gender)"
         let postData : NSData = post.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
         let postLength: String = "\(postData.length)"
         request.HTTPMethod = "POST"
@@ -412,6 +412,48 @@ class RequestBuilder: NSObject
             
             
         })
+        dataTask.resume()
+
+    }
+    
+    func requestForTeachersList(classId:Int, subjectID:Int, boardID:Int)
+    {
+        var url = NSURL()
+        
+        url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/teacher/?classid=\(classId)&subjectid=\(subjectID)&boardid=\(boardID)")!
+        
+        let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "GET"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        print("SignupRequest : \(request)")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let session = NSURLSession.sharedSession()
+        let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {
+            
+            data, response, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+            if error != nil
+            {
+                
+            }
+            if let httpResponse = response as? NSHTTPURLResponse
+            {
+                if httpResponse.statusCode == 200
+                {
+                    print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                    self.completionHandler(dataFromServer: data!)
+                    
+                    
+                }
+                
+            }
+            
+            
+        })
+        
         dataTask.resume()
 
     }
