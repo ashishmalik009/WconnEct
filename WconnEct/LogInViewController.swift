@@ -322,12 +322,14 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             requestObject.errorHandler = { error in
                 
                 dispatch_async(dispatch_get_main_queue(),{
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismissViewControllerAnimated(true, completion: {() -> Void in
+
                     let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                     let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alert.addAction(alertAction)
                     self.presentViewController(alert, animated: true, completion: nil)
                 })
+            })
             }
 
             requestObject.completionHandler = { dataValue in
@@ -335,7 +337,8 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     let parser = LogInParser()
                     if parser.isparsedLogInDetailsUsingData(dataValue)
                     {
-                        self.dismissViewControllerAnimated(true, completion:nil)
+                        self.dismissViewControllerAnimated(true, completion:{() -> Void in
+
                             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                             {
                                 delegate.emailIdOfLoggedInUser = self.emailIdTextField.text!
@@ -352,8 +355,9 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
 //                        self.presentViewController(alert, animated: true, completion: nil)
                         
 //                        let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("tabbarControllerStoryboardID") as! UITabBarController
-                       
+                    })   
                     }
+                    
                     else
                     {
                         self.dismissViewControllerAnimated(true, completion: {

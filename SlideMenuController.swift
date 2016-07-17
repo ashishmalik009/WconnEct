@@ -147,14 +147,14 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
             FBSDKProfile.setCurrentProfile(nil)
             FBSDKAccessToken.setCurrentAccessToken(nil)
             self.deleteImage()
-            dismissViewControllerAnimated(true, completion: nil)
+            dismissViewControllerAnimated(true, completion: { ()-> Void in
             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
             {
                 delegate.isUserLoggedIn = false
                 delegate.accessTokenAfterLogin = ""
                 delegate.emailIdOfLoggedInUser = ""
             }
-
+            })
 
         }
     }

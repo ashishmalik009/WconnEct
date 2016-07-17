@@ -170,7 +170,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             print(error)
         }
         else {
-             self.showActivityIndicator()
+             self.showActivityIndicator("Creating account...")
             print(GIDSignIn.sharedInstance().currentUser.profile.name)
             print(GIDSignIn.sharedInstance().currentUser.profile.email)
             let requestObject = RequestBuilder()
@@ -186,22 +186,24 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
                                     let parser = SignUpParser()
                                     if parser.isparsedSignUpDetailsUsingData(dataValue)
                                     {
-                                        self.dismissViewControllerAnimated(true, completion: {
-                                            let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
-                                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                                            alert.addAction(alertAction)
-                                            self.presentViewController(alert, animated: true, completion: nil)
+                                     self.dismissViewControllerAnimated(true, completion:{ () -> Void in
+//                                            let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
+//                                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//                                            alert.addAction(alertAction)
+//                                            self.presentViewController(alert, animated: true, completion: nil)
+                                        self.loginAfterSignUp()
                                         })
-                                        
+                                    
                                     }
                                     else
                                     {
-                                        self.dismissViewControllerAnimated(true, completion: {
+                                        self.dismissViewControllerAnimated(true, completion:{ () -> Void in
                                             let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
                                             let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                                             alert.addAction(alertAction)
                                             self.presentViewController(alert, animated: true, completion: nil)
                                         })
+                
                                     }
                                     
                                     
@@ -262,7 +264,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             } else if result.isCancelled {
                 print("Cancelled")
             } else {
-                self.showActivityIndicator()
+                self.showActivityIndicator("Creating account...")
                 self.getFBUserData()
                 
             }
@@ -291,17 +293,18 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
                                 let parser = SignUpParser()
                                 if parser.isparsedSignUpDetailsUsingData(dataValue)
                                 {
-                                    self.dismissViewControllerAnimated(true, completion: {
-                                    let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
-                                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                                    alert.addAction(alertAction)
-                                    self.presentViewController(alert, animated: true, completion: nil)
+                                     self.dismissViewControllerAnimated(true, completion:{ () -> Void in
+//                                    let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
+//                                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//                                    alert.addAction(alertAction)
+                                    self.loginAfterSignUp()
+//                                    self.presentViewController(alert, animated: true, completion: nil)
                                     })
                                     
                                 }
                                 else
                                 {
-                                    self.dismissViewControllerAnimated(true, completion: {
+                                    self.dismissViewControllerAnimated(true, completion:{ () -> Void in
                                     let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
                                     let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                                     alert.addAction(alertAction)
@@ -356,7 +359,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         }
         else
         {
-            self.showActivityIndicator()
+            self.showActivityIndicator("Creating account...")
             let requestObject = RequestBuilder()
             requestObject.requestForSignUp(String(UTF8String: nameTextField.text!)!, phNumber: String(UTF8String:contactNumberField.text!)!, emailID: String(UTF8String: emailIDField.text!)!, password: String(UTF8String: passwordField.text!)!, gender: gender, isTeacher: isTeacher)
             requestObject.completionHandler = { dataValue in
@@ -364,12 +367,14 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
                     let parser = SignUpParser()
                     if parser.isparsedSignUpDetailsUsingData(dataValue)
                     {
-//                        self.loginAfterSignUp()
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
-                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                        alert.addAction(alertAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        
+                        self.dismissViewControllerAnimated(true, completion: {
+                            self.loginAfterSignUp()
+                        })
+//                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
+//                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//                        alert.addAction(alertAction)
+//                        self.presentViewController(alert, animated: true, completion: nil)
                         
                     }
                     else
@@ -399,17 +404,26 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     
     func loginAfterSignUp()
     {
-        self.showActivityIndicator()
+        self.showActivityIndicator("Logging in...")
         let requestObject = RequestBuilder()
         var  isTeacher : Bool = false
         
         if teacherOrStudentSegmentControl.selectedSegmentIndex == 0
         {
             isTeacher = true
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = true
+            }
+
         }
         else
         {
             isTeacher = false
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = false
+            }
         }
         requestObject.requestForLogIn(String(UTF8String: emailIDField.text!)!, password: String(UTF8String:passwordField.text!)!, isTeacher: isTeacher)
         requestObject.errorHandler = { error in
@@ -460,9 +474,9 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
 
     }
 
-    func showActivityIndicator()
+    func showActivityIndicator(message:String)
     {
-        let alert = UIAlertController(title: nil, message: "Creating an Account...", preferredStyle: .Alert)
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
         
         alert.view.tintColor = UIColor.blackColor()
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView

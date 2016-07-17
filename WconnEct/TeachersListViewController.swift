@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeachersListViewController: UIViewController
+class TeachersListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
 
     var classID : Int = 999
@@ -27,6 +27,7 @@ class TeachersListViewController: UIViewController
 
     func requestForTeachersList()
     {
+        self.showActivityIndicator()
         let requestObject = RequestBuilder()
         
         requestObject.requestForTeachersList(classID, subjectID: subjectID, boardID: boardId)
@@ -46,8 +47,11 @@ class TeachersListViewController: UIViewController
         requestObject.completionHandler = { dataValue in
             self.dismissViewControllerAnimated(true, completion:nil)
             dispatch_async(dispatch_get_main_queue(), {
-//                let parser = AllClassesParser()
-//                if parser.isparsedAllClasses(dataValue)
+                let parser = TeachersListParser()
+                if parser.isParsedTeachersList(dataValue)
+                {
+                    
+                }
 //                {
 //                    self.valueTupleArray = parser.getClassAndClassIdArray
 //                    self.classTableView.reloadData()
@@ -64,15 +68,33 @@ class TeachersListViewController: UIViewController
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func showActivityIndicator()
+    {
+        let alert = UIAlertController(title: nil, message: "Fetching data...", preferredStyle: .Alert)
+        
+        alert.view.tintColor = UIColor.blackColor()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        loadingIndicator.startAnimating()
+        
+        alert.view.addSubview(loadingIndicator)
+        presentViewController(alert, animated: true, completion: nil)
+        
     }
-    */
 
+
+    //MARK : TableViewDataSource and Delegates
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let tableViewCell = tableView.dequeueReusableCellWithIdentifier("teachersListCellIdentifier")! as UITableViewCell
+        tableViewCell.textLabel?.text = "Ashish"
+        return tableViewCell
+    }
 }
