@@ -106,7 +106,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/SlideMenuController.swift"
-                  timestampString = "490394196.41568"
+                  timestampString = "490426621.464985"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -121,7 +121,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/SlideMenuController.swift"
-                  timestampString = "490394196.415922"
+                  timestampString = "490426621.465171"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -186,7 +186,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "490394196.418645"
+                  timestampString = "490426621.467784"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "63"
@@ -201,7 +201,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "490394196.418823"
+                  timestampString = "490426621.467952"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "64"
@@ -234,7 +234,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "490394196.419852"
+                  timestampString = "490426621.469007"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "64"
@@ -249,7 +249,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "490394196.42002"
+                  timestampString = "490426621.469176"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "65"
@@ -257,22 +257,6 @@
                   offsetFromSymbolStart = "19">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TeachersListParser.swift"
-            timestampString = "490393694.265575"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "isParsedTeachersList(_:)"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

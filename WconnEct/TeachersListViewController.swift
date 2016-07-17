@@ -11,9 +11,11 @@ import UIKit
 class TeachersListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
 
+    @IBOutlet weak var teachersTableView: UITableView!
     var classID : Int = 999
     var subjectID : Int = 999
     var boardId : Int = 999
+    var teachersListArray : NSMutableArray = []
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -45,18 +47,18 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         }
         
         requestObject.completionHandler = { dataValue in
-            self.dismissViewControllerAnimated(true, completion:nil)
+            
             dispatch_async(dispatch_get_main_queue(), {
+                self.dismissViewControllerAnimated(true, completion:{ ()-> Void in
                 let parser = TeachersListParser()
                 if parser.isParsedTeachersList(dataValue)
                 {
+                    self.teachersListArray = parser.teachersArray
+                    self.teachersTableView.reloadData()
                     
                 }
-//                {
-//                    self.valueTupleArray = parser.getClassAndClassIdArray
-//                    self.classTableView.reloadData()
-//                }
                 
+            })
             })
             
         }
@@ -90,11 +92,19 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return self.teachersListArray.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let tableViewCell = tableView.dequeueReusableCellWithIdentifier("teachersListCellIdentifier")! as UITableViewCell
-        tableViewCell.textLabel?.text = "Ashish"
+        let tableViewCell = tableView.dequeueReusableCellWithIdentifier("teachersListCellIdentifier")! as! TeachersTableViewCell
+        let teacher =  teachersListArray.objectAtIndex(indexPath.row) as! Teacher
+        tableViewCell.nameLabel.text = teacher.name
+        tableViewCell.qualificationLabel.text = teacher.highestQualification
+        tableViewCell.experienceLabel.text = teacher.experience
+        tableViewCell.profileImageView.layer.cornerRadius = tableViewCell.profileImageView.frame.size.width/2
+        tableViewCell.profileImageView.clipsToBounds = true
+        
+        
+        
         return tableViewCell
     }
 }
