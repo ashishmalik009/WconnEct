@@ -23,10 +23,14 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         print(subjectID)
         print(boardId)
         
-        self.requestForTeachersList()
+        
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.requestForTeachersList()
+    }
     func requestForTeachersList()
     {
         self.showActivityIndicator()
