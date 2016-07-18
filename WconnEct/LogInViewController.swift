@@ -43,6 +43,10 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
         let actionForTeacher = UIAlertAction(title: "Teacher", style: .Default, handler: {(alert: UIAlertAction!) in
             
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = true
+            }
             GIDSignIn.sharedInstance().signIn()
             
         })
@@ -170,6 +174,11 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
         let actionForTeacher = UIAlertAction(title: "Teacher", style: .Default, handler: {(alert: UIAlertAction!) in
             
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = true
+            }
+
             self.callFacebookSignInFunction()
         })
         let actionForStudent = UIAlertAction(title: "Student/Parent", style: .Default, handler: {(alert: UIAlertAction!) in
@@ -292,11 +301,16 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     }
     @IBAction func logIn(sender: AnyObject)
     {
-        var isTeacher : Bool = true
+        var isTeacher : Bool = false
         if segmentControl.selectedSegmentIndex == 0
         {
             
             isTeacher = true
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = true
+            }
+
         }
         else
         {
@@ -346,15 +360,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                             }
                             let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
                             self.presentViewController(revealController, animated: true, completion: nil)
-                            
-                            
-                        
-//                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
-//                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//                        alert.addAction(alertAction)
-//                        self.presentViewController(alert, animated: true, completion: nil)
-                        
-//                        let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("tabbarControllerStoryboardID") as! UITabBarController
+
                     })   
                     }
                     

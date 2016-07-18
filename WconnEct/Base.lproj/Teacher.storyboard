@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qp1-fa-48C">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ECm-ET-zkm">
+            <objects>
+                <navigationController id="Qp1-fa-48C" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Btv-Np-3PF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="yMp-w4-dKu" kind="relationship" relationship="rootViewController" id="6DF-FO-cfQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Klm-RH-ykX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2037" y="2479"/>
+        </scene>
+        <!--Slide Menu Detail Teacher Controller-->
+        <scene sceneID="JZx-8Q-Scr">
+            <objects>
+                <viewController id="yMp-w4-dKu" customClass="SlideMenuDetailTeacherController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5KW-RY-9uH"/>
+                        <viewControllerLayoutGuide type="bottom" id="FW2-vW-hlZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r5H-4Y-xUJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="U2r-fA-uG6">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="gLi-Ho-pK3"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="gLi-Ho-pK3" id="LhT-tJ-fCC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XeJ-jf-oP1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2717" y="2479"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="menu" width="22" height="22"/>
+    </resources>
+</document>

@@ -144,6 +144,10 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     {
         let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
         let actionForTeacher = UIAlertAction(title: "Teacher", style: .Default, handler: {(alert: UIAlertAction!) in
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                delegate.isTeacherLoggedIn = true
+            }
             GIDSignIn.sharedInstance().signIn()
             })
         let actionForStudent = UIAlertAction(title: "Student/Parent", style: .Default, handler: {(alert: UIAlertAction!) in

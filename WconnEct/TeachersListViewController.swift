@@ -27,13 +27,15 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         // Do any additional setup after loading the view.
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool)
+    {
         super.viewWillAppear(true)
-        self.requestForTeachersList()
+         self.showActivityIndicator()
+        
     }
     func requestForTeachersList()
     {
-        self.showActivityIndicator()
+       
         let requestObject = RequestBuilder()
         
         requestObject.requestForTeachersList(classID, subjectID: subjectID, boardID: boardId)
@@ -86,9 +88,26 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         loadingIndicator.startAnimating()
         
         alert.view.addSubview(loadingIndicator)
-        presentViewController(alert, animated: true, completion: nil)
+        presentViewController(alert, animated: true, completion: { () -> Void in
+            self.requestForTeachersList()
+        })
         
     }
+    
+    func imageForRating(rating:Int) -> UIImage
+    {
+        switch(rating)
+        {
+            case 1: return UIImage.init(named:"1StarSmall.png")!
+            case 2: return UIImage.init(named:"2StarsSmall.png")!
+            case 3: return UIImage.init(named:"3StarsSmall.png")!
+            case 4: return UIImage.init(named:"4StarsSmall.png")!
+            case 5: return UIImage.init(named:"5StarsSmall.png")!
+            default: print("No Stars")
+        }
+     return UIImage.init()
+    }
+    
 
 
     //MARK : TableViewDataSource and Delegates

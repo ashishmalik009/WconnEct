@@ -28,6 +28,9 @@
 
 #import "SWRevealViewController.h"
 
+//ashish : added appdelegate file
+#import "WconnEct-Swift.h"
+
 
 #pragma mark - StatusBar Helper Function
 
@@ -52,6 +55,7 @@ static CGFloat statusBarAdjustment( UIView* view )
 @interface SWRevealView: UIView
 {
     __weak SWRevealViewController *_c;
+    
 }
 
 @property (nonatomic, readonly) UIView *rearView;
@@ -1704,7 +1708,15 @@ const int FrontViewPositionNone = 0xff;
         
         @try
         {
-            [self performSegueWithIdentifier:SWSegueFrontIdentifier sender:nil];
+            AppDelegate *delegate =  [[UIApplication sharedApplication]delegate];
+            if (delegate.isTeacherLoggedIn)
+            {
+                [self performSegueWithIdentifier:SWSegueFrontTeacherIdentifier sender:nil];
+            }
+            else
+            {
+                [self performSegueWithIdentifier:SWSegueFrontIdentifier sender:nil];
+            }
         }
         @catch(NSException *exception) {}
         
@@ -1838,6 +1850,7 @@ const int FrontViewPositionNone = 0xff;
 NSString * const SWSegueRearIdentifier = @"sw_rear";
 NSString * const SWSegueFrontIdentifier = @"sw_front";
 NSString * const SWSegueRightIdentifier = @"sw_right";
+NSString * const SWSegueFrontTeacherIdentifier = @"sw_front_teacher";
 
 
 #pragma mark - SWRevealViewControllerSegueSetController class
@@ -1852,7 +1865,10 @@ NSString * const SWSegueRightIdentifier = @"sw_right";
     SWRevealViewController *rvc = self.sourceViewController;
     UIViewController *dvc = self.destinationViewController;
     
-    if ( [identifier isEqualToString:SWSegueFrontIdentifier] )
+    if ( [identifier isEqualToString:SWSegueFrontIdentifier])
+        operation = SWRevealControllerOperationReplaceFrontController;
+    
+    else if([identifier isEqualToString:SWSegueFrontTeacherIdentifier] )
         operation = SWRevealControllerOperationReplaceFrontController;
     
     else if ( [identifier isEqualToString:SWSegueRearIdentifier] )
@@ -1871,6 +1887,17 @@ NSString * const SWSegueRightIdentifier = @"sw_right";
 #pragma mark - SWRevealViewControllerSeguePushController class
 
 @implementation SWRevealViewControllerSeguePushController
+
+- (void)perform
+{
+    SWRevealViewController *rvc = [self.sourceViewController revealViewController];
+    UIViewController *dvc = self.destinationViewController;
+    [rvc pushFrontViewController:dvc animated:YES];
+}
+
+@end
+
+@implementation SWRevealViewControllerSeguePushTeacherController
 
 - (void)perform
 {

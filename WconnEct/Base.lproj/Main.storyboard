@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -634,6 +634,7 @@
                     <connections>
                         <segue destination="vD6-Vv-ruW" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="7AW-sJ-BUo"/>
                         <segue destination="LhF-ug-Hkd" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="j8n-Qq-81a"/>
+                        <segue destination="fhj-B0-lEt" kind="custom" identifier="sw_front_teacher" customClass="SWRevealViewControllerSegueSetController" id="1rQ-Yz-33S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C9e-DY-tug" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -673,7 +674,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="vD6-Vv-ruW" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="dWV-ZG-0Sd"/>
+                                            <segue destination="fhj-B0-lEt" kind="custom" customClass="SWRevealViewControllerSeguePushTeacherController" id="31M-GO-Vx2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -966,7 +967,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="YCP-0R-GgB">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="CBE-sN-GWB"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="fwh-ef-bQv">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="fwh-ef-bQv">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="sendIDToNextController:" destination="nsZ-2x-Ttq" id="CvX-qq-VP6"/>
@@ -1220,6 +1221,14 @@
             </objects>
             <point key="canvasLocation" x="3844" y="1567"/>
         </scene>
+        <!--Teacher-->
+        <scene sceneID="b69-dY-tLD">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Teacher" id="fhj-B0-lEt" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zUi-0U-eNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2376.5" y="2427"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cancelImage" width="25" height="25"/>
@@ -1229,6 +1238,6 @@
         <image name="menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dWV-ZG-0Sd"/>
+        <segue reference="31M-GO-Vx2"/>
     </inferredMetricsTieBreakers>
 </document>
