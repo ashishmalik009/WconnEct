@@ -12,6 +12,7 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
 {
 
     @IBOutlet weak var teachersTableView: UITableView!
+    @IBOutlet weak var labelForNoData : UILabel!
     var classID : Int = 999
     var subjectID : Int = 999
     var boardId : Int = 999
@@ -22,7 +23,7 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
        print(classID)
         print(subjectID)
         print(boardId)
-        
+        self.labelForNoData.hidden = true
         
         // Do any additional setup after loading the view.
     }
@@ -60,7 +61,18 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
                 if parser.isParsedTeachersList(dataValue)
                 {
                     self.teachersListArray = parser.teachersArray
-                    self.teachersTableView.reloadData()
+                    if self.teachersListArray.count == 0
+                    {
+                        self.teachersTableView.hidden = true
+                        self.labelForNoData.hidden = false
+                        self.labelForNoData.text = "Oops, no teachers found!!!"
+                    }
+                    else
+                    {
+                        self.teachersTableView.hidden = false
+                        self.labelForNoData.hidden = true
+                        self.teachersTableView.reloadData()
+                    }
                     
                 }
                 

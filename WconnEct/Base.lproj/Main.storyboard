@@ -1061,6 +1061,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1DC-nr-OiD">
+                                <rect key="frame" x="20" y="290" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aK6-Ei-8pA">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1156,10 +1162,15 @@
                             <constraint firstAttribute="trailing" secondItem="aK6-Ei-8pA" secondAttribute="trailing" id="3W3-i5-0iF"/>
                             <constraint firstItem="aK6-Ei-8pA" firstAttribute="top" secondItem="4k4-pk-SbO" secondAttribute="bottom" id="F4x-Ko-nIM"/>
                             <constraint firstItem="b0X-6i-8FW" firstAttribute="top" secondItem="aK6-Ei-8pA" secondAttribute="bottom" id="Haa-QA-M5o"/>
+                            <constraint firstItem="1DC-nr-OiD" firstAttribute="trailing" secondItem="C8Q-29-YEg" secondAttribute="trailingMargin" id="O7x-af-EvP"/>
                             <constraint firstItem="aK6-Ei-8pA" firstAttribute="leading" secondItem="C8Q-29-YEg" secondAttribute="leading" id="PZi-Tv-DPP"/>
+                            <constraint firstItem="1DC-nr-OiD" firstAttribute="leading" secondItem="C8Q-29-YEg" secondAttribute="leadingMargin" id="es5-a9-Za0"/>
+                            <constraint firstItem="1DC-nr-OiD" firstAttribute="centerY" secondItem="C8Q-29-YEg" secondAttribute="centerY" id="iZ2-tm-aBz"/>
+                            <constraint firstItem="1DC-nr-OiD" firstAttribute="centerX" secondItem="C8Q-29-YEg" secondAttribute="centerX" id="uoe-dn-0I8"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="labelForNoData" destination="1DC-nr-OiD" id="5Mp-Ih-IEB"/>
                         <outlet property="teachersTableView" destination="aK6-Ei-8pA" id="bnV-Zr-h4t"/>
                     </connections>
                 </viewController>
@@ -1238,6 +1249,6 @@
         <image name="menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="31M-GO-Vx2"/>
+        <segue reference="1rQ-Yz-33S"/>
     </inferredMetricsTieBreakers>
 </document>
