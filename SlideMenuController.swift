@@ -107,34 +107,59 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCellWithIdentifier("profileCellIdentifier")
-        if indexPath.row == 0
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         {
-            tableViewCell?.textLabel?.text = "Search"
-            
-        }
-        else if indexPath.row == 1
-        {
-            tableViewCell?.textLabel?.text = "Your Wish List"
-        }
-        else if indexPath.row == 2
-        {
-            tableViewCell?.textLabel?.text = "Booked Teachers"
-        }
-        else if indexPath.row == 3
-        {
-            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            if indexPath.row == 0
             {
-               if delegate.isUserLoggedIn
-               {
-                tableViewCell?.textLabel?.text = "Log out"
-               }
+                if delegate.isTeacherLoggedIn
+                {
+                     tableViewCell?.textLabel?.text = "Dashboard"
+                }
                 else
-               {
-                tableViewCell?.textLabel?.text = "Log in"
-               }
+                {
+                     tableViewCell?.textLabel?.text = "Search"
+                }
+                
             }
-            
-            tableViewCell?.imageView?.image = UIImage(named: "logOut")
+            else if indexPath.row == 1
+            {
+                if delegate.isTeacherLoggedIn
+                {
+                    tableViewCell?.textLabel?.text = "Ratings and Reviews"
+                }
+                else
+                {
+                    tableViewCell?.textLabel?.text = "Wish List"
+                }
+            }
+            else if indexPath.row == 2
+            {
+                if delegate.isTeacherLoggedIn
+                {
+                    tableViewCell?.textLabel?.text = "Students who booked"
+                }
+                else
+                {
+                    tableViewCell?.textLabel?.text = "Booked Teachers"
+                }
+                
+            }
+            else if indexPath.row == 3
+            {
+                if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                {
+                   if delegate.isUserLoggedIn
+                   {
+                    tableViewCell?.textLabel?.text = "Log out"
+                   }
+                    else
+                   {
+                    tableViewCell?.textLabel?.text = "Log in"
+                   }
+                }
+                
+                tableViewCell?.imageView?.image = UIImage(named: "logOut")
+            }
         }
         return tableViewCell!
     }

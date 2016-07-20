@@ -113,7 +113,7 @@ class RequestBuilder: NSObject
                 {
                     if httpResponse.statusCode == 200
                     {
-//                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                         self.completionHandler(dataFromServer: data!)
                         
                         

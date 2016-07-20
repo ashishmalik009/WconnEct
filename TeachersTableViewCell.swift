@@ -20,6 +20,7 @@ class TeachersTableViewCell: UITableViewCell
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var addToWishListButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
