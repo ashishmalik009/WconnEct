@@ -24,7 +24,7 @@ class CustomActivityIndicator {
     func showActivityIndicator(uiView: UIView) {
         container.frame = uiView.frame
         container.center = uiView.center
-        container.backgroundColor = UIColorFromHex(0xffffff, alpha: 0.3)
+        container.backgroundColor = UIColor.init(colorLiteralRed: 212.0/255.0, green: 213.0/255.0, blue: 215.0/255.0, alpha: 0.3)
         
         loadingView.frame = CGRectMake(0, 0, 80, 80)
         loadingView.center = uiView.center
