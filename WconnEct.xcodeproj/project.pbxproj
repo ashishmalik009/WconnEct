@@ -18,6 +18,7 @@
 		54414A591D181D4C0000E3D2 /* WconnEctTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54414A581D181D4C0000E3D2 /* WconnEctTests.swift */; };
 		54414A641D181D4C0000E3D2 /* WconnEctUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54414A631D181D4C0000E3D2 /* WconnEctUITests.swift */; };
 		5442A3EC1D38BE32003F5A3F /* TeachersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442A3EB1D38BE32003F5A3F /* TeachersListViewController.swift */; };
+		545065BA1D40B72B004395D2 /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545065B91D40B72B004395D2 /* CustomActivityIndicator.swift */; };
 		5471EC0D1D377710001AB166 /* AllBoardsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5471EC0C1D377710001AB166 /* AllBoardsParser.swift */; };
 		5472D9411D192AD500FEA690 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5472D9401D192AD500FEA690 /* LogInViewController.swift */; };
 		5482FEB31D1ACA65002E991A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5482FEB21D1ACA65002E991A /* GoogleService-Info.plist */; };
@@ -94,6 +95,7 @@
 		54414A631D181D4C0000E3D2 /* WconnEctUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WconnEctUITests.swift; sourceTree = "<group>"; };
 		54414A651D181D4C0000E3D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5442A3EB1D38BE32003F5A3F /* TeachersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachersListViewController.swift; sourceTree = "<group>"; };
+		545065B91D40B72B004395D2 /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
 		5471EC0C1D377710001AB166 /* AllBoardsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBoardsParser.swift; sourceTree = "<group>"; };
 		5472D9401D192AD500FEA690 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		5482FEB21D1ACA65002E991A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		54414A341D181D4B0000E3D2 = {
 			isa = PBXGroup;
 			children = (
+				545065B91D40B72B004395D2 /* CustomActivityIndicator.swift */,
 				5489C5D91D3CC8490052B4EB /* Resources */,
 				6D8F53A81D3ACE7D00AC8C42 /* Modal Classes */,
 				1B90A6931D326FAD00010394 /* SlideMenuClass */,
@@ -633,6 +636,7 @@
 				6DA1BE0C1D2C401A006F4473 /* SlideMenuController.swift in Sources */,
 				6D93E4BC1D205849008CF9C2 /* SignUpViewController.swift in Sources */,
 				6D8F53A51D3ACDC600AC8C42 /* TeachersListParser.swift in Sources */,
+				545065BA1D40B72B004395D2 /* CustomActivityIndicator.swift in Sources */,
 				54EC953F1D33B18800C6B67E /* SelectClassViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

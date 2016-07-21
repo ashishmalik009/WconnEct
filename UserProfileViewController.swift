@@ -38,7 +38,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func callFetchData()
     {
-        self.showActivityIndicator("Fetching Info..")
+        CustomActivityIndicator.sharedInstance.showActivityIndicator(self.view)
         let requestObject = RequestBuilder()
         requestObject.requestForProfileOfUser()
        
@@ -46,12 +46,12 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
    
             
             dispatch_async(dispatch_get_main_queue(),{
-                self.dismissViewControllerAnimated(true, completion:{ () -> Void in
+                CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
                 let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                 let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alert.addAction(alertAction)
                 self.presentViewController(alert, animated: true, completion: nil)
-            })
+            
             })
            
         }
@@ -61,7 +61,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             
                 
             dispatch_async(dispatch_get_main_queue(), {
-                self.dismissViewControllerAnimated(true, completion:{ () -> Void in
+               CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
                 let parser = ProfileUserParser()
                 if parser.isparsedPRrofileUserUsingData(dataValue)
                 {
@@ -87,7 +87,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             
         
-        })
+        
             })
             
         

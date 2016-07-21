@@ -73,67 +73,21 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 withError error: NSError!) {
         
         if let _ = error {
+            CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
             print(error)
-            let alert = UIAlertController(title: "Error", message: "The login flow has been cancelled", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Error", message: error.description, preferredStyle: .Alert)
             let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alert.addAction(alertAction)
             presentViewController(alert, animated: true, completion: nil)
         }
         else {
-            self.showActivityIndicator()
+            CustomActivityIndicator.sharedInstance.showActivityIndicator(self.view)
             print(GIDSignIn.sharedInstance().currentUser.profile.name)
             print(GIDSignIn.sharedInstance().currentUser.profile.email)
-            let requestObject = RequestBuilder()
             if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
             {
-                requestObject.requestForLogIn(String(GIDSignIn.sharedInstance().currentUser.profile.email), password:"", isTeacher:delegate.isTeacherLoggedIn)
+                self.requestToLogIn(String(GIDSignIn.sharedInstance().currentUser.profile.email), password:"", isTeacher:delegate.isTeacherLoggedIn)
             }
-            requestObject.errorHandler = { error in
-                
-                dispatch_async(dispatch_get_main_queue(),{
-                    self.dismissViewControllerAnimated(true, completion:nil)
-                    let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
-                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    alert.addAction(alertAction)
-                    self.presentViewController(alert, animated: true, completion: nil)
-                    
-                })
-            }
-            
-            requestObject.completionHandler = { dataValue in
-                dispatch_async(dispatch_get_main_queue(), {
-                    let parser = LogInParser()
-                    if parser.isparsedLogInDetailsUsingData(dataValue)
-                    {
-                        self.dismissViewControllerAnimated(true, completion:{
-                            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-                            {
-                                delegate.emailIdOfLoggedInUser = String(GIDSignIn.sharedInstance().currentUser.profile.email)
-                                delegate.isUserLoggedIn = true
-                            }
-                            let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
-                            self.presentViewController(revealController, animated: true, completion: nil)
-                        })
-                        
-                    }
-                    else
-                    {
-                        self.dismissViewControllerAnimated(true, completion: {
-                            let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
-                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                            alert.addAction(alertAction)
-                            self.presentViewController(alert, animated: true, completion: nil)
-                        })
-                        
-                        
-                    }
-                    
-                    
-                })
-                
-                
-            }
-            
         }
     }
     
@@ -150,7 +104,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 dismissViewController viewController: UIViewController!) {
         
         self.dismissViewControllerAnimated(true, completion:nil)
-        self.showActivityIndicator()
+        CustomActivityIndicator.sharedInstance.showActivityIndicator(self.view)
         
             
         
@@ -211,7 +165,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 print("Cancelled")
             } else {
                 print("LoggedIn")
-                self.showActivityIndicator()
+                CustomActivityIndicator.sharedInstance.showActivityIndicator(self.view)
                 self.getFBUserData()
                 
             }
@@ -226,79 +180,32 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
                 if (error == nil)
                 {
-                    let requestObject = RequestBuilder()
                     if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                     {
-                        requestObject.requestForLogIn(String(result.objectForKey("email")!), password:"", isTeacher: delegate.isTeacherLoggedIn)
-                    }
-                    requestObject.errorHandler = { error in
-                        
-                        dispatch_async(dispatch_get_main_queue(),{
-                            self.dismissViewControllerAnimated(true, completion: nil)
-                            let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
-                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                            alert.addAction(alertAction)
-                            self.presentViewController(alert, animated: true, completion: nil)
-                        })
+                            self.requestToLogIn(String(result.objectForKey("email")!), password:"", isTeacher: delegate.isTeacherLoggedIn)
                     }
                     
-                    requestObject.completionHandler = { dataValue in
-                        dispatch_async(dispatch_get_main_queue(), {
-                            let parser = LogInParser()
-                            if parser.isparsedLogInDetailsUsingData(dataValue)
-                            {
-                                self.dismissViewControllerAnimated(true, completion: {
-                                    if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-                                    {
-                                        delegate.emailIdOfLoggedInUser = String(result.objectForKey("email")!)
-                                        delegate.isUserLoggedIn = true
-                                    }
-                                    let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
-                                    self.presentViewController(revealController, animated: true, completion: nil)
-                                    
-                                    
-                                })
-                             
-                                
-                            }
-                            else
-                            {
-                                self.dismissViewControllerAnimated(true, completion: {
-                                    let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
-                                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                                    alert.addAction(alertAction)
-                                    self.presentViewController(alert, animated: true, completion: nil)
-                                })
-                                
-                                
-                            }
-                            
-                            
-                        })
-                        
-                        
-                    }
-
                 }
+
             })
         }
         
     }
     
-    func showActivityIndicator()
-    {
-        let alert = UIAlertController(title: nil, message: "Authenticating...", preferredStyle: .Alert)
-        
-        alert.view.tintColor = UIColor.blackColor()
-        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        loadingIndicator.startAnimating()
-        
-        alert.view.addSubview(loadingIndicator)
-        presentViewController(alert, animated: true, completion: nil)
-        
-    }
+//    func showActivityIndicator()
+//    {
+//        let alert = UIAlertController(title: nil, message: "Authenticating...", preferredStyle: .Alert)
+//        
+//        alert.view.tintColor = UIColor.blackColor()
+//        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+//        loadingIndicator.startAnimating()
+//        
+//        alert.view.addSubview(loadingIndicator)
+//        presentViewController(alert, animated: true, completion: nil)
+//        
+//    }
     @IBAction func logIn(sender: AnyObject)
     {
         var isTeacher : Bool = false
@@ -330,63 +237,66 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         }
         else
         {
-            self.showActivityIndicator()
-            let requestObject = RequestBuilder()
-            requestObject.requestForLogIn(String(UTF8String: emailIdTextField.text!)!, password: String(UTF8String:passwordTextField.text!)!, isTeacher: isTeacher)
-            requestObject.errorHandler = { error in
-                
-                dispatch_async(dispatch_get_main_queue(),{
-                    self.dismissViewControllerAnimated(true, completion: {() -> Void in
-
-                    let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
-                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    alert.addAction(alertAction)
-                    self.presentViewController(alert, animated: true, completion: nil)
-                })
-            })
-            }
-
-            requestObject.completionHandler = { dataValue in
-                dispatch_async(dispatch_get_main_queue(), {
-                    let parser = LogInParser()
-                    if parser.isparsedLogInDetailsUsingData(dataValue)
-                    {
-                        self.dismissViewControllerAnimated(true, completion:{() -> Void in
-
-                            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-                            {
-                                delegate.emailIdOfLoggedInUser = self.emailIdTextField.text!
-                                delegate.isUserLoggedIn = true
-                            }
-                            let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
-                            self.presentViewController(revealController, animated: true, completion: nil)
-
-                    })   
-                    }
-                    
-                    else
-                    {
-                        self.dismissViewControllerAnimated(true, completion: {
-                            let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
-                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                            alert.addAction(alertAction)
-                            self.presentViewController(alert, animated: true, completion: nil)
-                        })
-                        
-                        
-                    }
-                    
-                    
-                })
-                
-                
-            }
-
-            
+            CustomActivityIndicator.sharedInstance.showActivityIndicator(self.view)
+            self.requestToLogIn(String(UTF8String: emailIdTextField.text!)!, password: String(UTF8String: passwordTextField.text!)!, isTeacher: isTeacher)
         }
 
     }
     
+    func requestToLogIn(username:String , password: String,isTeacher:Bool)
+    {
+        let requestObject = RequestBuilder()
+        requestObject.requestForLogIn(username, password:password, isTeacher: isTeacher)
+        requestObject.errorHandler = { error in
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
+                    
+                    let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(alertAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                
+            })
+        }
+        
+        requestObject.completionHandler = { dataValue in
+            dispatch_async(dispatch_get_main_queue(), {
+                let parser = LogInParser()
+                if parser.isparsedLogInDetailsUsingData(dataValue)
+                {
+                    CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
+                        
+                        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                        {
+                            delegate.emailIdOfLoggedInUser = self.emailIdTextField.text!
+                            delegate.isUserLoggedIn = true
+                        }
+                        let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
+                        self.presentViewController(revealController, animated: true, completion: nil)
+                        
+                    
+                }
+                    
+                else
+                {
+                        CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
+                        let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
+                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(alertAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    
+                }
+                
+                
+            })
+            
+            
+        }
+        
+    }
+
 }
 
 
