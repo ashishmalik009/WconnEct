@@ -113,7 +113,8 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
             {
                 if delegate.isTeacherLoggedIn
                 {
-                    tableViewCell?.textLabel?.text = " Dashboard"
+                    tableViewCell?.textLabel?.text = "Dashboard"
+                    
                 }
                 else
                 {
