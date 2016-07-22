@@ -243,10 +243,10 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
 
     }
     
-    func requestToLogIn(username:String , password: String,isTeacher:Bool)
+    func requestToLogIn(emailId:String , password: String,isTeacher:Bool)
     {
         let requestObject = RequestBuilder()
-        requestObject.requestForLogIn(username, password:password, isTeacher: isTeacher)
+        requestObject.requestForLogIn(emailId, password:password, isTeacher: isTeacher)
         requestObject.errorHandler = { error in
             
             dispatch_async(dispatch_get_main_queue(),{
@@ -269,7 +269,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                         
                         if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                         {
-                            delegate.emailIdOfLoggedInUser = self.emailIdTextField.text!
+                            delegate.emailIdOfLoggedInUser = emailId
                             delegate.isUserLoggedIn = true
                         }
                         let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController

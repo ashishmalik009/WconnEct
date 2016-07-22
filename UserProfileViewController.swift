@@ -226,16 +226,15 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
 
         let requestObject = RequestBuilder()
         requestObject.requestToUpdateData(updatedDataTupleArray)
-            showActivityIndicator("Updating Info...")
+            CustomActivityIndicator.sharedInstance.showActivityIndicator(self.view)
             requestObject.errorHandler = { error in
                 
-                self.dismissViewControllerAnimated(true, completion:{
+                CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
                     dispatch_async(dispatch_get_main_queue(),{
                         let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
                         let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                         alert.addAction(alertAction)
                         self.presentViewController(alert, animated: true, completion: nil)
-                    })
                 })
             }
             
@@ -244,13 +243,13 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                     let parser = ProfileUserParser()
                     if parser.isparsedPRrofileUserAfterUpdateingData(dataValue)
                     {
-                        self.dismissViewControllerAnimated(true, completion:{
+                            CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
                             let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
                             let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                             alert.addAction(alertAction)
                             self.presentViewController(alert, animated: true, completion: nil)
   
-                        })
+                        
                     }
                 })
                 

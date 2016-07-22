@@ -113,7 +113,7 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
             {
                 if delegate.isTeacherLoggedIn
                 {
-                     tableViewCell?.textLabel?.text = "Dashboard"
+                    tableViewCell?.textLabel?.text = " Dashboard"
                 }
                 else
                 {
@@ -125,7 +125,8 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
             {
                 if delegate.isTeacherLoggedIn
                 {
-                    tableViewCell?.textLabel?.text = "Ratings and Reviews"
+                    
+                    tableViewCell?.textLabel?.text = "Update Work Profile"
                 }
                 else
                 {
@@ -165,6 +166,28 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+        if indexPath.row == 0
+        {
+            if delegate.isTeacherLoggedIn
+            {
+                self.performSegueWithIdentifier("teacherDashBoardSegue", sender: self)
+            }
+            else
+            {
+                self.performSegueWithIdentifier("studentSegue", sender: self)
+            }
+            
+        }
+        else if indexPath.row == 1
+        {
+            if delegate.isTeacherLoggedIn
+            {
+                self.performSegueWithIdentifier("teacherWorkProfileSegue", sender: self)
+            }
+        }
+        }
         if indexPath.row == 3
         {
             GIDSignIn.sharedInstance().signOut()

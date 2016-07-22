@@ -13,7 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     var window: UIWindow?
-    let tintColor =  UIColor(red: 242/255, green: 71/255, blue: 63/255, alpha: 1)
+    let tintColor =  UIColor(red: 238/255, green: 51/255, blue: 0/255, alpha: 1)
     var accessTokenAfterLogin : String = ""
     var emailIdOfLoggedInUser : String = ""
     var isUserLoggedIn : Bool = false

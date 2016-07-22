@@ -11,6 +11,9 @@
             <string>FontAwesome</string>
             <string>FontAwesome</string>
         </mutableArray>
+        <mutableArray key="cmic_icons.ttf">
+            <string>cmic_icons</string>
+        </mutableArray>
     </customFonts>
     <scenes>
         <!--WconnEct-->
@@ -113,15 +116,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svf-gu-k9F">
                                                 <rect key="frame" x="20" y="20" width="560" height="49"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Va1-75-Uet">
-                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="49"/>
-                                                        <state key="normal" title="Sign Up With Google+">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="googleSignUp:" destination="zqJ-KO-HC5" eventType="touchUpInside" id="EYD-f6-imF"/>
-                                                        </connections>
-                                                    </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google Icon" translatesAutoresizingMaskIntoConstraints="NO" id="Q5d-Os-IDP">
                                                         <rect key="frame" x="10" y="7" width="35" height="35"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,6 +126,15 @@
                                                             <constraint firstAttribute="width" secondItem="Q5d-Os-IDP" secondAttribute="height" multiplier="1:1" id="qQK-mR-RA2"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Va1-75-Uet">
+                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="49"/>
+                                                        <state key="normal" title="Sign Up With Google+">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="googleSignUp:" destination="zqJ-KO-HC5" eventType="touchUpInside" id="EYD-f6-imF"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.93333333330000001" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -667,15 +670,12 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AIy-nx-O6q">
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="cmic_icons" family="cmic_icons" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="fhj-B0-lEt" kind="custom" customClass="SWRevealViewControllerSeguePushTeacherController" id="31M-GO-Vx2"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -703,7 +703,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstItem="8hq-Tj-j4l" firstAttribute="width" secondItem="fKy-5z-soo" secondAttribute="width" id="6JQ-pv-apa"/>
                                     <constraint firstItem="8hq-Tj-j4l" firstAttribute="centerX" secondItem="fKy-5z-soo" secondAttribute="centerX" id="KbO-Ah-dbP"/>
@@ -735,6 +735,9 @@
                         <outlet property="profileImageView" destination="fKy-5z-soo" id="oOh-na-MFp"/>
                         <outlet property="profileTableView" destination="zav-Q1-I8M" id="rIJ-g0-mzT"/>
                         <outlet property="userNameLabel" destination="8hq-Tj-j4l" id="SNB-LU-Yey"/>
+                        <segue destination="fhj-B0-lEt" kind="custom" identifier="teacherDashBoardSegue" customClass="SWRevealViewControllerSeguePushTeacherController" id="7Lu-kS-fJb"/>
+                        <segue destination="vD6-Vv-ruW" kind="custom" identifier="studentSegue" customClass="SWRevealViewControllerSeguePushController" id="bqt-cb-ttS"/>
+                        <segue destination="RA5-aD-Cnw" kind="custom" identifier="teacherWorkProfileSegue" customClass="SWRevealViewControllerSeguePushTeacherController" id="GsP-Nq-B7l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgx-dT-seE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1222,7 +1225,47 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eiq-6b-HQF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3389" y="2487"/>
+            <point key="canvasLocation" x="3106" y="2536"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hvP-P8-QGP">
+            <objects>
+                <navigationController id="RA5-aD-Cnw" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2us-mj-hXg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BCO-88-jib" kind="relationship" relationship="rootViewController" id="Lzq-kz-UWK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0H6-gi-gyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3106" y="3491"/>
+        </scene>
+        <!--Update Work Profile-->
+        <scene sceneID="J0s-aF-OW2">
+            <objects>
+                <viewController id="BCO-88-jib" customClass="UpdateWorkProfileViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OdB-B6-SI1"/>
+                        <viewControllerLayoutGuide type="bottom" id="rGi-yj-6AT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oAg-El-gsU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Update Work Profile" id="c62-Av-Jh2">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="W9n-rK-cnd"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="W9n-rK-cnd" id="YO4-aB-ajP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yyE-Fc-z8U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3794" y="3491"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Unc-pe-25b">
@@ -1248,7 +1291,7 @@
                 <viewControllerPlaceholder storyboardName="Teacher" id="fhj-B0-lEt" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zUi-0U-eNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2376.5" y="2427"/>
+            <point key="canvasLocation" x="2373.5" y="2162"/>
         </scene>
     </scenes>
     <resources>
@@ -1260,6 +1303,7 @@
         <image name="menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="31M-GO-Vx2"/>
+        <segue reference="bqt-cb-ttS"/>
+        <segue reference="7Lu-kS-fJb"/>
     </inferredMetricsTieBreakers>
 </document>
