@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "407"
             endingLineNumber = "407"
-            landmarkName = "loginAfterSignUp()"
+            landmarkName = "signUp(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,7 +106,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/SlideMenuController.swift"
-                  timestampString = "490463201.540688"
+                  timestampString = "491085578.435373"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -121,7 +121,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/SlideMenuController.swift"
-                  timestampString = "490463201.540858"
+                  timestampString = "491085578.435515"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -186,7 +186,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "490463201.542917"
+                  timestampString = "491085578.437876"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "63"
@@ -201,7 +201,7 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "490463201.543083"
+                  timestampString = "491085578.43808"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "64"
@@ -225,38 +225,22 @@
             endingLineNumber = "64"
             landmarkName = "callFetchData()"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WconnEct.UserProfileViewController.(callFetchData () -&gt; ()).(closure #2).(closure #1)"
-                  moduleName = "WconnEct"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "490463201.54407"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
-                  offsetFromSymbolStart = "19">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WconnEct.UserProfileViewController.(callFetchData () -&gt; ()).(closure #2).(closure #1).(closure #1)"
-                  moduleName = "WconnEct"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "490463201.544222"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65"
-                  offsetFromSymbolStart = "19">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SignUpParser.swift"
+            timestampString = "491085572.294181"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "isparsedSignUpDetailsUsingData(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

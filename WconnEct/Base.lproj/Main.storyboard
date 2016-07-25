@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -201,8 +201,8 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJR-sx-h2H">
-                                                <rect key="frame" x="20" y="466" width="560" height="30"/>
-                                                <color key="backgroundColor" red="0.87450980389999999" green="0.2901960784" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                                <rect key="frame" x="20" y="466" width="560" height="49"/>
+                                                <color key="backgroundColor" red="0.93333333330000001" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Sign Up">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -321,6 +321,7 @@
                                             <constraint firstItem="gmS-nk-ksz" firstAttribute="centerX" secondItem="Tbk-eC-OTI" secondAttribute="centerX" id="HB1-7b-5Qk"/>
                                             <constraint firstItem="svf-gu-k9F" firstAttribute="leading" secondItem="Tbk-eC-OTI" secondAttribute="leading" constant="20" id="ISn-hj-BWD"/>
                                             <constraint firstAttribute="height" priority="250" constant="536" id="SU4-L3-o0G"/>
+                                            <constraint firstItem="HJR-sx-h2H" firstAttribute="height" secondItem="ged-Tv-Pfg" secondAttribute="height" id="TJR-tA-Mn1"/>
                                             <constraint firstItem="c3W-At-wm5" firstAttribute="centerX" secondItem="Tbk-eC-OTI" secondAttribute="centerX" id="Vdk-9C-90e"/>
                                             <constraint firstAttribute="bottom" secondItem="HJR-sx-h2H" secondAttribute="bottom" constant="40" id="Xei-rB-vmr"/>
                                             <constraint firstItem="D54-vZ-tLG" firstAttribute="centerX" secondItem="Tbk-eC-OTI" secondAttribute="centerX" id="aNR-2d-p0v"/>
@@ -926,7 +927,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2pA-kl-tIa">
-                                <rect key="frame" x="0.0" y="363" width="600" height="237"/>
+                                <rect key="frame" x="0.0" y="280" width="600" height="237"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="detailCellIdentifier" textLabel="Jt8-uj-nKP" detailTextLabel="wd9-jM-rac" style="IBUITableViewCellStyleValue1" id="rQQ-Wy-eh7">
@@ -959,12 +960,20 @@
                                     <outlet property="delegate" destination="nsZ-2x-Ttq" id="f4I-k2-hVQ"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MO6-sa-vf0">
+                                <rect key="frame" x="304" y="551" width="17" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3xy-bQ-GMN" firstAttribute="top" secondItem="2pA-kl-tIa" secondAttribute="bottom" id="59s-6M-Q4p"/>
+                            <constraint firstItem="3xy-bQ-GMN" firstAttribute="top" secondItem="2pA-kl-tIa" secondAttribute="bottom" constant="83" id="59s-6M-Q4p"/>
                             <constraint firstItem="2pA-kl-tIa" firstAttribute="leading" secondItem="iVW-Dg-zl2" secondAttribute="leading" id="7Op-pB-L1D"/>
-                            <constraint firstItem="2pA-kl-tIa" firstAttribute="top" secondItem="5wr-13-w2H" secondAttribute="bottom" constant="299" id="889-fC-WdV"/>
+                            <constraint firstItem="2pA-kl-tIa" firstAttribute="top" secondItem="5wr-13-w2H" secondAttribute="bottom" constant="216" id="889-fC-WdV"/>
+                            <constraint firstItem="3xy-bQ-GMN" firstAttribute="top" secondItem="MO6-sa-vf0" secondAttribute="bottom" constant="28" id="c91-2K-i6K"/>
+                            <constraint firstAttribute="trailing" secondItem="MO6-sa-vf0" secondAttribute="trailing" constant="279" id="rtH-Pi-ToE"/>
                             <constraint firstAttribute="trailing" secondItem="2pA-kl-tIa" secondAttribute="trailing" id="zXq-q0-466"/>
                         </constraints>
                     </view>
