@@ -18,7 +18,7 @@ class RequestBuilder: NSObject
     }
     
     
-    func requestForSignUp(name:String,phNumber:String,emailID:String,password:String,gender:String,isTeacher:Bool) -> Void
+    func requestForSignUp(name:String,phNumber:String,emailID:String,password:String,gender:String,isTeacher:Bool,isGoogleOrFBSignUp :Bool) -> Void
     {
         var url = NSURL()
         if isTeacher
@@ -31,7 +31,16 @@ class RequestBuilder: NSObject
         }
         
         let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        let post : String = "name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&pswd=\(password)&gender=\(gender)"
+        var post : String = ""
+        if isGoogleOrFBSignUp
+        {
+            post = "name=\(name)&email=\(emailID)"
+        }
+        else
+        {
+            post = "name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&pswd=\(password)&gender=\(gender)"
+            
+        }
         let postData : NSData = post.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
         let postLength: String = "\(postData.length)"
         request.HTTPMethod = "POST"

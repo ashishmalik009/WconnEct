@@ -40,7 +40,7 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
             
             self.backgroundImageView.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
         } else {
-            self.backgroundImageView.backgroundColor = UIColor.grayColor()
+            self.backgroundImageView.backgroundColor = UIColor.clearColor()
         }
         
     }
