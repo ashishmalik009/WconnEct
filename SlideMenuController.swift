@@ -17,6 +17,7 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
     var emailId : String = ""
     @IBOutlet weak var profileTableView: UITableView!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     @IBOutlet weak var userNameLabel: UILabel!
     
@@ -27,6 +28,20 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
         self.profileImageView.clipsToBounds = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(SlideMenuController.screenTapped(_:)))
         self.profileImageView.addGestureRecognizer(tapRecognizer)
+        
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            self.backgroundImageView.backgroundColor = UIColor.clearColor()
+            
+            let blurEffect = UIBlurEffect(style: .Light)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //always fill the view
+            blurEffectView.frame = self.backgroundImageView.bounds
+            blurEffectView.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+            
+            self.backgroundImageView.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
+        } else {
+            self.backgroundImageView.backgroundColor = UIColor.grayColor()
+        }
         
     }
     func screenTapped(gestureRecognizer: UITapGestureRecognizer)
@@ -67,6 +82,8 @@ class SlideMenuController: UIViewController, UITableViewDataSource, UITableViewD
             if fileManager.fileExistsAtPath(imagePAth)
             {
                 self.profileImageView.image = UIImage(contentsOfFile: imagePAth)
+                self.backgroundImageView.backgroundColor = UIColor.grayColor()
+                self.backgroundImageView.image = UIImage(contentsOfFile: imagePAth)
             }
             else
             {

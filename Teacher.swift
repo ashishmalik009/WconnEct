@@ -24,6 +24,7 @@ class Teacher: NSObject
     var subjects : String = ""
     var board : String = ""
     var about_me : String = ""
+    var rating : Double = 0.0
     
 
 }
