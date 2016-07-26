@@ -105,6 +105,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // ...
     }
     
+    
+    
+    func checkNetworkStatus() -> Bool {
+        let reachability: Reachability = Reachability.reachabilityForInternetConnection()
+        let networkStatus = reachability.currentReachabilityStatus().rawValue;
+        var isAvailable  = false;
+        
+        switch networkStatus {
+        case (NotReachable.rawValue):
+            isAvailable = false;
+            break;
+        case (ReachableViaWiFi.rawValue):
+            isAvailable = true;
+            break;
+        case (ReachableViaWWAN.rawValue):
+            isAvailable = true;
+            break;
+        default:
+            isAvailable = false;
+            break;
+        }
+        return isAvailable;
+    }
+    
     // MARK: - Core Data stack
     
     lazy var applicationDocumentsDirectory: NSURL = {

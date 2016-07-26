@@ -137,6 +137,7 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         tableViewCell.experienceLabel.text = teacher.experience
         tableViewCell.profileImageView.layer.cornerRadius = tableViewCell.profileImageView.frame.size.width/2
         tableViewCell.profileImageView.clipsToBounds = true
+        tableViewCell.ratingImageView.image = self.imageForRating(Int(teacher.rating))
         
         
         

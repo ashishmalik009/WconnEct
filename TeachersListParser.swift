@@ -32,6 +32,11 @@ class TeachersListParser: NSObject
                 teacher.profession = String(dict.objectForKey("profession")!)
                 teacher.about_me = String(dict.objectForKey("about_me"))
                 teachersArray.addObject(teacher)
+                if let teacherReview = dict.objectForKey("teacher_reviews") as? NSDictionary
+                {
+                    teacher.rating = teacherReview.objectForKey("rating") as! Double
+                    print(teacherReview)
+                }
                 
             }
             

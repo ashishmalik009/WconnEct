@@ -30,7 +30,20 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool)
+    {
+       if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+       {
+            let isInternetConnected = delegate.checkNetworkStatus()
+        if !isInternetConnected
+        {
+            let alert = UIAlertController(title: "No Internet", message: "Your device is not connected to Internet", preferredStyle: .Alert)
+            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(alertAction)
+             presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        }
         
     }
     

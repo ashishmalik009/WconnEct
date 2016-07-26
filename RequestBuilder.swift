@@ -18,7 +18,7 @@ class RequestBuilder: NSObject
     }
     
     
-    func requestForSignUp(name:String,phNumber:String,emailID:String,password:String,gender:String,isTeacher:Bool) -> Void
+    func requestForSignUp(name:String,phNumber:String,emailID:String,password:String,gender:String,isTeacher:Bool,isGoogleOrFBSignUp :Bool) -> Void
     {
         var url = NSURL()
         if isTeacher
@@ -31,7 +31,16 @@ class RequestBuilder: NSObject
         }
         
         let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        let post : String = "name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&pswd=\(password)&gender=\(gender)"
+        var post : String = ""
+        if isGoogleOrFBSignUp
+        {
+            post = "name=\(name)&email=\(emailID)"
+        }
+        else
+        {
+            post = "name=\(name)&ph_number=\(String(phNumber))&email=\(emailID)&pswd=\(password)&gender=\(gender)"
+            
+        }
         let postData : NSData = post.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
         let postLength: String = "\(postData.length)"
         request.HTTPMethod = "POST"
@@ -61,6 +70,11 @@ class RequestBuilder: NSObject
                     self.completionHandler(dataFromServer: data!)
                    
                     
+                }
+                else
+                {
+                    let responseError = NSError(domain: "Some error occured. Please try again later", code: 0, userInfo: nil)
+                    self.errorHandler(errorValue:responseError)
                 }
 
             }
@@ -457,6 +471,57 @@ class RequestBuilder: NSObject
         dataTask.resume()
 
     }
+    
+    
+    
+    
+    func testForFacebook(iD:String)
+    {
+        var url = NSURL()
+        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/auth/Facebook/callback/?code=\(iD)")!
+        let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "GET"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        print("SubjectListRequest : \(request)")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let session = NSURLSession.sharedSession()
+        let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {
+            
+            data, response, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+            if error != nil
+            {
+                self.errorHandler(errorValue: error!)
+            }
+            else
+            {
+                if let httpResponse = response as? NSHTTPURLResponse
+                {
+                    if httpResponse.statusCode == 200
+                    {
+                                                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                        self.completionHandler(dataFromServer: data!)
+                        
+                        
+                    }
+                    else
+                    {
+                        let responseError = NSError(domain: "Some error occured. Please try again later", code: 0, userInfo: nil)
+                        self.errorHandler(errorValue:responseError)
+                    }
+                }
+                
+            }
+            
+            
+        })
+        
+        dataTask.resume()
+    }
+
 }
 
 

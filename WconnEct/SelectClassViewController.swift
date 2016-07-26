@@ -43,6 +43,8 @@ class SelectClassViewController: UIViewController, UITableViewDelegate, UITableV
         {
             showActivityIndicator("Fetching Data...")
         }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
