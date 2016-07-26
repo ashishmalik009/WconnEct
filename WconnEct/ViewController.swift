@@ -7,13 +7,24 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
 
+    var locationManager: CLLocationManager = CLLocationManager()
+    var startLocation: CLLocation!
+    @IBOutlet weak var locationBarButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 //        GIDSignIn.sharedInstance().uiDelegate = self        // Do any additional setup after loading the view, typically from a nib.
 //        GIDSignIn.sharedInstance().uiDelegate = self
+        
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        startLocation = nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,6 +58,86 @@ class ViewController: UIViewController {
         let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
         self.presentViewController(revealController, animated: true, completion: nil)
 
+    }
+    
+    
+
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+        {
+            let latestLocation: CLLocation = locations[locations.count - 1]
+            
+            var latitude : CLLocationDegrees = 0.0
+            var long : CLLocationDegrees = 0.0
+            latitude = latestLocation.coordinate.latitude
+            
+            print("latitude is\(latitude)")
+            long = latestLocation.coordinate.longitude
+            
+            print("longitude is\(long)")
+
+            if self.startLocation == nil {
+                startLocation = latestLocation 
+            }
+
+                let geoCoder = CLGeocoder()
+                let location = CLLocation(latitude: latitude, longitude:long)
+                geoCoder.reverseGeocodeLocation(location)
+                {
+                    (placemarks, error) -> Void in
+                    
+                    let placeArray = placemarks as [CLPlacemark]!
+                    
+                    // Place details
+                    var placeMark: CLPlacemark!
+                    placeMark = placeArray?[0]
+                    
+                    // Address dictionary
+                    print(placeMark.addressDictionary)
+                    
+                    // Location name
+                    if let locationName = placeMark.addressDictionary?["Name"] as? NSString
+                    {
+                        print(locationName)
+                    }
+                    
+                    // Street address
+                    if let street = placeMark.addressDictionary?["Thoroughfare"] as? NSString
+                    {
+                        print(street)
+                    }
+                    
+                    // City
+                    if let city = placeMark.addressDictionary?["City"] as? NSString
+                    {
+                        print(city)
+                        self.locationBarButton.title = " \(city)"
+                    }
+                    
+                    // Zip code
+                    if let zip = placeMark.addressDictionary?["ZIP"] as? NSString
+                    {
+                        print(zip)
+                    }
+                    
+                    // Country
+                    if let country = placeMark.addressDictionary?["Country"] as? NSString
+                    {
+                        print(country)
+                    }
+                }
+            
+            
+            
+            
+           //            var distanceBetween: CLLocationDistance =
+//                latestLocation.distanceFromLocation(startLocation)
+//            
+//            distance.text = String(format: "%.2f", distanceBetween)
+        }
+    
+    func locationManager(manager: CLLocationManager!,
+                         didFailWithError error: NSError!) {
+        
     }
     
 }

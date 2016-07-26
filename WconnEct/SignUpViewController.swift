@@ -182,6 +182,17 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             {
                 requestObject.requestForSignUp(String(GIDSignIn.sharedInstance().currentUser.profile.name), phNumber:"", emailID: String(GIDSignIn.sharedInstance().currentUser.profile.email), password: "", gender: "", isTeacher:delegate.isTeacherLoggedIn,isGoogleOrFBSignUp:true)
             }
+            requestObject.errorHandler = { error in
+                
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(alertAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
+
             requestObject.completionHandler =
                 {
                     dataValue in
@@ -287,8 +298,21 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
                     let requestObject = RequestBuilder()
                     if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
                     {
-                        requestObject.requestForSignUp(String(result.objectForKey("name")!), phNumber: "", emailID: String(result.objectForKey("email")!), password: "", gender: "", isTeacher:delegate.isTeacherLoggedIn,isGoogleOrFBSignUp: true )
+                        requestObject.testForFacebook(String(result.objectForKey("id")!))
+                        
+//                        requestObject.requestForSignUp(String(result.objectForKey("name")!), phNumber: "", emailID: String(result.objectForKey("email")!), password: "", gender: "", isTeacher:delegate.isTeacherLoggedIn,isGoogleOrFBSignUp: true )
                     }
+                    requestObject.errorHandler = { error in
+                        
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.dismissViewControllerAnimated(true, completion: nil)
+                            let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                            alert.addAction(alertAction)
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        })
+                    }
+
                         requestObject.completionHandler =
                         {
                             dataValue in
@@ -363,47 +387,65 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         }
         else
         {
-            self.showActivityIndicator("Creating account...")
-            let requestObject = RequestBuilder()
-            requestObject.requestForSignUp(String(UTF8String: nameTextField.text!)!, phNumber: String(UTF8String:contactNumberField.text!)!, emailID: String(UTF8String: emailIDField.text!)!, password: String(UTF8String: passwordField.text!)!, gender: gender, isTeacher: isTeacher,isGoogleOrFBSignUp: false)
-            requestObject.completionHandler = { dataValue in
-                dispatch_async(dispatch_get_main_queue(), {
-                    let parser = SignUpParser()
-                    if parser.isparsedSignUpDetailsUsingData(dataValue)
-                    {
-                        
-                        self.dismissViewControllerAnimated(true, completion: {
-                            self.loginAfterSignUp()
-                        })
-//                        let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
-//                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//                        alert.addAction(alertAction)
-//                        self.presentViewController(alert, animated: true, completion: nil)
-                        
-                    }
-                    else
-                    {
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                        let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
-                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                        alert.addAction(alertAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
-                        
-                    }
-                    
     
-                })
-                
+            if let _ = Int(contactNumberField.text!)
+            {
+                if String(contactNumberField.text!).characters.count != 10
+                {
+                    let alert = UIAlertController(title: "Error", message: "Please enter the 10 digit contact number", preferredStyle:.Alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(alertAction)
+                    presentViewController(alert, animated: true, completion: nil)
+                }
+                else
+                {
+                    self.showActivityIndicator("Creating account...")
+                    let requestObject = RequestBuilder()
+                    requestObject.requestForSignUp(String(UTF8String: nameTextField.text!)!, phNumber: String(UTF8String:contactNumberField.text!)!, emailID: String(UTF8String: emailIDField.text!)!, password: String(UTF8String: passwordField.text!)!, gender: gender, isTeacher: isTeacher,isGoogleOrFBSignUp: false)
+                    requestObject.errorHandler = { error in
+                        
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.dismissViewControllerAnimated(true, completion: nil)
+                            let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                            alert.addAction(alertAction)
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        })
+                    }
+
+                    requestObject.completionHandler = { dataValue in
+                        dispatch_async(dispatch_get_main_queue(), {
+                            let parser = SignUpParser()
+                            if parser.isparsedSignUpDetailsUsingData(dataValue)
+                            {
+                                
+                                self.dismissViewControllerAnimated(true, completion: {
+                                    self.loginAfterSignUp()
+                                })
+                                
+                            }
+                            else
+                            {
+                                self.dismissViewControllerAnimated(true, completion: nil)
+                                let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
+                                let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                                alert.addAction(alertAction)
+                                self.presentViewController(alert, animated: true, completion: nil)
+                            }
+                        })
+                    }
+            
+                }
             }
-            
-            
+            else
+            {
+                let alert = UIAlertController(title: "Error", message: "Please check your contact value", preferredStyle:.Alert)
+                let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(alertAction)
+                presentViewController(alert, animated: true, completion: nil)
+            }
+                
         }
-        
-
-        
-        
-        
-
     }
     
     func loginAfterSignUp()

@@ -89,7 +89,13 @@
                                 <action selector="skipLogin:" destination="zlx-mg-jZD" id="xoK-c3-Blk"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Location" id="NH4-nm-bJZ">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="locationBarButton" destination="NH4-nm-bJZ" id="fBf-zO-1Qd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iM8-fD-UAR" sceneMemberID="firstResponder"/>
             </objects>
