@@ -20,6 +20,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileTableView: UITableView!
+     @IBOutlet weak var backgroundImageView: UIImageView!
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -27,8 +28,23 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.profileImageView.clipsToBounds = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.screenTapped(_:)))
         self.profileImageView.addGestureRecognizer(tapRecognizer)
-        
+        self.profileTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.callFetchData()
+        
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            self.backgroundImageView.backgroundColor = UIColor.clearColor()
+            
+            let blurEffect = UIBlurEffect(style: .Light)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //always fill the view
+            blurEffectView.frame = self.backgroundImageView.bounds
+            blurEffectView.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+            
+            self.backgroundImageView.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
+        } else {
+            self.backgroundImageView.backgroundColor = UIColor.clearColor()
+        }
+
     }
     
     override func viewDidAppear(animated: Bool)
@@ -75,11 +91,15 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                     if image == nil
                     {
                         self.profileImageView.image = UIImage.init(named: "defaultUserIcon")
+                        self.backgroundImageView.backgroundColor = UIColor.grayColor()
+                        self.backgroundImageView.image = UIImage.init(named: "defaultUserIcon")
                     }
                     else
                     {
                         self.profileImageView.image = image
                         self.saveImageDocumentDirectory(image!)
+                        self.backgroundImageView.backgroundColor = UIColor.grayColor()
+                        self.backgroundImageView.image = image
 
                     }
                     self.profileTableView.reloadData()
@@ -160,10 +180,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
-    @IBAction func cancel(sender: AnyObject)
-    {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
 
     @IBAction func save(sender: AnyObject)
     {
