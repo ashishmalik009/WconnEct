@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -194,13 +194,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gmS-nk-ksz">
-                                                <rect key="frame" x="20" y="416" width="560" height="29"/>
-                                                <segments>
-                                                    <segment title="Teacher"/>
-                                                    <segment title="Student/Parent"/>
-                                                </segments>
-                                            </segmentedControl>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contact Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D54-vZ-tLG">
                                                 <rect key="frame" x="20" y="327" width="560" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -307,6 +300,13 @@
                                                     <segment title="Male"/>
                                                 </segments>
                                             </segmentedControl>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="gmS-nk-ksz">
+                                                <rect key="frame" x="20" y="416" width="560" height="29"/>
+                                                <segments>
+                                                    <segment title="Teacher"/>
+                                                    <segment title="Student/Parent"/>
+                                                </segments>
+                                            </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -408,7 +408,7 @@
         <!--Log In View Controller-->
         <scene sceneID="yRm-b2-Ghl">
             <objects>
-                <viewController id="qOS-Nd-lp6" customClass="LogInViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginStoryboardID" id="qOS-Nd-lp6" customClass="LogInViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lRO-IZ-vEH"/>
                         <viewControllerLayoutGuide type="bottom" id="LV9-sf-qr3"/>
@@ -417,12 +417,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BtA-oy-0go">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test@gmail.com" borderStyle="roundedRect" placeholder="Email ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BtA-oy-0go">
                                 <rect key="frame" x="20" y="124" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T4K-os-V3S">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T4K-os-V3S">
                                 <rect key="frame" x="20" y="171" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -565,7 +565,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8KK-xC-Qgc">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="8KK-xC-Qgc">
                                 <rect key="frame" x="20" y="232" width="560" height="29"/>
                                 <segments>
                                     <segment title="Teacher"/>
@@ -617,7 +617,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="ghx-in-eNg"/>
+                    <navigationItem key="navigationItem" id="ghx-in-eNg">
+                        <barButtonItem key="backBarButtonItem" title="&lt; " id="60G-kq-Jkj"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailIdTextField" destination="BtA-oy-0go" id="7lV-Jd-Pbq"/>
                         <outlet property="passwordTextField" destination="T4K-os-V3S" id="cNH-Tu-QZM"/>
@@ -772,11 +774,11 @@
             </objects>
             <point key="canvasLocation" x="1548" y="3597"/>
         </scene>
-        <!--Booked Teachers-->
+        <!--Contacted-->
         <scene sceneID="Cwn-4t-2EP">
             <objects>
                 <navigationController id="i7O-Cl-1Nd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Booked Teachers" image="bookedTeacherIcon" id="4R5-FT-sao"/>
+                    <tabBarItem key="tabBarItem" title="Contacted" image="bookedTeacherIcon" id="4R5-FT-sao"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ybb-qV-be7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -875,8 +877,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A8u-lA-58o">
-                                <rect key="frame" x="0.0" y="253" width="600" height="347"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A8u-lA-58o">
+                                <rect key="frame" x="0.0" y="253" width="600" height="298"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="profileCellIdentifier" id="cmQ-Ld-IXD" customClass="ProfileUserTableViewCell" customModule="WconnEct" customModuleProvider="target">
@@ -1133,7 +1135,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xyP-Qf-O0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3396" y="2703"/>
+            <point key="canvasLocation" x="4388" y="2863"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="52c-3H-9jg">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="2N3-AS-Evw" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gBL-MT-IHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3004" y="2863"/>
+        </scene>
+        <!--Page Content View Controller-->
+        <scene sceneID="SpI-VP-lKx">
+            <objects>
+                <viewController id="IzB-CM-mP4" customClass="PageContentViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dkg-dE-Dgk"/>
+                        <viewControllerLayoutGuide type="bottom" id="cS8-qF-Z3h"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gxt-ff-ehl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="328"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uyx-Wg-xcy">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="328"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Uyx-Wg-xcy" secondAttribute="trailing" id="0YD-yR-enB"/>
+                            <constraint firstItem="Uyx-Wg-xcy" firstAttribute="top" secondItem="gxt-ff-ehl" secondAttribute="top" id="ITB-BV-Cjz"/>
+                            <constraint firstItem="Uyx-Wg-xcy" firstAttribute="leading" secondItem="gxt-ff-ehl" secondAttribute="leading" id="exp-YP-E2e"/>
+                            <constraint firstItem="cS8-qF-Z3h" firstAttribute="top" secondItem="Uyx-Wg-xcy" secondAttribute="bottom" id="neT-aN-dL0"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="328"/>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="Uyx-Wg-xcy" id="c69-h4-7bx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gzK-Fv-uBh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3004" y="3597"/>
         </scene>
         <!--Teachers List View Controller-->
         <scene sceneID="JXr-5d-sEM">
@@ -1272,7 +1316,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUC-BY-5Aj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3396" y="3432"/>
+            <point key="canvasLocation" x="4388" y="3597"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hHg-TP-Ykf">
@@ -1382,7 +1426,7 @@
     <resources>
         <image name="accountIcon" width="30" height="30"/>
         <image name="addToWishlist" width="25" height="25"/>
-        <image name="bookedTeacherIcon" width="30" height="30"/>
+        <image name="bookedTeacherIcon" width="25" height="25"/>
         <image name="cancelImage" width="25" height="25"/>
         <image name="defaultUserIcon" width="200" height="200"/>
         <image name="faceBook Icon" width="19" height="18"/>

@@ -478,7 +478,7 @@ class RequestBuilder: NSObject
     func testForFacebook(iD:String)
     {
         var url = NSURL()
-        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/auth/Facebook/callback/?code=\(iD)")!
+        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/auth/Facebook/student/?code=\(iD)")!
         let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")

@@ -55,13 +55,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func skipLogin(sender: AnyObject)
     {
         dismissViewControllerAnimated(true, completion: nil)
-        let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
-        self.presentViewController(revealController, animated: true, completion: nil)
+    
+        let tabbarcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("tabBarControllerStorboardIDForStudent") as! UITabBarController
+        self.presentViewController(tabbarcontroller, animated: true, completion: nil)
+
 
     }
     
-    
-
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
         {
             let latestLocation: CLLocation = locations[locations.count - 1]

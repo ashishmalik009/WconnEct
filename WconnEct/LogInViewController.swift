@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
+class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate, UITextFieldDelegate {
     
     
     @IBOutlet weak var signInButton: GIDSignInButton!
@@ -27,6 +27,9 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.login")
         GIDSignIn.sharedInstance().scopes.append("https://www.googleapis.com/auth/plus.me")
 //        GIDSignIn.sharedInstance().signInSilently()
+        
+        self.emailIdTextField.delegate = self
+        self.passwordTextField.delegate = self
         
     }
     
@@ -309,6 +312,14 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         }
         
     }
+    
+    // MARK : TextField Delegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        self.view.endEditing(true)
+        return false
+    }
+    
 
 }
 

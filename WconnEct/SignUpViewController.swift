@@ -296,7 +296,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
                 {
                     print(result)
                     let requestObject = RequestBuilder()
-                    if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                    if let _ = UIApplication.sharedApplication().delegate as? AppDelegate
                     {
                         requestObject.testForFacebook(FBSDKAccessToken.currentAccessToken().tokenString)
                         

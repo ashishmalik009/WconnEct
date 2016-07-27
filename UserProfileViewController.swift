@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate
 {
     
     var userName: String = ""
@@ -17,6 +17,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     var emailId : String = ""
     var base64encodedString : String = ""
     var updatedDataTupleArray : [(_:String, _:String)] = []
+    var isImagePickerSelected : Bool = false
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileTableView: UITableView!
@@ -29,7 +30,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.screenTapped(_:)))
         self.profileImageView.addGestureRecognizer(tapRecognizer)
         self.profileTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.callFetchData()
+        
+
         
         if !UIAccessibilityIsReduceTransparencyEnabled() {
             self.backgroundImageView.backgroundColor = UIColor.clearColor()
@@ -130,6 +132,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     func screenTapped(gestureRecognizer: UITapGestureRecognizer)
     {
+        isImagePickerSelected = true
         let actionSheet = UIAlertController(title: "Choose", message: "", preferredStyle: .ActionSheet)
         let galleryAction = UIAlertAction(title: "Open Gallery", style: .Default, handler: {(alert: UIAlertAction!) in
             
@@ -176,8 +179,33 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        
-        
+       if !isImagePickerSelected
+       {
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                if delegate.isUserLoggedIn
+                {
+                    self.callFetchData()
+                }
+                else
+                {
+                    let alert = UIAlertController(title: "WconnEct", message: "Please login to continue", preferredStyle: .Alert)
+                    let alertAction = UIAlertAction(title: "LogIn", style: .Default, handler: { alertAction in
+                        
+                        let loginController = self.storyboard?.instantiateViewControllerWithIdentifier("loginStoryboardID") as! LogInViewController
+                        let nav = UINavigationController(rootViewController: loginController)
+                        
+                        self.presentViewController(nav, animated: true, completion: nil)
+                        
+                    })
+                    
+                    alert.addAction(alertAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                }
+            }
+
+        }
     }
     
 
@@ -302,10 +330,12 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     {
         let tablewViewCell = tableView.dequeueReusableCellWithIdentifier("profileCellIdentifier") as! ProfileUserTableViewCell
         let tableViewCellForGender = tableView.dequeueReusableCellWithIdentifier("genderProfileIdentifer") as! GenderProfileTableViewCell
+        tablewViewCell.detailTextField.delegate = self
         if indexPath.row == 0
         {
             tablewViewCell.detailTextField.text = String("\(userName)")
             tablewViewCell.detailTextField.placeholder = "name"
+            
         }
         else if indexPath.row == 1
         {
@@ -318,6 +348,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         {
             tablewViewCell.detailTextField.text = String("\(phNumber)")
             tablewViewCell.detailTextField.placeholder = "Contact Numebr"
+            tablewViewCell.detailTextField.keyboardType = .NumberPad 
         }
         else if indexPath.row == 3
         {
@@ -335,16 +366,24 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             return tableViewCellForGender
             
         }
+
         return tablewViewCell
     }
     
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        self.view.endEditing(true)
+        return false
+    }
     
     //MARK : UIImagePickerControllerDelegates
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!) {
         let selectedImage : UIImage = image
         //var tempImage:UIImage = editingInfo[UIImagePickerControllerOriginalImage] as UIImage
-        self.profileImageView.image=selectedImage
+        self.profileImageView.image = selectedImage
+        self.backgroundImageView.backgroundColor = UIColor.grayColor()
+        self.backgroundImageView.image = selectedImage
         self.dismissViewControllerAnimated(true, completion: nil)
     }
   }

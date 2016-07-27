@@ -10,7 +10,6 @@ import UIKit
 
 class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClassValueDatasource
 {
-     @IBOutlet var menuButton:UIBarButtonItem!
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
@@ -27,18 +26,19 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         
-        if revealViewController() != nil
-        {
-            //            revealViewController().rearViewRevealWidth = 62
-            menuButton.target = revealViewController()
-            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-
-            
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
-            
-        }
         
+//        if revealViewController() != nil
+//        {
+//            //            revealViewController().rearViewRevealWidth = 62
+//            menuButton.target = revealViewController()
+//            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+//
+//            
+//            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//            view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
+//            
+//        }
+//        
         
     }
     
