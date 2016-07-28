@@ -58,24 +58,24 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     }
     func showUserData()
     {
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "id, name, gender, first_name, last_name, locale, email"])
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            if ((error) != nil)
-            {
-                // Process error
-                print("Error: \(error)")
-            }
-            else
-            {
-                let userName : NSString = result.valueForKey("name") as! NSString
-                print("User Name is: \(userName)")
-                
-                if let userEmail : NSString = result.valueForKey("email") as? NSString {
-                    print("User Email is: \(userEmail)")
-                }
-            }
-        })
+//        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "id, name, gender, first_name, last_name, locale, email"])
+//        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+//            
+//            if ((error) != nil)
+//            {
+//                // Process error
+//                print("Error: \(error)")
+//            }
+//            else
+//            {
+//                let userName : NSString = result.valueForKey("name") as! NSString
+//                print("User Name is: \(userName)")
+//                
+//                if let userEmail : NSString = result.valueForKey("email") as? NSString {
+//                    print("User Email is: \(userEmail)")
+//                }
+//            }
+//        })
     }
     override func viewWillAppear(animated: Bool)
     {
@@ -279,6 +279,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
             } else if result.isCancelled {
                 print("Cancelled")
             } else {
+                print(FBSDKAccessToken.currentAccessToken())
                 self.showActivityIndicator("Creating account...")
                 self.getFBUserData()
                 
@@ -289,67 +290,68 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     
     func getFBUserData()
     {
-        if((FBSDKAccessToken.currentAccessToken()) != nil)
+        let requestObject = RequestBuilder()
+        if let _ = UIApplication.sharedApplication().delegate as? AppDelegate
         {
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
-                if (error == nil)
-                {
-                    print(result)
-                    let requestObject = RequestBuilder()
-                    if let _ = UIApplication.sharedApplication().delegate as? AppDelegate
-                    {
-                        requestObject.testForFacebook(FBSDKAccessToken.currentAccessToken().tokenString)
-                        
-//                        requestObject.requestForSignUp(String(result.objectForKey("name")!), phNumber: "", emailID: String(result.objectForKey("email")!), password: "", gender: "", isTeacher:delegate.isTeacherLoggedIn,isGoogleOrFBSignUp: true )
-                    }
-                    requestObject.errorHandler = { error in
-                        
-                        dispatch_async(dispatch_get_main_queue(),{
-                            self.dismissViewControllerAnimated(true, completion: nil)
-                            let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
-                            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                            alert.addAction(alertAction)
-                            self.presentViewController(alert, animated: true, completion: nil)
-                        })
-                    }
-
-                        requestObject.completionHandler =
-                        {
-                            dataValue in
-                            dispatch_async(dispatch_get_main_queue(),
-                                {
+            print()
+            requestObject.testForFacebook(FBSDKAccessToken.currentAccessToken().tokenString)
+            
+            //                        requestObject.requestForSignUp(String(result.objectForKey("name")!), phNumber: "", emailID: String(result.objectForKey("email")!), password: "", gender: "", isTeacher:delegate.isTeacherLoggedIn,isGoogleOrFBSignUp: true )
+        }
+        requestObject.errorHandler = { error in
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                self.dismissViewControllerAnimated(true, completion: nil)
+                let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+                let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(alertAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+            })
+        }
+        
+        requestObject.completionHandler =
+            {
+                dataValue in
+                dispatch_async(dispatch_get_main_queue(),
+                               {
                                 let parser = SignUpParser()
                                 if parser.isparsedSignUpDetailsUsingData(dataValue)
                                 {
-                                     self.dismissViewControllerAnimated(true, completion:{ () -> Void in
-//                                    let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
-//                                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//                                    alert.addAction(alertAction)
-                                    self.loginAfterSignUp()
-//                                    self.presentViewController(alert, animated: true, completion: nil)
+                                    self.dismissViewControllerAnimated(true, completion:{ () -> Void in
+                                        //                                    let alert = UIAlertController(title: "Success", message: parser.messageFromParser, preferredStyle:.Alert)
+                                        //                                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                                        //                                    alert.addAction(alertAction)
+//                                        self.loginAfterSignUp()
+                                        //                                    self.presentViewController(alert, animated: true, completion: nil)
                                     })
                                     
                                 }
                                 else
                                 {
                                     self.dismissViewControllerAnimated(true, completion:{ () -> Void in
-                                    let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
-                                    let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                                    alert.addAction(alertAction)
-                                    self.presentViewController(alert, animated: true, completion: nil)
+                                        let alert = UIAlertController(title: "Error", message: parser.messageFromParser, preferredStyle:.Alert)
+                                        let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                                        alert.addAction(alertAction)
+                                        self.presentViewController(alert, animated: true, completion: nil)
                                     })
                                 }
                                 
                                 
-                            })
-                            
-                    }
-
-                    
-                    
-                }
-            })
+                })
         }
+
+
+//        if((FBSDKAccessToken.currentAccessToken()) != nil)
+//        {
+//            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+//                if (error == nil)
+//                {
+//                    print(FBSDKAccessToken.currentAccessToken())
+//                    print(FBSDKAccessToken.currentAccessToken().tokenString)
+//                }
+//                
+//            })
+//        }
         
      
     }

@@ -471,18 +471,20 @@ class RequestBuilder: NSObject
         dataTask.resume()
 
     }
+
     
+//    http://wconnect-pcj.rhcloud.com/auth/facebook/student?code=AQD2tuqeDwYRNsimH0XPOHxtDUElvtJdyFhC33-cRL_8BQK0YSt9a92KmbcTQ0NDP1gqyES3676tBpD1hQEkeqEnmn037WBiG1l3QUf3BgpFW3EQ8hsFv7PrsBOiVIxTHaLSDwStKyKmbDNeMyjZcJnbFW19hJRkJhrjsNrx2UD3CiPl44dxx8btxQcL-c84L8ESIdyEXYtm5IL8bFaRWzFkN39xtVz40R9gLclcRQgsliNP64ObwSyToQ-MGJlxp2kUkVowMyjtr1aAzHGg_gCVmRztIksqo2YyowllAX2CsF3J828EPJgFXqFLcue7Ke4Ghj_D8oCoPVRhA1rdmveL#_=_
     
     
     
     func testForFacebook(iD:String)
     {
         var url = NSURL()
-        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/auth/Facebook/student/?code=\(iD)")!
+        url = NSURL(string: "http://wconnect-pcj.rhcloud.com/auth/facebook/student?code=\(iD)")!
         let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        print("SubjectListRequest : \(request)")
+//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        print("Test Request  : \(request)")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let session = NSURLSession.sharedSession()
         let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {
@@ -502,7 +504,7 @@ class RequestBuilder: NSObject
                 {
                     if httpResponse.statusCode == 200
                     {
-                                                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                         self.completionHandler(dataFromServer: data!)
                         
                         

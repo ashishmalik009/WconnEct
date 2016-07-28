@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "192"
             endingLineNumber = "192"
-            landmarkName = "save(_:)"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WconnEct/SignUpViewController.swift"
-            timestampString = "490390230.90669"
+            timestampString = "491340246.941636"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
             landmarkName = "signUp(_:)"
             landmarkType = "5">
             <Locations>
@@ -58,11 +58,11 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/WconnEct/SignUpViewController.swift"
-                  timestampString = "491257616.780198"
+                  timestampString = "491421600.80929"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "407"
-                  endingLineNumber = "407"
+                  startingLineNumber = "409"
+                  endingLineNumber = "409"
                   offsetFromSymbolStart = "56">
                </Location>
                <Location
@@ -73,11 +73,11 @@
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/WconnEct/SignUpViewController.swift"
-                  timestampString = "491257616.780389"
+                  timestampString = "491421600.809479"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "408"
-                  endingLineNumber = "408"
+                  startingLineNumber = "410"
+                  endingLineNumber = "410"
                   offsetFromSymbolStart = "20">
                </Location>
             </Locations>
@@ -182,31 +182,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "WconnEct.UserProfileViewController.(callFetchData () -&gt; ()).(closure #2)"
+                  symbolName = "WconnEct.UserProfileViewController.callFetchData () -&gt; ()"
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "491257616.785855"
+                  timestampString = "491421600.813119"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "79"
-                  endingLineNumber = "79"
-                  offsetFromSymbolStart = "56">
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "455">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "WconnEct.UserProfileViewController.(callFetchData () -&gt; ()).(closure #2).(closure #1)"
+                  symbolName = "WconnEct.UserProfileViewController.(callFetchData () -&gt; ()).(closure #2)"
                   moduleName = "WconnEct"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
-                  timestampString = "491257616.786035"
+                  urlString = "file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk/usr/include/dispatch/queue.h"
+                  timestampString = "491421600.813272"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "19">
+                  startingLineNumber = "325"
+                  endingLineNumber = "325"
+                  offsetFromSymbolStart = "40">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -225,6 +225,38 @@
             endingLineNumber = "80"
             landmarkName = "callFetchData()"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WconnEct.UserProfileViewController.(callFetchData () -&gt; ()).(closure #2)"
+                  moduleName = "WconnEct"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
+                  timestampString = "491421600.81412"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WconnEct.UserProfileViewController.(callFetchData () -&gt; ()).(closure #2).(closure #1)"
+                  moduleName = "WconnEct"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devAshish/Documents/WconnEct/UserProfileViewController.swift"
+                  timestampString = "491421600.814263"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -250,12 +282,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RequestBuilder.swift"
-            timestampString = "491257121.838732"
+            timestampString = "491339831.684912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "481"
-            endingLineNumber = "481"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
             landmarkName = "testForFacebook(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WconnEct/SignUpViewController.swift"
+            timestampString = "491340718.086576"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "callFacebooksignUpFunction()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WconnEct/SignUpViewController.swift"
+            timestampString = "491340746.108241"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
+            landmarkName = "callFacebooksignUpFunction()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WconnEct/SignUpViewController.swift"
+            timestampString = "491340781.370919"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
+            landmarkName = "getFBUserData()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
