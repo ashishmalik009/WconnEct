@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class TeachersListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
@@ -129,7 +130,8 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.teachersListArray.count
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let tableViewCell = tableView.dequeueReusableCellWithIdentifier("teachersListCellIdentifier")! as! TeachersTableViewCell
         let teacher =  teachersListArray.objectAtIndex(indexPath.row) as! Teacher
         tableViewCell.nameLabel.text = teacher.name
@@ -139,8 +141,22 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         tableViewCell.profileImageView.clipsToBounds = true
         tableViewCell.ratingImageView.image = self.imageForRating(Int(teacher.rating))
         
+        if let appdelegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            let studentlocation = CLLocation(latitude: appdelegate.myLatitude, longitude:appdelegate.myLongitude)
+            let teacherlocation = CLLocation(latitude: teacher.latitude, longitude:teacher.longitude)
+            let distanceBetween: CLLocationDistance =
+                        studentlocation.distanceFromLocation(teacherlocation)/1000
+            let distanceInKm : CLLocationDistance =  distanceBetween/1000.0
+            
+            tableViewCell.distanceLabel.text = String(format: "%.2fKM", distanceInKm)
+            
         
+            
+        }
         
         return tableViewCell
     }
+    
+
 }

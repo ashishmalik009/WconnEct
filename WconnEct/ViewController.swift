@@ -73,6 +73,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             print("latitude is\(latitude)")
             long = latestLocation.coordinate.longitude
             
+            
+            if let appdelegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                appdelegate.myLatitude = latitude
+                appdelegate.myLatitude = long
+            }
             print("longitude is\(long)")
 
             if self.startLocation == nil {
@@ -86,7 +92,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     (placemarks, error) -> Void in
                     
                     let placeArray = placemarks as [CLPlacemark]!
-                    
+                    if placeArray != nil
+                    {
                     // Place details
                     var placeMark: CLPlacemark!
                     placeMark = placeArray?[0]
@@ -124,15 +131,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     {
                         print(country)
                     }
+                    }
                 }
             
             
             
             
-           //            var distanceBetween: CLLocationDistance =
-//                latestLocation.distanceFromLocation(startLocation)
-//            
-//            distance.text = String(format: "%.2f", distanceBetween)
         }
     
     func locationManager(manager: CLLocationManager!,

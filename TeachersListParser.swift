@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class TeachersListParser: NSObject
 {
@@ -31,6 +32,9 @@ class TeachersListParser: NSObject
                 teacher.experience = String(dict.objectForKey("experience")!)
                 teacher.profession = String(dict.objectForKey("profession")!)
                 teacher.about_me = String(dict.objectForKey("about_me"))
+                teacher.latitude = (dict.objectForKey("lat") as? CLLocationDegrees)!
+                teacher.longitude = (dict.objectForKey("lng") as? CLLocationDegrees)!
+                
                 teachersArray.addObject(teacher)
                 if let teacherReview = dict.objectForKey("teacher_reviews") as? NSDictionary
                 {

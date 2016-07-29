@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class Teacher: NSObject
 {
@@ -25,6 +26,7 @@ class Teacher: NSObject
     var board : String = ""
     var about_me : String = ""
     var rating : Double = 0.0
-    
+    var latitude : CLLocationDegrees = 0.0
+    var longitude : CLLocationDegrees = 0.0
 
 }
