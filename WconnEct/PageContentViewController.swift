@@ -13,11 +13,13 @@ class PageContentViewController: UIViewController {
     @IBOutlet weak var backgroundImageView: UIImageView!
     var pageIndex : Int = 999
     var titleText : String = ""
+    var imageFile : String = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.backgroundImageView.image = UIImage(named: self.imageFile)
         // Do any additional setup after loading the view.
     }
 

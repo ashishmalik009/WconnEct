@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class TeachersListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
@@ -139,8 +140,15 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         tableViewCell.profileImageView.clipsToBounds = true
         tableViewCell.ratingImageView.image = self.imageForRating(Int(teacher.rating))
         
-        
-        
+        if let appdeleagate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            let startLocation : CLLocation = CLLocation(latitude: appdeleagate.myLatitude , longitude: appdeleagate.myLongitude)
+            let teacherLocation : CLLocation = CLLocation(latitude: teacher.teacherLatitude, longitude: teacher.teacherLongitude)
+            let distanceBetween: CLLocationDistance =
+                            startLocation.distanceFromLocation(teacherLocation)
+            let finalDistance = distanceBetween/1000
+            tableViewCell.distanceLabel.text = String(format: "%.2fKM", finalDistance)
+        }
         return tableViewCell
     }
 }

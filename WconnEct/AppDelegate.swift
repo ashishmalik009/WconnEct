@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var emailIdOfLoggedInUser : String = ""
     var isUserLoggedIn : Bool = false
     var isTeacherLoggedIn : Bool = false
+    var myLatitude : CLLocationDegrees = 0.0
+    var myLongitude : CLLocationDegrees = 0.0
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
