@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClassValueDatasource
+class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, ClassValueDatasource, UIPageViewControllerDataSource
 {
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -19,12 +19,21 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
     var subjectIdOfSelectedSubject : Int = 999
     var boardIDofSelectedBoard : Int = 999
     var arrayValuesToShowInTable : NSMutableArray = ["Class","Subject"]
+    let pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+    let imagesArray  : NSArray = ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg"]
+    
     @IBOutlet weak var detailTableView: UITableView!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        pageViewController.dataSource = self
+        let startingViewController : PageContentViewController = self.getViewControllerAtIndex(0)
+        self.pageViewController.setViewControllers([startingViewController], direction: .Forward, animated: false, completion: nil)
+        self.pageViewController.view.frame = CGRectMake(0, (self.navigationController?.navigationBar.frame.size.height)! , self.view.frame.size.width, self.view.frame.size.height - self.detailTableView.frame.size.height-(self.navigationController?.navigationBar.frame.size.height)! - (self.tabBarController?.tabBar.frame.size.height)!);
+        self.addChildViewController(pageViewController)
+        self.view.addSubview(pageViewController.view)
+        self.pageViewController.didMoveToParentViewController(self)
         
         
 //        if revealViewController() != nil
@@ -118,6 +127,55 @@ class SlideMenuDetailController: UIViewController, UITableViewDelegate, UITableV
         
     }
 
+    //MARK : PageViewControllerDatasource
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        
+        let pageContent: PageContentViewController = viewController as! PageContentViewController
+        var index = pageContent.pageIndex
+        if ((index == 0) || (index == NSNotFound))
+        {
+            index = self.imagesArray.count
+        }
+        index -= 1;
+        return getViewControllerAtIndex(index)
+    }
+    
+    
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+     
+        let pageContent: PageContentViewController = viewController as! PageContentViewController
+        var index = pageContent.pageIndex
+        if (index == NSNotFound)
+        {
+            return nil;
+        }
+
+        index += 1;
+        if (index == imagesArray.count)
+        {
+            index = 0
+        }
+        return getViewControllerAtIndex(index)
+        
+    }
+    
+    func getViewControllerAtIndex(index: NSInteger) -> PageContentViewController
+    {
+        print ("Index is \(index)")
+        // Create a new view controller and pass suitable data.
+        let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageContentViewControllerID") as! PageContentViewController
+        pageContentViewController.imageFile = "\(imagesArray[index])"
+        pageContentViewController.pageIndex = index
+        return pageContentViewController
+    }
+    
+    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+        return imagesArray.count
+    }
+    
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+        return 0 
+    }
     //MARK : UitableViewDelegates and DataSources
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

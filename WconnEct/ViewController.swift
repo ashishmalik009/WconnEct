@@ -130,17 +130,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                         }
                         
                         // City
-                        if let city = placeMark.addressDictionary?["City"] as? NSString
-                        {
-                            print(city)
-                            
-                        }
+                       
                         if let sublocality = placeMark.addressDictionary?["SubLocality"] as? NSString
                         {
                             print(sublocality)
                             self.locationBarButton.title = "\(sublocality)"
                         }
-                        
+                        else if let city = placeMark.addressDictionary?["City"] as? NSString
+                        {
+                            self.locationBarButton.title = "\(city)"
+                            print(city)
+                            
+                        }
                         // Zip code
                         if let zip = placeMark.addressDictionary?["ZIP"] as? NSString
                         {

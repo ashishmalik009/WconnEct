@@ -144,10 +144,12 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         if let appdelegate = UIApplication.sharedApplication().delegate as? AppDelegate
         {
             let studentlocation = CLLocation(latitude: appdelegate.myLatitude, longitude:appdelegate.myLongitude)
+            print("Latitude Student : \(appdelegate.myLatitude) + Long: \(appdelegate.myLongitude)")
             let teacherlocation = CLLocation(latitude: teacher.latitude, longitude:teacher.longitude)
+            print("Latitude Student : \(teacher.latitude) + Long: \(teacher.longitude)")
             let distanceBetween: CLLocationDistance =
                         studentlocation.distanceFromLocation(teacherlocation)/1000
-            let distanceInKm : CLLocationDistance =  distanceBetween/1000.0
+            let distanceInKm : CLLocationDistance =  distanceBetween
             
             tableViewCell.distanceLabel.text = String(format: "%.2fKM", distanceInKm)
             
