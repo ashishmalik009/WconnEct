@@ -81,6 +81,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
             print("longitude is\(long)")
 
+
             if self.startLocation == nil {
                 startLocation = latestLocation 
             }
@@ -104,32 +105,53 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     // Location name
                     if let locationName = placeMark.addressDictionary?["Name"] as? NSString
                     {
-                        print(locationName)
-                    }
-                    
-                    // Street address
-                    if let street = placeMark.addressDictionary?["Thoroughfare"] as? NSString
-                    {
-                        print(street)
-                    }
-                    
-                    // City
-                    if let city = placeMark.addressDictionary?["City"] as? NSString
-                    {
-                        print(city)
-                        self.locationBarButton.title = " \(city)"
-                    }
-                    
-                    // Zip code
-                    if let zip = placeMark.addressDictionary?["ZIP"] as? NSString
-                    {
-                        print(zip)
-                    }
-                    
-                    // Country
-                    if let country = placeMark.addressDictionary?["Country"] as? NSString
-                    {
-                        print(country)
+                        if let appdelegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                        {
+                            appdelegate.myLatitude = latitude
+                            appdelegate.myLongitude = long
+                        }
+                        // Place details
+                        var placeMark: CLPlacemark!
+                        placeMark = placeArray?[0]
+                        
+                        // Address dictionary
+                        print(placeMark.addressDictionary)
+                        
+                        // Location name
+                        if let locationName = placeMark.addressDictionary?["Name"] as? NSString
+                        {
+                            print(locationName)
+                        }
+                        
+                        // Street address
+                        if let street = placeMark.addressDictionary?["Thoroughfare"] as? NSString
+                        {
+                            print(street)
+                        }
+                        
+                        // City
+                        if let city = placeMark.addressDictionary?["City"] as? NSString
+                        {
+                            print(city)
+                            
+                        }
+                        if let sublocality = placeMark.addressDictionary?["SubLocality"] as? NSString
+                        {
+                            print(sublocality)
+                            self.locationBarButton.title = "\(sublocality)"
+                        }
+                        
+                        // Zip code
+                        if let zip = placeMark.addressDictionary?["ZIP"] as? NSString
+                        {
+                            print(zip)
+                        }
+                        
+                        // Country
+                        if let country = placeMark.addressDictionary?["Country"] as? NSString
+                        {
+                            print(country)
+                        }
                     }
                     }
                 }
@@ -139,8 +161,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
         }
     
-    func locationManager(manager: CLLocationManager!,
-                         didFailWithError error: NSError!) {
+    func locationManager(manager: CLLocationManager,
+                         didFailWithError error: NSError) {
+        
+        print("Error while getting core location :\(error.localizedDescription)")
         
     }
     

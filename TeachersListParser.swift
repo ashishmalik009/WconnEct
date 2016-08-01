@@ -41,6 +41,8 @@ class TeachersListParser: NSObject
                     teacher.rating = teacherReview.objectForKey("rating") as! Double
                     print(teacherReview)
                 }
+        
+                
                 
             }
             

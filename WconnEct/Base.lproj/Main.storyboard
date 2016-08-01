@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTv-Rc-Plt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -83,6 +83,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="WconnEct" id="LAj-L3-a1y">
+                        <barButtonItem key="backBarButtonItem" title=" " id="uw1-ZZ-BZz"/>
                         <barButtonItem key="leftBarButtonItem" image="cancelImage" id="1cT-Sb-8C7">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -617,9 +618,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="ghx-in-eNg">
-                        <barButtonItem key="backBarButtonItem" title="&lt; " id="60G-kq-Jkj"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="ghx-in-eNg"/>
                     <connections>
                         <outlet property="emailIdTextField" destination="BtA-oy-0go" id="7lV-Jd-Pbq"/>
                         <outlet property="passwordTextField" destination="T4K-os-V3S" id="cNH-Tu-QZM"/>
@@ -1141,7 +1140,7 @@
         <!--Page View Controller-->
         <scene sceneID="52c-3H-9jg">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="2N3-AS-Evw" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="2N3-AS-Evw" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gBL-MT-IHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3004" y="2863"/>
@@ -1149,7 +1148,7 @@
         <!--Page Content View Controller-->
         <scene sceneID="SpI-VP-lKx">
             <objects>
-                <viewController id="IzB-CM-mP4" customClass="PageContentViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageContentController" id="IzB-CM-mP4" customClass="PageContentViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dkg-dE-Dgk"/>
                         <viewControllerLayoutGuide type="bottom" id="cS8-qF-Z3h"/>
@@ -1268,7 +1267,7 @@
                                                 <constraint firstItem="kUI-Kw-jlA" firstAttribute="leading" secondItem="WEy-JU-ikD" secondAttribute="trailing" constant="8" id="EoR-vB-N66"/>
                                                 <constraint firstItem="WEy-JU-ikD" firstAttribute="top" secondItem="GSd-c3-K7r" secondAttribute="bottom" constant="2" id="I4J-Gh-WYo"/>
                                                 <constraint firstItem="GSd-c3-K7r" firstAttribute="leading" secondItem="WEy-JU-ikD" secondAttribute="leading" id="IpI-Ap-bQT"/>
-                                                <constraint firstItem="r0U-ch-Yg7" firstAttribute="leading" secondItem="kUI-Kw-jlA" secondAttribute="leading" id="Oxb-F2-Vjq"/>
+                                                <constraint firstItem="r0U-ch-Yg7" firstAttribute="leading" secondItem="kUI-Kw-jlA" secondAttribute="leading" constant="6" id="Oxb-F2-Vjq"/>
                                                 <constraint firstItem="kUI-Kw-jlA" firstAttribute="top" secondItem="r0U-ch-Yg7" secondAttribute="bottom" constant="5" id="Plo-RH-JKJ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="WEy-JU-ikD" secondAttribute="bottom" constant="8" id="Q1I-et-RxA"/>
                                                 <constraint firstItem="eHh-vI-L4A" firstAttribute="leading" secondItem="GSd-c3-K7r" secondAttribute="leading" id="S62-Qu-MV6"/>
