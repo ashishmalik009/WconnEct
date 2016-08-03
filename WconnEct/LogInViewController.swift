@@ -11,6 +11,8 @@ import UIKit
 class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate, UITextFieldDelegate {
     
     
+    @IBOutlet weak var facebookSignInView: UIView!
+    @IBOutlet weak var googleSignInView: UIView!
     @IBOutlet weak var signInButton: GIDSignInButton!
     @IBOutlet weak var emailIdTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -80,6 +82,9 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         actionSheet.addAction(actionForStudent)
         actionSheet.addAction(actionForTeacher)
         actionSheet.addAction(dismissAction)
+//        actionSheet.popoverPresentationController?.sourceView = self.googleSignInView
+        actionSheet.popoverPresentationController?.barButtonItem = UIBarButtonItem(customView: googleSignInView)
+        
         self.presentViewController(actionSheet, animated: true, completion: nil)
         
         }
@@ -163,6 +168,7 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         actionSheet.addAction(actionForStudent)
         actionSheet.addAction(actionForTeacher)
         actionSheet.addAction(dismissAction)
+        actionSheet.popoverPresentationController?.barButtonItem = UIBarButtonItem(customView: self.facebookSignInView)
         self.presentViewController(actionSheet, animated: true, completion: nil)
 
         

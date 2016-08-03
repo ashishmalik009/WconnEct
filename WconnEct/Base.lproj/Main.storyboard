@@ -395,7 +395,9 @@
                     <connections>
                         <outlet property="contactNumberField" destination="D54-vZ-tLG" id="nUr-J8-KLD"/>
                         <outlet property="emailIDField" destination="o7U-NW-apS" id="1FW-kv-NTW"/>
+                        <outlet property="facebookSignInView" destination="L25-KG-qek" id="Uo9-VD-yca"/>
                         <outlet property="genderSegmentControl" destination="c3W-At-wm5" id="zHi-pf-6J8"/>
+                        <outlet property="googleSignInView" destination="svf-gu-k9F" id="m6D-ps-iJQ"/>
                         <outlet property="nameTextField" destination="CU6-ZD-Yky" id="4Al-dv-xfP"/>
                         <outlet property="passwordField" destination="9J9-T3-cHa" id="KvK-Bb-PJW"/>
                         <outlet property="scrollView" destination="Be8-GX-Aq7" id="Ybi-Oy-YFS"/>
@@ -579,6 +581,20 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account! " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Lx-sa-t3F">
+                                <rect key="frame" x="20" y="530" width="167" height="25"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVW-V9-SbX">
+                                <rect key="frame" x="185" y="524" width="70" height="36"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="15"/>
+                                <state key="normal" title="Sign Up"/>
+                                <connections>
+                                    <segue destination="zqJ-KO-HC5" kind="show" id="CAp-KG-Rjh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -587,6 +603,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="iBi-za-gff" secondAttribute="leading" id="5rD-XV-DHO"/>
                             <constraint firstItem="e17-er-tC6" firstAttribute="trailing" secondItem="zTB-rQ-u3c" secondAttribute="trailingMargin" id="Awy-F4-I5o"/>
                             <constraint firstItem="Ajt-mY-shF" firstAttribute="leading" secondItem="zTB-rQ-u3c" secondAttribute="leading" constant="20" id="B2X-Hb-69g"/>
+                            <constraint firstItem="oVW-V9-SbX" firstAttribute="leading" secondItem="2Lx-sa-t3F" secondAttribute="trailing" constant="-2" id="CbZ-wW-SjE"/>
                             <constraint firstItem="e17-er-tC6" firstAttribute="top" secondItem="8KK-xC-Qgc" secondAttribute="bottom" constant="25" id="Juj-Sh-ToT"/>
                             <constraint firstAttribute="trailing" secondItem="Ajt-mY-shF" secondAttribute="trailing" constant="20" id="Jxm-2g-37G"/>
                             <constraint firstItem="8A2-vn-cX8" firstAttribute="centerX" secondItem="zTB-rQ-u3c" secondAttribute="centerX" id="KDf-Qp-qoj"/>
@@ -597,16 +614,20 @@
                             <constraint firstAttribute="trailingMargin" secondItem="8KK-xC-Qgc" secondAttribute="trailing" id="YnW-KV-qJk"/>
                             <constraint firstAttribute="leadingMargin" secondItem="8KK-xC-Qgc" secondAttribute="leading" id="ZHs-2W-0Xu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="iBi-za-gff" secondAttribute="trailing" id="ZXP-44-v7b"/>
+                            <constraint firstItem="oVW-V9-SbX" firstAttribute="top" secondItem="Ugl-Wk-8ow" secondAttribute="bottom" constant="8" id="Zq0-s5-QPL"/>
                             <constraint firstAttribute="trailing" secondItem="Ajt-mY-shF" secondAttribute="trailing" constant="20" id="dOC-LD-0QX"/>
                             <constraint firstAttribute="leadingMargin" secondItem="BtA-oy-0go" secondAttribute="leading" id="dSb-jU-VZ6"/>
                             <constraint firstItem="Ajt-mY-shF" firstAttribute="top" secondItem="8A2-vn-cX8" secondAttribute="bottom" constant="25" id="e7x-Bv-vsY"/>
                             <constraint firstItem="8A2-vn-cX8" firstAttribute="top" secondItem="e17-er-tC6" secondAttribute="bottom" constant="17" id="eaN-6S-jYL"/>
                             <constraint firstItem="iBi-za-gff" firstAttribute="top" secondItem="rGK-dP-GJQ" secondAttribute="bottom" constant="23" id="jdu-Zj-TXb"/>
+                            <constraint firstItem="2Lx-sa-t3F" firstAttribute="top" secondItem="Ugl-Wk-8ow" secondAttribute="bottom" constant="14" id="m7U-dj-Okf"/>
                             <constraint firstItem="BtA-oy-0go" firstAttribute="top" secondItem="lRO-IZ-vEH" secondAttribute="bottom" constant="60" id="mVE-uB-JA9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oVW-V9-SbX" secondAttribute="trailing" constant="325" id="mVk-Fp-MJR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BtA-oy-0go" secondAttribute="trailing" id="mnG-2H-zhb"/>
                             <constraint firstItem="e17-er-tC6" firstAttribute="height" secondItem="rGK-dP-GJQ" secondAttribute="height" id="mpb-6D-XEM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="T4K-os-V3S" secondAttribute="trailing" id="n1e-jS-54g"/>
                             <constraint firstAttribute="leadingMargin" secondItem="T4K-os-V3S" secondAttribute="leading" id="ogJ-3c-WXo"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="2Lx-sa-t3F" secondAttribute="leading" id="pzy-Vk-blY"/>
                             <constraint firstItem="Ajt-mY-shF" firstAttribute="leading" secondItem="zTB-rQ-u3c" secondAttribute="leading" constant="20" id="vAw-Bf-x1x"/>
                         </constraints>
                         <variation key="default">
@@ -618,9 +639,15 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="ghx-in-eNg"/>
+                    <navigationItem key="navigationItem" id="ghx-in-eNg">
+                        <barButtonItem key="leftBarButtonItem" image="cancelImage" id="6ye-bo-hGx">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailIdTextField" destination="BtA-oy-0go" id="7lV-Jd-Pbq"/>
+                        <outlet property="facebookSignInView" destination="iBi-za-gff" id="Csx-Is-1ua"/>
+                        <outlet property="googleSignInView" destination="Ajt-mY-shF" id="qrT-UO-Aoq"/>
                         <outlet property="passwordTextField" destination="T4K-os-V3S" id="cNH-Tu-QZM"/>
                         <outlet property="segmentControl" destination="8KK-xC-Qgc" id="y85-zh-395"/>
                     </connections>
@@ -876,7 +903,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A8u-lA-58o">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A8u-lA-58o">
                                 <rect key="frame" x="0.0" y="253" width="600" height="298"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -955,6 +982,14 @@
                                         <connections>
                                             <outlet property="genderSegmentControl" destination="vNZ-N0-Q0K" id="mU7-ZP-GQn"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="otherIdentifier" id="esv-0E-Fd0" customClass="GenderProfileTableViewCell" customModule="WconnEct" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="116" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="esv-0E-Fd0" id="GYC-Qa-vqa">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1435,4 +1470,7 @@
         <image name="google Icon" width="86" height="88"/>
         <image name="menu" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="CAp-KG-Rjh"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -22,6 +22,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileTableView: UITableView!
      @IBOutlet weak var backgroundImageView: UIImageView!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.profileImageView.clipsToBounds = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.screenTapped(_:)))
         self.profileImageView.addGestureRecognizer(tapRecognizer)
-        self.profileTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+//        self.profileTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
 
         
@@ -198,8 +199,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                         self.presentViewController(nav, animated: true, completion: nil)
                         
                     })
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
                     
                     alert.addAction(alertAction)
+                    alert.addAction(cancelAction)
                     self.presentViewController(alert, animated: true, completion: nil)
                     
                 }
@@ -323,13 +326,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let tablewViewCell = tableView.dequeueReusableCellWithIdentifier("profileCellIdentifier") as! ProfileUserTableViewCell
         let tableViewCellForGender = tableView.dequeueReusableCellWithIdentifier("genderProfileIdentifer") as! GenderProfileTableViewCell
+        let tableViewCellLogout = tableView.dequeueReusableCellWithIdentifier("otherIdentifier") 
         tablewViewCell.detailTextField.delegate = self
         if indexPath.row == 0
         {
@@ -366,11 +370,76 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             return tableViewCellForGender
             
         }
+        else if indexPath.row == 4
+        {
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            {
+                if delegate.isUserLoggedIn
+                {
+                    tableViewCellLogout?.textLabel?.font = UIFont(name: "FontAwesome", size: 15.0)
+                    tableViewCellLogout?.textLabel?.text = " Log out"
+                }
+                else
+                {
+                    tableViewCellLogout?.textLabel?.text = "Log in"
+                }
+            }
+            
+//            tableViewCellLogout?.imageView?.image = UIImage(named: "logOut")
+            return tableViewCellLogout!
+
+        }
 
         return tablewViewCell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 4
+        {
+            GIDSignIn.sharedInstance().signOut()
+            FBSDKLoginManager().logOut()
+            FBSDKProfile.setCurrentProfile(nil)
+            FBSDKAccessToken.setCurrentAccessToken(nil)
+            self.deleteImage()
+            dismissViewControllerAnimated(true, completion: { ()-> Void in
+                if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                {
+                    delegate.isUserLoggedIn = false
+                    delegate.accessTokenAfterLogin = ""
+                    delegate.emailIdOfLoggedInUser = ""
+                }
+            })
+            
+        }
+
+    }
+    func deleteImage()
+    {
+        let fileManager = NSFileManager.defaultManager()
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            let imagePath = (self.getDirectoryPath() as NSString).stringByAppendingPathComponent("\(delegate.emailIdOfLoggedInUser).jpg")
+            if fileManager.fileExistsAtPath(imagePath)
+            {
+                
+                do
+                {
+                    try fileManager.removeItemAtPath(imagePath)
+                }
+                catch let error as NSError
+                {
+                    print("No such File found")
+                }
+                
+            }
+        }
+    }
     
+    func getDirectoryPath() -> String {
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
+    }
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
         self.view.endEditing(true)

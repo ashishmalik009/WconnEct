@@ -15,7 +15,9 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
     @IBOutlet weak var emailIDField: UITextField!
     var activeTextField: UITextField!
     
+    @IBOutlet weak var googleSignInView: UIView!
     
+    @IBOutlet weak var facebookSignInView: UIView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contactNumberField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -162,6 +164,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         actionSheet.addAction(actionForStudent)
         actionSheet.addAction(actionForTeacher)
         actionSheet.addAction(dismissAction)
+        actionSheet.popoverPresentationController?.barButtonItem = UIBarButtonItem(customView: self.googleSignInView)
         self.presentViewController(actionSheet, animated: true, completion: nil)
         
     }
@@ -264,6 +267,7 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
         actionSheet.addAction(actionForStudent)
         actionSheet.addAction(actionForTeacher)
         actionSheet.addAction(dismissAction)
+        actionSheet.popoverPresentationController?.barButtonItem = UIBarButtonItem(customView: self.facebookSignInView)
         self.presentViewController(actionSheet, animated: true, completion: nil)
         
 
