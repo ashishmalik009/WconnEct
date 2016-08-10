@@ -17,6 +17,7 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
     var classID : Int = 999
     var subjectID : Int = 999
     var boardId : Int = 999
+    var selectedIndexPath : Int = 999
     var teachersListArray : NSMutableArray = []
     override func viewDidLoad()
     {
@@ -121,7 +122,15 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
      return UIImage.init()
     }
     
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showDetailTeacherID"
+        {
+            let teacherDetailViewController = segue.destinationViewController as? TeacherDetailViewController
+            teacherDetailViewController?.teacherToShowDetail = self.teachersListArray.objectAtIndex(selectedIndexPath) as! Teacher
+            
+        
+        }
+    }
 
     //MARK : TableViewDataSource and Delegates
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -160,5 +169,9 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         return tableViewCell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedIndexPath = indexPath.row
+        self.performSegueWithIdentifier("showDetailTeacherID", sender: self)
+    }
 
 }

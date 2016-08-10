@@ -22,8 +22,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
+        
+        
+        locationManager.requestLocation()
         startLocation = nil
     }
 
