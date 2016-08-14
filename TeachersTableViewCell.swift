@@ -21,6 +21,8 @@ class TeachersTableViewCell: UITableViewCell
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var addToWishListButton: UIButton!
+    
+    var addedToWishList : Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

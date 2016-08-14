@@ -149,7 +149,15 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         tableViewCell.profileImageView.layer.cornerRadius = tableViewCell.profileImageView.frame.size.width/2
         tableViewCell.profileImageView.clipsToBounds = true
         tableViewCell.ratingImageView.image = self.imageForRating(Int(teacher.rating))
-        
+        tableViewCell.addToWishListButton.addTarget(self, action: #selector(TeachersListViewController.addToWishlist(_:)), forControlEvents: .TouchUpInside)
+        if tableViewCell.addedToWishList
+        {
+            tableViewCell.addToWishListButton.setImage(UIImage(named: "addedToWishlist"), forState: .Normal)
+        }
+        else
+        {
+            tableViewCell.addToWishListButton.setImage(UIImage(named: "addToWishlist"), forState: .Normal)
+        }
         if let appdelegate = UIApplication.sharedApplication().delegate as? AppDelegate
         {
             let studentlocation = CLLocation(latitude: appdelegate.myLatitude, longitude:appdelegate.myLongitude)
@@ -172,6 +180,24 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedIndexPath = indexPath.row
         self.performSegueWithIdentifier("showDetailTeacherID", sender: self)
+        
     }
 
+    func addToWishlist(sender:UIButton)
+    {
+      //  let buttonTag = sender.tag
+        let buttonPosition = sender.convertPoint(CGPointZero, toView: self.teachersTableView)
+        let buttonIndexPath = self.teachersTableView.indexPathForRowAtPoint(buttonPosition)
+        let cell = self.teachersTableView.cellForRowAtIndexPath(buttonIndexPath!) as! TeachersTableViewCell
+        if cell.addedToWishList
+        {
+            cell.addedToWishList = false
+            cell.addToWishListButton.setImage(UIImage(named: "addToWishlist"), forState: .Normal)
+        }
+        else
+        {
+            cell.addedToWishList = true
+            cell.addToWishListButton.setImage(UIImage(named: "addedToWishlist"), forState: .Normal)
+        }
+    }
 }
