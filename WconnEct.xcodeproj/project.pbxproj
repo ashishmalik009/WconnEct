@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B62C0FB1D2941BD00014F7F /* SignUpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B62C0FA1D2941BD00014F7F /* SignUpParser.swift */; };
+		1B893FE61D60393900DF7544 /* ConnectedTeachersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B893FE51D60393900DF7544 /* ConnectedTeachersViewController.swift */; };
 		1B94B4CA1D322F5E00E92785 /* GenderProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B94B4C91D322F5E00E92785 /* GenderProfileTableViewCell.swift */; };
 		54121F4C1D5B660A0060A5AC /* TeacherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54121F4B1D5B660A0060A5AC /* TeacherDetailViewController.swift */; };
 		54414A411D181D4C0000E3D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54414A401D181D4C0000E3D2 /* AppDelegate.swift */; };
@@ -86,6 +87,7 @@
 /* Begin PBXFileReference section */
 		0615E9257D8A7733A9FEEA66 /* Pods_WconnEctTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WconnEctTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B62C0FA1D2941BD00014F7F /* SignUpParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpParser.swift; sourceTree = "<group>"; };
+		1B893FE51D60393900DF7544 /* ConnectedTeachersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectedTeachersViewController.swift; sourceTree = "<group>"; };
 		1B94B4C91D322F5E00E92785 /* GenderProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderProfileTableViewCell.swift; sourceTree = "<group>"; };
 		2F32CBD9BCAE59D2C8F225E5 /* Pods-WconnEctUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WconnEctUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WconnEctUITests/Pods-WconnEctUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		54121F4B1D5B660A0060A5AC /* TeacherDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherDetailViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				548ABBB11D423D890016F6A1 /* UpdateWorkProfileViewController.swift */,
 				54FEB2F51D48CFBB00509F06 /* PageContentViewController.swift */,
 				54121F4B1D5B660A0060A5AC /* TeacherDetailViewController.swift */,
+				1B893FE51D60393900DF7544 /* ConnectedTeachersViewController.swift */,
 			);
 			path = WconnEct;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 				54C1C8BD1D3653C600A0D474 /* GetSubjectsParser.swift in Sources */,
 				6D82C7381D31850200DCC51B /* ProfileUserTableViewCell.swift in Sources */,
 				6D5B387B1D28CC4400BD8DEF /* RequestBuilder.swift in Sources */,
+				1B893FE61D60393900DF7544 /* ConnectedTeachersViewController.swift in Sources */,
 				6DD4A50E1D3B4EF800ECFEC6 /* TeachersTableViewCell.swift in Sources */,
 				54FEB2F61D48CFBB00509F06 /* PageContentViewController.swift in Sources */,
 				6DA1BE0A1D2C3ECE006F4473 /* SWRevealViewController.m in Sources */,

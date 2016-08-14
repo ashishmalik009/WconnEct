@@ -845,10 +845,10 @@
             </objects>
             <point key="canvasLocation" x="2281" y="3597"/>
         </scene>
-        <!--View Controller-->
+        <!--Connected Teachers View Controller-->
         <scene sceneID="ir0-vv-dcq">
             <objects>
-                <viewController id="2Ka-qO-FgY" sceneMemberID="viewController">
+                <viewController id="2Ka-qO-FgY" customClass="ConnectedTeachersViewController" customModule="WconnEct" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jME-NB-r8q"/>
                         <viewControllerLayoutGuide type="bottom" id="vg4-lK-Q1u"/>
@@ -856,9 +856,24 @@
                     <view key="view" contentMode="scaleToFill" id="cw6-fl-pe9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ejf-0P-YlI">
+                                <rect key="frame" x="20" y="72" width="560" height="471"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ejf-0P-YlI" firstAttribute="top" secondItem="jME-NB-r8q" secondAttribute="bottom" constant="8" symbolic="YES" id="BAi-e1-hVc"/>
+                            <constraint firstItem="vg4-lK-Q1u" firstAttribute="top" secondItem="ejf-0P-YlI" secondAttribute="bottom" constant="8" symbolic="YES" id="UGR-Uz-VE6"/>
+                            <constraint firstItem="ejf-0P-YlI" firstAttribute="trailing" secondItem="cw6-fl-pe9" secondAttribute="trailingMargin" id="adp-NH-bsH"/>
+                            <constraint firstItem="ejf-0P-YlI" firstAttribute="leading" secondItem="cw6-fl-pe9" secondAttribute="leadingMargin" id="wQ4-gn-lYM"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="x2P-jL-ONO"/>
+                    <connections>
+                        <outlet property="testView" destination="ejf-0P-YlI" id="cXh-lj-HrE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UpH-JW-yaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
