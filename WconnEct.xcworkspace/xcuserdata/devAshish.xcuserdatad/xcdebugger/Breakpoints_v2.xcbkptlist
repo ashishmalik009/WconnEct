@@ -49,38 +49,6 @@
             endingLineNumber = "409"
             landmarkName = "signUp(_:)"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WconnEct.SignUpViewController.(signUp (Swift.AnyObject) -&gt; ()).(closure #1)"
-                  moduleName = "WconnEct"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devAshish/Documents/WconnEct/WconnEct/SignUpViewController.swift"
-                  timestampString = "491515134.984089"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "409"
-                  endingLineNumber = "409"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WconnEct.SignUpViewController.(signUp (Swift.AnyObject) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "WconnEct"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devAshish/Documents/WconnEct/WconnEct/SignUpViewController.swift"
-                  timestampString = "491515134.984222"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "410"
-                  endingLineNumber = "410"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -113,6 +81,38 @@
             endingLineNumber = "184"
             landmarkName = "signIn(_:didSignInForUser:withError:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WconnEct.SignUpViewController.signIn (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.GIDSignIn&gt;, didSignInForUser : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.GIDGoogleUser&gt;, withError : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSError&gt;) -&gt; ()"
+                  moduleName = "WconnEct"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devAshish/Documents/WconnEct/WconnEct/SignUpViewController.swift"
+                  timestampString = "492979259.968323"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "2708">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WconnEct.SignUpViewController.signIn (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.GIDSignIn&gt;, didSignInForUser : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.GIDGoogleUser&gt;, withError : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSError&gt;) -&gt; ()"
+                  moduleName = "WconnEct"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devAshish/Documents/WconnEct/WconnEct/SignUpViewController.swift"
+                  timestampString = "492979259.968511"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "3022">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -208,6 +208,22 @@
             startingLineNumber = "293"
             endingLineNumber = "293"
             landmarkName = "getFBUserData()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachersListParser.swift"
+            timestampString = "492971133.503413"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "isParsedTeachersList(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

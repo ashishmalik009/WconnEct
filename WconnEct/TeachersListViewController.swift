@@ -189,6 +189,7 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         let buttonPosition = sender.convertPoint(CGPointZero, toView: self.teachersTableView)
         let buttonIndexPath = self.teachersTableView.indexPathForRowAtPoint(buttonPosition)
         let cell = self.teachersTableView.cellForRowAtIndexPath(buttonIndexPath!) as! TeachersTableViewCell
+        let teacher =  teachersListArray.objectAtIndex(buttonIndexPath!.row) as! Teacher
         if cell.addedToWishList
         {
             cell.addedToWishList = false
@@ -197,6 +198,13 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         else
         {
             cell.addedToWishList = true
+            let request = RequestBuilder()
+            print(teacher.iD)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            request.addTeacherToWishlist(teacher.iD)    
+                
+            })
+            
             cell.addToWishListButton.setImage(UIImage(named: "addedToWishlist"), forState: .Normal)
         }
     }
