@@ -198,6 +198,7 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 request.deleteTeacherToWishlist(teacher.iD)
                 
+                
             })
 
             cell.addToWishListButton.setImage(UIImage(named: "addToWishlist"), forState: .Normal)
