@@ -193,6 +193,13 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         if cell.addedToWishList
         {
             cell.addedToWishList = false
+            let request = RequestBuilder()
+            print(teacher.iD)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                request.deleteTeacherToWishlist(teacher.iD)
+                
+            })
+
             cell.addToWishListButton.setImage(UIImage(named: "addToWishlist"), forState: .Normal)
         }
         else

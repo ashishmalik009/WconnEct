@@ -259,7 +259,9 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         }
         else
         {
-            CustomActivityIndicator.sharedInstance.showActivityIndicator(self.view)
+//            CustomActivityIndicator.sharedInstance.showActivityIndicator(self.view)
+            let alert = CustomIndicator.sharedInstance.showActivityIndicator("Logging In")
+            self.presentViewController(alert, animated: true, completion: nil)
             self.requestToLogIn(String(UTF8String: emailIdTextField.text!)!, password: String(UTF8String: passwordTextField.text!)!, isTeacher: isTeacher)
         }
 
@@ -272,12 +274,14 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         requestObject.errorHandler = { error in
             
             dispatch_async(dispatch_get_main_queue(),{
-                CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
-                    
-                    let alert = UIAlertController(title: "Error", message:error.description, preferredStyle:.Alert)
+//                CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
+                self.dismissViewControllerAnimated(true, completion: {
+                    let alert = UIAlertController(title: "Error", message:error.localizedDescription, preferredStyle:.Alert)
                     let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alert.addAction(alertAction)
                     self.presentViewController(alert, animated: true, completion: nil)
+                })
+                
                 
             })
         }
@@ -287,16 +291,17 @@ class LogInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 let parser = LogInParser()
                 if parser.isparsedLogInDetailsUsingData(dataValue)
                 {
-                    CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
-                        
-                        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+//                    CustomActivityIndicator.sharedInstance.hideActivityIndicator(self.view)
+                    self.dismissViewControllerAnimated(true, completion:
                         {
-                            delegate.emailIdOfLoggedInUser = emailId
-                            delegate.isUserLoggedIn = true
-                        }
-                    let tabbarcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("tabBarControllerStorboardIDForStudent") as! UITabBarController
-                        self.presentViewController(tabbarcontroller, animated: true, completion: nil)
-                        
+                            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+                            {
+                                delegate.emailIdOfLoggedInUser = emailId
+                                delegate.isUserLoggedIn = true
+                            }
+                        let tabbarcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("tabBarControllerStorboardIDForStudent") as! UITabBarController
+                            self.presentViewController(tabbarcontroller, animated: true, completion: nil)
+                    })
                     
                 }
                     

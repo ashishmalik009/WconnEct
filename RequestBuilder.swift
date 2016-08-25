@@ -638,6 +638,68 @@ class RequestBuilder: NSObject
         dataTask.resume()
 
     }
+    
+    func deleteTeacherToWishlist(teacherID:Int)
+    {
+        var url = NSURL()
+        url = NSURL.init(string: "https://wconnect-pcj.rhcloud.com/student_wishlist/")!
+        
+        
+        let request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        let post : NSMutableString = ""
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        {
+            post.appendString("token=\(delegate.accessTokenAfterLogin)")
+        }
+        post.appendString("&teacherid=\(teacherID)")
+        
+        let postData : NSData = post.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)!
+        let postLength: String = "\(postData.length)"
+        request.HTTPMethod = "DELETE"
+        
+        request.setValue(postLength, forHTTPHeaderField: "Content-Length")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = postData
+        print("deleteTeacherFromWishlist : \(request)")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let session = NSURLSession.sharedSession()
+        let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {
+            
+            data, response, error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+            if error != nil
+            {
+                self.errorHandler(errorValue: error!)
+            }
+            else
+            {
+                if let httpResponse = response as? NSHTTPURLResponse
+                {
+                    if httpResponse.statusCode == 200
+                    {
+                        print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                        self.completionHandler(dataFromServer: data!)
+                        
+                        
+                    }
+                    else
+                    {
+                        let responseError = NSError(domain: "Some error occured. Please try again later", code: 0, userInfo: nil)
+                        self.errorHandler(errorValue:responseError)
+                    }
+                }
+                
+            }
+            
+            
+        })
+        
+        dataTask.resume()
+    }
+
 }
 
 

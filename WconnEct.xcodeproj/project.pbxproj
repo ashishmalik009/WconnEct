@@ -48,6 +48,7 @@
 		54EC95411D33B3C200C6B67E /* AllClassesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EC95401D33B3C200C6B67E /* AllClassesParser.swift */; };
 		54FEB2F61D48CFBB00509F06 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FEB2F51D48CFBB00509F06 /* PageContentViewController.swift */; };
 		6D5B387B1D28CC4400BD8DEF /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */; };
+		6D74F9C91D6E96410043C41B /* CustomIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D74F9C81D6E96410043C41B /* CustomIndicator.swift */; };
 		6D82C7381D31850200DCC51B /* ProfileUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D82C7371D31850200DCC51B /* ProfileUserTableViewCell.swift */; };
 		6D82C73A1D31877800DCC51B /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D82C7391D31877800DCC51B /* FontAwesome.otf */; };
 		6D8F53A51D3ACDC600AC8C42 /* TeachersListParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F53A41D3ACDC600AC8C42 /* TeachersListParser.swift */; };
@@ -138,6 +139,7 @@
 		54FEB2F51D48CFBB00509F06 /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		6D5B387A1D28CC4400BD8DEF /* RequestBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		6D5C14CF1D1B175000AB6A00 /* WconnEct-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WconnEct-Bridging-Header.h"; sourceTree = "<group>"; };
+		6D74F9C81D6E96410043C41B /* CustomIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIndicator.swift; sourceTree = "<group>"; };
 		6D82C7371D31850200DCC51B /* ProfileUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUserTableViewCell.swift; sourceTree = "<group>"; };
 		6D82C7391D31877800DCC51B /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		6D8F53A41D3ACDC600AC8C42 /* TeachersListParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachersListParser.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		54414A341D181D4B0000E3D2 = {
 			isa = PBXGroup;
 			children = (
+				6D74F9C81D6E96410043C41B /* CustomIndicator.swift */,
 				54B8D78B1D465C48006318ED /* Reachability  */,
 				545065B91D40B72B004395D2 /* CustomActivityIndicator.swift */,
 				5489C5D91D3CC8490052B4EB /* Resources */,
@@ -667,6 +670,7 @@
 				6DA8176B1D2AEE3C003EAA16 /* ProfileUserParser.swift in Sources */,
 				1B62C0FB1D2941BD00014F7F /* SignUpParser.swift in Sources */,
 				5442A3EC1D38BE32003F5A3F /* TeachersListViewController.swift in Sources */,
+				6D74F9C91D6E96410043C41B /* CustomIndicator.swift in Sources */,
 				5471EC0D1D377710001AB166 /* AllBoardsParser.swift in Sources */,
 				1B94B4CA1D322F5E00E92785 /* GenderProfileTableViewCell.swift in Sources */,
 				6DEF119C1D61FF0E007DF90E /* StudentWishlistViewController.swift in Sources */,
