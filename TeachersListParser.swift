@@ -31,7 +31,7 @@ class TeachersListParser: NSObject
                 teacher.highestQualification = String(dict.objectForKey("highest_qualification")!)
                 teacher.experience = String(dict.objectForKey("experience")!)
                 teacher.profession = String(dict.objectForKey("profession")!)
-                teacher.about_me = String(dict.objectForKey("about_me"))
+                teacher.about_me = String(dict.objectForKey("about_me")!)
                 if dict.objectForKey("lat") is NSNull
                 {
                     
@@ -49,12 +49,12 @@ class TeachersListParser: NSObject
                 teacher.longitude = (dict.objectForKey("lng") as? CLLocationDegrees)!
                 }
                 teachersArray.addObject(teacher)
-                if let teacherReview = dict.objectForKey("teacher_reviews") as? NSDictionary
-                {
-                    teacher.rating = teacherReview.objectForKey("rating") as! Double
-                    print(teacherReview)
-                }
-        
+//                if let teacherReview = dict.objectForKey("teacher_reviews") as? NSDictionary
+//                {
+                    teacher.rating =  dict.objectForKey("rating") as! Double
+//                    print(teacherReview)
+//                }
+//        
                 
                 
             }
