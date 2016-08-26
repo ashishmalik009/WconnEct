@@ -16,11 +16,15 @@ class TeacherDetailViewController: UIViewController {
     @IBOutlet weak var qualificationLabel: UILabel!
     @IBOutlet weak var aboutMeLabel: UILabel!
     
+    @IBOutlet weak var imageViewForProfile : UIImageView!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        experienceLabel.text = teacherToShowDetail.experience
-        qualificationLabel.text = teacherToShowDetail.highestQualification
+        self.imageViewForProfile.layer.cornerRadius = self.imageViewForProfile.frame.size.width / 2
+        self.imageViewForProfile.clipsToBounds = true
+//        experienceLabel.text = teacherToShowDetail.experience
+//        qualificationLabel.text = teacherToShowDetail.highestQualification
         aboutMeLabel.text = teacherToShowDetail.about_me
 
         // Do any additional setup after loading the view.

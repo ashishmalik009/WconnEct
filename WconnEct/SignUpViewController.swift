@@ -500,8 +500,8 @@ class SignUpViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelega
                             delegate.emailIdOfLoggedInUser = self.emailIDField.text!
                             delegate.isUserLoggedIn = true
                         }
-                        let revealController = self.storyboard?.instantiateViewControllerWithIdentifier("revealControllerIdentifier") as! SWRevealViewController
-                        self.presentViewController(revealController, animated: true, completion: nil)
+                        let tabbarcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("tabBarControllerStorboardIDForStudent") as! UITabBarController
+                        self.presentViewController(tabbarcontroller, animated: true, completion: nil)
                         
                         
                     })                }

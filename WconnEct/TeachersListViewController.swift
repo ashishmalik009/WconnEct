@@ -145,7 +145,7 @@ class TeachersListViewController: UIViewController, UITableViewDataSource, UITab
         let teacher =  teachersListArray.objectAtIndex(indexPath.row) as! Teacher
         tableViewCell.nameLabel.text = teacher.name
         tableViewCell.qualificationLabel.text = teacher.highestQualification
-        tableViewCell.experienceLabel.text = teacher.experience
+        tableViewCell.experienceLabel.text = String("\(teacher.experience) Exp.")
         tableViewCell.profileImageView.layer.cornerRadius = tableViewCell.profileImageView.frame.size.width/2
         tableViewCell.profileImageView.clipsToBounds = true
         tableViewCell.ratingImageView.image = self.imageForRating(Int(teacher.rating))
