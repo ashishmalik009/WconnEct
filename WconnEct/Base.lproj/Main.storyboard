@@ -1638,15 +1638,34 @@
                                 <rect key="frame" x="0.0" y="250" width="600" height="301"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="gpc-nq-ouU">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="teacherDetailCellID" id="gpc-nq-ouU" customClass="TeacherDetailTableViewCell" customModule="WconnEct" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gpc-nq-ouU" id="h6p-yw-uCQ">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hI-2p-NgV">
+                                                    <rect key="frame" x="27" y="4" width="565" height="35"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7hI-2p-NgV" firstAttribute="trailing" secondItem="h6p-yw-uCQ" secondAttribute="trailingMargin" id="3ig-xD-ema"/>
+                                                <constraint firstItem="7hI-2p-NgV" firstAttribute="leading" secondItem="h6p-yw-uCQ" secondAttribute="leadingMargin" constant="19" id="aLW-jQ-god"/>
+                                                <constraint firstItem="7hI-2p-NgV" firstAttribute="centerY" secondItem="h6p-yw-uCQ" secondAttribute="centerY" id="dKt-Zx-I1p"/>
+                                                <constraint firstItem="7hI-2p-NgV" firstAttribute="top" secondItem="h6p-yw-uCQ" secondAttribute="topMargin" constant="-4" id="qbG-EK-NvN"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="viewForTeacherDetail" destination="7hI-2p-NgV" id="nM5-ar-Ah3"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="6RE-jC-29O" id="j5r-FJ-Cli"/>
+                                    <outlet property="delegate" destination="6RE-jC-29O" id="gIC-xY-eGI"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQ7-h4-FSA">
                                 <rect key="frame" x="136" y="85" width="444" height="21"/>

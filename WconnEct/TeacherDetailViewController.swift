@@ -36,14 +36,43 @@ class TeacherDetailViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 4
     }
-    */
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("teacherDetailCellID") as! TeacherDetailTableViewCell
+        let border = CALayer()
+        border.frame = CGRectMake(0, 0, 1.0, CGRectGetHeight(cell.frame))
+        border.backgroundColor = UIColor.blackColor().CGColor
+        cell.viewForTeacherDetail.layer.addSublayer(border)
+        cell.viewForTeacherDetail.layer.cornerRadius = 20.0
+
+//        cell.textLabel?.text = "Ashish"
+        return cell
+    }
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0
+        {
+            return "EDUCATIONS AND QUALIFICATIONS"
+        }
+        else if section == 1
+        {
+            return "EXPERIENCE"
+        }
+        else if section == 2
+        {
+            return "CERTIFICATES AND AWARDS"
+        }
+        else if section == 3
+        {
+            return "SPECIALITY"
+        }
+        
+        return ""
+    }
 
 }
